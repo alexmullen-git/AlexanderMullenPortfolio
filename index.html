@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/Images/favicon.png" type="image/png" />
+  <title>Alexander Mullen Innovation Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Innovation Portfolio</a>
+      <div class="links">
+        <a href="index.html" class="active">Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="hero">
+      <h1 class="font-display">Selected works</h1>
+      <p>Projects, experiments, and learning at the intersection of product engineering and management.</p>
+    </div>
+    <div class="grid" id="project-grid"></div>
+  </div>
+  <script src="projects.js"></script>
+  <script>
+    const grid = document.getElementById('project-grid');
+    PROJECTS.forEach(p => {
+      const a = document.createElement('a');
+      a.href = 'project-' + p.slug + '.html';
+      a.className = 'card';
+      const img = (p.image || 'https://picsum.photos/seed/' + p.slug + '/400/240').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      a.innerHTML = `
+        <div class="card-image">
+          <img src="${img}" alt="" loading="lazy" />
+        </div>
+        <div class="card-body">
+          <span class="date">${escapeHtml(p.date)}</span>
+          <h3 class="font-display">${escapeHtml(p.title)}</h3>
+          <p class="subtitle">${escapeHtml(p.subtitle)}</p>
+          <span class="arrow">View project →</span>
+        </div>
+      `;
+      grid.appendChild(a);
+    });
+    function escapeHtml(s) {
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
