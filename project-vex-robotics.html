@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Vex Robotics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .split-layout {
+      display: grid;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+    @media (min-width: 768px) {
+      .split-layout { grid-template-columns: 1fr 1fr; align-items: start; }
+    }
+    .timeline {
+      border-left: 2px solid rgba(99,102,241,0.4);
+      padding-left: 1.5rem;
+      margin-top: 1rem;
+    }
+    .timeline-item { margin-bottom: 1.5rem; }
+    .timeline-item strong { display: block; color: white; font-size: 0.875rem; }
+    .timeline-item span { font-size: 0.8125rem; color: var(--text-muted); }
+    .timeline-item p { margin-top: 0.25rem; font-size: 0.9375rem; color: var(--text); }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: block;
+    }
+
+    .innovations {
+      margin-top: 3.5rem;
+    }
+    .innovations-grid {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      margin-top: 1rem;
+    }
+    @media (min-width: 640px) {
+      .innovations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .innovations-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .innovation-tile {
+      display: block;
+      overflow: hidden;
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(11,15,31,0.6);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .innovation-tile:hover {
+      transform: translateY(-2px);
+      border-color: rgba(99,102,241,0.25);
+      background: rgba(16,21,37,0.85);
+      box-shadow: 0 20px 60px rgba(15,23,42,0.85), 0 0 0 1px rgba(129,140,248,0.22);
+    }
+    .innovation-media {
+      aspect-ratio: 5/3;
+      background: var(--surface-soft);
+      overflow: hidden;
+    }
+    .innovation-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .innovation-tile:hover .innovation-media img {
+      transform: scale(1.03);
+    }
+    .innovation-body {
+      padding: 1rem 1.25rem 1.25rem;
+    }
+    .innovation-title {
+      color: white;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .innovation-caption {
+      margin-top: 0.5rem;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Portfolio</a>
+      <div class="links">
+        <a href="index.html">Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Portfolio
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2023–2025</span>
+      <h1 class="font-display">Vex Robotics</h1>
+      <p class="subtitle">Designing, building, and iterating a robot for competitive tasks</p>
+    </div>
+
+    <div class="split-layout project-content">
+      <div>
+        <h2 class="font-display">Overview</h2>
+        <p class="body">From robot soccer and disk golf to obstacle avoidance and manipulation, Vex has provided me many opportunities to develop and refine my skills in Design, CAD modeling, fabrication, material sciences, iteration, and coding. Some of my major learning moments in this project came from innovating within regulations and applied system redundancy/reliability. </p>
+
+        <h2 class="font-display" style="margin-top: 2rem;">Timeline</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <strong>National TSA Finalist</strong>
+            <span>2025</span>
+            <p>First place in Florida with bid to Nationals, top 10 highest scoring team in USA</p>
+          </div>
+          <div class="timeline-item">
+            <strong>National TSA Finalist</strong>
+            <span>2024</span>
+            <p>Second place in Florida with bid to Nationals, Second place in USA</p>
+          </div>
+          <div class="timeline-item">
+            <strong>National TSA Finalist</strong>
+            <span>2023</span>
+            <p>Regional Innovate Award, top 10 highest scoring team in Florida with bid to Nationals, Third place in USA</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-display">Gallery</h2>
+        <div class="gallery">
+          <img src="Images/vex2.jpg" alt="" />
+          <img src="Images/vex3.jpg" alt="" />
+          <img src="Images/vex4.jpg" alt="" />
+          <img src="Images/vex.gif" alt="" />
+          <img src="Images/vex.gif" alt="" /> <!-- change! -->
+          <img src="Images/vex.gif" alt="" /> <!-- change! -->
+        </div>
+        <p class="body" style="margin-top: 1rem;">Selected robots and integrations that I worked on.</p>
+      </div>
+    </div>
+
+    <section class="innovations project-content">
+      <h2 class="font-display">Notable innovations</h2>
+      <p class="body">A few focused engineering moves that made the robot more capable, consistent, or competition-ready.</p>
+
+      <div class="innovations-grid">
+        <div class="innovation-tile">
+          <div class="innovation-media">
+            <img src="Images/vex2.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="innovation-body">
+            <div class="innovation-title font-display">Axial-Actuating Wings</div>
+            <div class="innovation-caption">Pushing performance while staying inside constraints—tight packaging, clean interfaces, and deliberate trade-offs.</div>
+          </div>
+        </div>
+
+        <div class="innovation-tile">
+          <div class="innovation-media">
+            <img src="Images/vex3.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="innovation-body">
+            <div class="innovation-title font-display">High-Torque Pulling Arm</div>
+            <div class="innovation-caption">Designing for failure modes with backups and consistency—less “it works once,” more “it works every match.”</div>
+          </div>
+        </div>
+
+        <div class="innovation-tile">
+          <div class="innovation-media">
+            <img src="Images/vex4.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="innovation-body">
+            <div class="innovation-title font-display">Pneumatic Disk Launcher</div>
+            <div class="innovation-caption">CAD → fabrication → testing cycles that made improvements tangible—mechanical tweaks supported by software tuning.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

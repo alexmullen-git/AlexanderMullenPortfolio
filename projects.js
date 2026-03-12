@@ -15,5 +15,5 @@ const PROJECTS = [
   { slug: "tool-experiment", title: "Tool Experiment", subtitle: "Rapid prototyping and iteration", date: "Summer 2025", image: "https://picsum.photos/seed/tool/400/240" },
   { slug: "example-project", title: "Project Alpha", subtitle: "A technical product built with modern tooling", date: "2025", image: "Images/final1.jpg" },
   { slug: "platform-beta", title: "Platform Beta", subtitle: "Scalable infrastructure and developer experience", date: "2024–2025", image: "https://picsum.photos/seed/beta/400/240" },
-  { slug: "example-project", title: "Project Alpha", subtitle: "A technical product built with modern tooling", date: "2025", image: "Images/final1.jpg" },
+  { slug: "vex-robotics", title: "Vex Robotics", subtitle: "Designing, building, and iterating a robot for competitive tasks", date: "2023-2025", image: "Images/VexRobot1.jpg" },
 ];
