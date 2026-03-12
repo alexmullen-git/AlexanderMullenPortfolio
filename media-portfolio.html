@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Media Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .media-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background: rgba(2, 6, 23, 0.82);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 260ms ease, visibility 260ms ease;
+    }
+    .media-lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .media-lightbox-panel {
+      position: relative;
+      width: min(80vw, 1400px);
+      height: min(80vh, 900px);
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 24px 90px rgba(2, 6, 23, 0.75);
+      transform: translateY(14px) scale(0.97);
+      transition: transform 280ms ease;
+    }
+    .media-lightbox.is-open .media-lightbox-panel {
+      transform: translateY(0) scale(1);
+    }
+    .media-lightbox-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: rgba(2, 6, 23, 0.5);
+    }
+    .media-lightbox-close {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.9);
+      color: #f8fafc;
+      border-radius: 9999px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+    }
+    .media-lightbox-close:hover {
+      transform: translateX(-1px);
+      border-color: rgba(165, 180, 252, 0.8);
+      background: rgba(30, 41, 59, 0.95);
+    }
+    .media-lightbox-close svg {
+      width: 14px;
+      height: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html" class="active">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <section class="media-hero">
+      <h1 class="font-display">Media Portfolio</h1>
+      <p>Selected photography and videography works</p>
+    </section>
+
+    <section class="media-grid" id="media-grid"></section>
+  </div>
+  <div class="media-lightbox" id="media-lightbox" aria-hidden="true">
+    <div class="media-lightbox-panel">
+      <button class="media-lightbox-close font-display" id="media-lightbox-close" aria-label="Close full-screen image">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        Exit
+      </button>
+      <img class="media-lightbox-image" id="media-lightbox-image" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    const MEDIA_ITEMS = [
+      {
+        type: "image",
+        src: "Images/final1.jpg",
+        href: "Images/final1.jpg",
+        title: "Robot detail",
+        subtitle: "Close-up mechanical integration and cable routing."
+      },
+      {
+        type: "image",
+        src: "Images/vex2.jpg",
+        href: "Images/vex2.jpg",
+        title: "Competition field view",
+        subtitle: "Robot staged and ready on the match field."
+      },
+      {
+        type: "image",
+        src: "Images/vex3.jpg",
+        href: "Images/vex3.jpg",
+        title: "Iteration snapshot",
+        subtitle: "Testing a new subsystem before competition day."
+      },
+      {
+        type: "video",
+        src: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+        href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        title: "Match highlight reel",
+        subtitle: "High-tempo recap stitched from multiple perspectives."
+      },
+      {
+        type: "video",
+        src: "https://img.youtube.com/vi/oHg5SJYRHA0/hqdefault.jpg",
+        href: "https://www.youtube.com/watch?v=oHg5SJYRHA0",
+        title: "Build log cut",
+        subtitle: "Time-lapse of design, fabrication, and test days."
+      },
+      {
+        type: "image",
+        src: "Images/vex4.jpg",
+        href: "Images/vex4.jpg",
+        title: "Shop environment",
+        subtitle: "Tools, whiteboards, and the mess behind refinement."
+      }
+    ];
+
+    const mediaGrid = document.getElementById("media-grid");
+    const lightbox = document.getElementById("media-lightbox");
+    const lightboxImage = document.getElementById("media-lightbox-image");
+    const lightboxClose = document.getElementById("media-lightbox-close");
+
+    MEDIA_ITEMS.forEach((item) => {
+      const a = document.createElement("a");
+      a.className = "media-tile";
+      a.href = item.href || item.src;
+      if (item.type === "video") {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      } else {
+        a.addEventListener("click", (event) => {
+          event.preventDefault();
+          openLightbox(item.src, item.title);
+        });
+      }
+
+      a.innerHTML = `
+        <div class="media-thumb">
+          <img src="${item.src.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;")}" alt="" loading="lazy" />
+        </div>
+        <div class="media-overlay">
+          ${item.type === "video" ? '<div class="media-badge">Video</div>' : ""}
+          <div class="media-title font-display">${escapeHtml(item.title)}</div>
+          <div class="media-subtitle">${escapeHtml(item.subtitle)}</div>
+        </div>
+      `;
+
+      mediaGrid.appendChild(a);
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+        closeLightbox();
+      }
+    });
+
+    function openLightbox(src, title) {
+      lightboxImage.src = src;
+      lightboxImage.alt = title || "";
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      window.setTimeout(() => {
+        lightboxImage.src = "";
+      }, 220);
+    }
+
+    function escapeHtml(s) {
+      const div = document.createElement("div");
+      div.textContent = s;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
+
