@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>ESP32 Simple Integrations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .project-hero {
+      margin-bottom: 3rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: var(--surface-soft);
+    }
+    .project-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .integration-carousel {
+      margin-top: 0.5rem;
+    }
+    .integration-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .integration-header h2 {
+      margin-bottom: 0;
+    }
+    .carousel-controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin: 0;
+    }
+    .carousel-btn {
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(11,15,31,0.8);
+      color: var(--text);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .carousel-btn:hover {
+      border-color: rgba(129,140,248,0.6);
+      color: white;
+      background: rgba(15,23,42,1);
+    }
+
+    .carousel-window {
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.35s ease;
+    }
+    .integration-slide {
+      width: 100%;
+      flex: 0 0 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      background: rgba(11,15,31,0.7);
+      min-height: 26rem;
+    }
+
+    .slide-images {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .slide-images img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--surface-soft);
+    }
+    .slide-images video {
+      width: 130%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--surface-soft);
+      display: block;
+    }
+    .integration-slide h3 {
+      color: white;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .integration-slide .body {
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .carousel-dot {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 9999px;
+      border: none;
+      background: rgba(148,163,184,0.5);
+      cursor: pointer;
+    }
+    .carousel-dot.active {
+      background: var(--accent-soft);
+    }
+    @media (min-width: 768px) {
+      .slide-images {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2025</span>
+      <h1 class="font-display">ESP32 Simple Integrations</h1>
+      <p class="subtitle">Inputs, custom capacitive sensors, networking, calibration, and pulse frequency + width understanding</p>
+    </div>
+
+
+    <div class="project-content">
+      <h2 class="font-display">Overview</h2>
+      <p class="body">A collection of some of my first microcontroller builds using ESP32 boards. These projects taught me the fundamentals of input, output, best coding practices, and integrating programs with custom hardware beyond simple LEDs and Servos. Since, I have improved my coding abilities with Arduino/C++ and have taken on many more ambitious projects like the Automatic Zen Garden and Water-Filling Table.</p>
+
+      <div class="integration-header">
+        <h2 class="font-display">Selected Integrations</h2>
+        <div class="carousel-controls">
+          <button id="carouselPrev" class="carousel-btn" type="button" aria-label="Previous integration">&#8592;</button>
+          <button id="carouselNext" class="carousel-btn" type="button" aria-label="Next integration">&#8594;</button>
+        </div>
+      </div>
+      <div class="integration-carousel" aria-label="ESP32 integrations carousel">
+
+        <div id="carouselWindow" class="carousel-window">
+          <div id="carouselTrack" class="carousel-track">
+            <article class="integration-slide">
+              <div class="slide-images">
+                <img src="Images/ESP32/handTest.GIF" alt="Early hand sensor prototype in testing" />
+                <img src="Images/ESP32/handFinal.GIF" alt="Final hand sensor interaction behavior" />
+              </div>
+              <h3 class="font-display">Input/Output Prototyping</h3>
+              <p class="body">I built a simple input/output device using a servo, potentiometer, and custom-designed lasercut mount from cardboard. By taking the exact position of a potentiometer, I programmed a servo to match the detected angle every 50ms, giving the impression that these two axes are mechanically connected. Future integrations could include steering mechanisms and coordination in mechanically-infeasible areas.</p>
+            </article>
+
+            <article class="integration-slide">
+              <div class="slide-images">
+                <img src="Images/ESP32/CS.jpeg" alt="Capacitive sensor hardware setup" />
+                <img src="Images/ESP32/CSgraph.png" alt="Capacitive sensor calibration graph" />
+              </div>
+              <h3 class="font-display">Custom Capacitive Sensor Build and Calibration</h3>
+              <p class="body">I built a capacitive sensor using copper tape and a small bottle. By measuring the change in capacitance between the copper tape and ground I was able to detect when more water was added to the bottle. I calibrated this custom sensor by plotting the capacitance values against the water in the bottle (increments of 3ml) and found the above correlation. There is a linear relationship between water amount and capacitance with a plateau effect at 209 capacitance since the water surpasses the level of the sensor at that point.</p>
+            </article>
+
+            <article class="integration-slide">
+              <div class="slide-images">
+                <video autoplay loop muted playsinline>
+                  <source src="Images/ESP32/DIY.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <h3 class="font-display">Networking</h3>
+              <p class="body">I learned how to use networking to receive inputs and execute outputs through a locally hosted WIFI network and broadcasted HTML site. Through this simple project with just a servo, I setup the ESP32 board to initially search for a specified network, and if unable to connect, create a WebSocket that allows for bidirectional communication so the user can use any WIFI-enabled device to control a servo. </p>
+            </article>
+
+            <article class="integration-slide">
+              <div class="slide-images">
+                <img src="Images/ESP32/US.jpg" alt="Ultrasonic sensor setup" />
+                <img src="Images/ESP32/USgraph.png" alt="Ultrasonic sensor calibration graph" />
+              </div>
+              <h3 class="font-display">Ultrasonic Sensor Calibration</h3>
+              <p class="body">I tested and calibrated an ultrasonic distance sensor by measuring the distance from the sensor to a flat object in increments of 1 inch from 1 to 15 inches. I found that the sensor's readings were extremely linear, showing that there is a constant relationship between the actual distance and the sensor's reading so long as an object is directly in front of the sensor. Future implementations could include parameterized output, for example, an LED could show different colors based on the distance of objects from the sensor. </p>
+            </article>
+
+            <article class="integration-slide">
+              <div class="slide-images">
+                <img src="Images/ESP32/servo0.jpg" alt="Oscilloscope output of servo at 0 degrees" />
+                <img src="Images/ESP32/servo180.jpg" alt="Oscilloscope output of servo at 180 degrees" />
+              </div>
+              <h3 class="font-display">Oscilloscope Output of Servo Understanding</h3>
+              <p class="body">While there are libraries like ESP32-Servo that handle numerical code into physical servo movement, how is that change communicated to the servos themselves? By connecting my microcontroller to an oscilloscope, I can read the pulse of voltage passing through the control wire, noting its width and frequency; with this information I can understand that at 0 degrees (left) the pulse is much narrower at 0.5ms and at 180 degrees (right), the pulse is nearly 5x wider at 2.4ms.</p>
+            </article>
+          </div>
+        </div>
+
+        <div id="carouselDots" class="carousel-dots" aria-label="Integration slide indicators"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const track = document.getElementById("carouselTrack");
+    const windowEl = document.getElementById("carouselWindow");
+    const prevBtn = document.getElementById("carouselPrev");
+    const nextBtn = document.getElementById("carouselNext");
+    const dotsWrap = document.getElementById("carouselDots");
+    const slides = Array.from(track.children);
+    let currentIndex = 0;
+
+    function renderDots() {
+      dotsWrap.innerHTML = "";
+      slides.forEach((_, idx) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "carousel-dot" + (idx === currentIndex ? " active" : "");
+        dot.setAttribute("aria-label", "Go to integration " + (idx + 1));
+        dot.addEventListener("click", (event) => {
+          event.stopPropagation();
+          goToSlide(idx);
+        });
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = (index + slides.length) % slides.length;
+      track.style.transform = "translateX(-" + currentIndex * 100 + "%)";
+      renderDots();
+    }
+
+    prevBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      goToSlide(currentIndex - 1);
+    });
+    nextBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      goToSlide(currentIndex + 1);
+    });
+    windowEl.addEventListener("click", () => goToSlide(currentIndex + 1));
+
+    goToSlide(0);
+  </script>
+</body>
+</html>

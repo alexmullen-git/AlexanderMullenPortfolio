@@ -102,6 +102,78 @@
       line-height: 1.6;
       color: var(--text-muted);
     }
+    .highlight-photo {
+      margin-top: 3.5rem;
+    }
+    .highlight-photo figure {
+      margin: 1rem 0 0;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.7);
+    }
+    .highlight-photo img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+    .highlight-photo figcaption {
+      padding: 0.85rem 1rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .collaborators {
+      margin-top: 3.5rem;
+    }
+    .collaborator-list {
+      margin-top: 1rem;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .collaborator-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .collaborator-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      padding: 1.25rem 1rem;
+      background: rgba(11,15,31,0.6);
+      min-height: 8.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .collaborator-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(129,140,248,0.42);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.65);
+    }
+    .collaborator-badge {
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 9999px;
+      display: grid;
+      place-items: center;
+      color: var(--accent-muted);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(129,140,248,0.4);
+    }
+    .collaborator-name {
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
   </style>
 </head>
 <body>
@@ -156,12 +228,12 @@
       <div>
         <h2 class="font-display">Gallery</h2>
         <div class="gallery">
-          <img src="Images/vex2.jpg" alt="" />
-          <img src="Images/vex3.jpg" alt="" />
-          <img src="Images/vex4.jpg" alt="" />
-          <img src="Images/vex.gif" alt="" />
-          <img src="Images/vex7.jpg" alt="" />
-          <img src="Images/vex9.jpg" alt="" />
+          <img src="Images/Vex/vex2.jpg" alt="" />
+          <img src="Images/Vex/vex3.jpg" alt="" />
+          <img src="Images/Vex/vex4.jpg" alt="" />
+          <img src="Images/Vex/vex.gif" alt="" />
+          <img src="Images/Vex/vex7.jpg" alt="" />
+          <img src="Images/Vex/vex9.jpg" alt="" />
         </div>
         <p class="body" style="margin-top: 1rem;">Selected robots and integrations that I worked on.</p>
       </div>
@@ -174,7 +246,7 @@
       <div class="innovations-grid">
         <div class="innovation-tile">
           <div class="innovation-media">
-            <img src="Images/vex6.jpg" alt="" loading="lazy" />
+            <img src="Images/Vex/vex6.jpg" alt="" loading="lazy" />
           </div>
           <div class="innovation-body">
             <div class="innovation-title font-display">Axial-Actuating Wings</div>
@@ -184,7 +256,7 @@
 
         <div class="innovation-tile">
           <div class="innovation-media">
-            <img src="Images/vex8.jpg" alt="" loading="lazy" />
+            <img src="Images/Vex/vex8.jpg" alt="" loading="lazy" />
           </div>
           <div class="innovation-body">
             <div class="innovation-title font-display">High-Torque Pulling Arm</div>
@@ -194,12 +266,39 @@
 
         <div class="innovation-tile">
           <div class="innovation-media">
-            <img src="Images/vex5.gif" alt="" loading="lazy" />
+            <img src="Images/Vex/vex5.gif" alt="" loading="lazy" />
           </div>
           <div class="innovation-body">
             <div class="innovation-title font-display">Pneumatic Disk Launcher</div>
             <div class="innovation-caption">Use pneumatic actuators to control when disks are launched by flywheel, saving power, space, and unnecessry complexity.</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlight-photo project-content">
+      <h2 class="font-display">Team highlight</h2>
+      <figure>
+        <img src="Images/Vex/TSAwin.jpg" alt="VEX robotics team celebrating with trophies" loading="lazy" />
+        <figcaption>TSA State recognition moment with teammates and mentor after awards ceremony and two first place finishes in Florida State TSA</figcaption>
+      </figure>
+    </section>
+
+    <section class="collaborators project-content">
+      <h2 class="font-display">Notable collaborators</h2>
+      <p class="body">Selected teammates and mentors throughout the years.</p>
+      <div class="collaborator-list">
+        <div class="collaborator-item">
+          <span class="collaborator-badge">WW</span>
+          <span class="collaborator-name">William Wakefield</span>
+        </div>
+        <div class="collaborator-item">
+          <span class="collaborator-badge">AR</span>
+          <span class="collaborator-name">Athan Reisz</span>
+        </div>
+        <div class="collaborator-item">
+          <span class="collaborator-badge">LS</span>
+          <span class="collaborator-name">Lisa Saunders</span>
         </div>
       </div>
     </section>

@@ -35,19 +35,43 @@
       max-width: 17.6rem;
     }
     .project-hero img { width: 100%; height: 100%; object-fit: contain; display: block; }
-    .tech-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
+    .integration-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 0.75rem;
     }
-    .tech-list span {
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      background: rgba(99,102,241,0.2);
+    .integration-tile {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      background: rgba(11,15,31,0.7);
+      min-height: 13.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.75rem;
+    }
+    .integration-tile h3 {
+      color: white;
+      font-size: 1.25rem;
+      line-height: 1.2;
+    }
+    .integration-tile .integration-subtitle {
       color: var(--accent-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .integration-tile .body {
+      color: var(--text);
+      line-height: 1.7;
+    }
+    @media (min-width: 768px) {
+      .integration-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
   </style>
 </head>
@@ -82,19 +106,24 @@
     </div>
 
       <div class="project-hero">
-        <img src="Images/pepper.gif" alt="" />
+        <img src="Images/Pepper/pepper.gif" alt="" />
       </div>
     </div>
 
     <div class="project-content">
-      <h2 class="font-display">Tech & stack</h2>
-      <div class="tech-list">
-        <span>React</span><span>TypeScript</span><span>Node</span>
+      <h2 class="font-display">Selected Integrations</h2>
+      <div class="integration-grid">
+        <article class="integration-tile">
+          <h3 class="font-display">Attendance Tracker</h3>
+          <p class="integration-subtitle">Elementary school teacher's assistant to understand students</p>
+          <p class="body">This project was a deep dive into my interest in human understanding with assistive technology. Through facial recognition and human understanding algorithms, I programmed Pepper to survey a classroom and identify all the students to take attendance, following up with an email to the teacher that includes which students were present along with their detected emotion. While this project was not implemented as a real teacher's assistant, it was my first exposure to CV facial recognition and provided me a great platform to work off of for future implementations; I later developed this program into a greeting robot.</p>
+        </article>
+        <article class="integration-tile">
+          <h3 class="font-display">Healthcare Companion</h3>
+          <p class="integration-subtitle">Big Hero 6 Baymax-inspired integration</p>
+          <p class="body">Taking inspiration from Big Hero 6, I programmed Pepper to act exactly as Baymax. Whenever you say ‘Ow’ it activates, and will walk you through solving your symptoms using voice-to-text, human understanding protocals, a central display, and a diagnosis outline approved by a real doctor. Initial segmentation of this program involved meeting with my friend’s dad (an ER doctor) to segmentalize the body into Care Zones, and then based on location and pain scale rating and follow-up questions, we developed a flowchart-based program to make the proper recommendations, prescribe over-the-counter medications, or contact emergency services. Unfortunately, we could not make Pepper fly or shoot lasers. </p>
+        </article>
       </div>
-      <p class="body" style="margin-top: 1rem;">[Add technical details, architecture decisions, or tools used.]</p>
-
-      <h2 class="font-display">Outcome</h2>
-      <p class="body">[Describe results, metrics, or learnings from this project.]</p>
     </div>
   </div>
 </body>
