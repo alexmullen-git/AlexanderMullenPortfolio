@@ -12,6 +12,7 @@
  */
 
 const PROJECTS = [
+  { slug: "zen-garden", title: "Automatic Zen Garden", subtitle: "Custom drawing machine in the form of a 'zen garden'", date: "2025", image: "Images/ZenGarden/drawline.gif" },
   { slug: "ESP32", title: "ESP32 Simple Integrations", subtitle: "Inputs, custom capacitive sensors, networking, and more", date: "2025", image: "Images/ESP32/handFinal.gif" },
   { slug: "pepper-integrations", title: "Pepper Integrations", subtitle: "Human understanding and AI integrations using Aldebaran's 'Pepper'", date: "2025", image: "Images/Pepper/pepper1.jpg" },
   { slug: "vex-robotics", title: "Vex Robotics", subtitle: "Designing, building, and iterating a robot for competitive tasks", date: "2023-2025", image: "Images/Vex/VexRobot1.jpg" },
