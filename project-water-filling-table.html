@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Water-Filling Table</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .pullquote {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent-muted);
+      line-height: 1.4;
+      margin: 2rem 0;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--accent-soft);
+    }
+    .problem-solution {
+      display: grid;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 640px) { .problem-solution { grid-template-columns: 1fr 1fr; } }
+    .problem-solution > div {
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.6);
+    }
+    .problem-solution h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .minimal-hero {
+      aspect-ratio: 16/9;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--surface-soft);
+      margin: 2rem 0;
+    }
+    .minimal-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .minimal-hero iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .zen-gallery {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .zen-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 1024px) {
+      .zen-gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .zen-media-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.8);
+      aspect-ratio: 1 / 1;
+    }
+    .zen-media-tile img,
+    .zen-media-tile video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .zen-media-tile:hover img,
+    .zen-media-tile:hover video {
+      transform: scale(1.04);
+    }
+    .zen-caption {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #fff;
+      background: linear-gradient(to top, rgba(2,6,23,0.94), rgba(2,6,23,0.25), transparent);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .zen-media-tile:hover .zen-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .process-doc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0.25rem 0 1.5rem;
+      padding: 0.72rem 1rem;
+      border-radius: 0.7rem;
+      border: 1px solid rgba(129,140,248,0.45);
+      background: rgba(79,70,229,0.12);
+      color: var(--accent-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      line-height: 1.35;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .process-doc-btn:hover {
+      background: rgba(79,70,229,0.22);
+      color: #fff;
+      border-color: rgba(129,140,248,0.65);
+      transform: translateY(-1px);
+    }
+    .collaborators {
+      margin-top: 3.5rem;
+    }
+    .collaborator-list {
+      margin-top: 1rem;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .collaborator-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .collaborator-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      padding: 1.25rem 1rem;
+      background: rgba(11,15,31,0.6);
+      min-height: 8.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .collaborator-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(129,140,248,0.42);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.65);
+    }
+    .collaborator-badge {
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 9999px;
+      display: grid;
+      place-items: center;
+      color: var(--accent-muted);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(129,140,248,0.4);
+    }
+    .collaborator-name {
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2025</span>
+      <h1 class="font-display">Water-Filling Table</h1>
+      <p class="subtitle">Table built to detect cups and refill them with water</p>
+    </div>
+
+    <div class="minimal-hero">
+      <iframe
+        src="https://www.youtube.com/embed/rLxY8W9E1YI"
+        title="Water-Filling Table project video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <blockquote class="pullquote font-display">
+      Harvard University PS70 Final Project Fall 2025 - Perfect score of 100%
+    </blockquote>
+
+    <div class="project-content">
+      <h2 class="font-display">Final Design Highlights</h2>
+      <p class="body">Testing various edge cases with the final product</p>
+      <div class="zen-gallery">
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/finalTest1.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Final test pass 1.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/finalTest2.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Final test pass 2.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/finalTest3.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Final test pass 3.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/finalTest4.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Final test pass 4.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/finalTest5.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Final test pass 5.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/finalTest6.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Final test pass 6.</figcaption>
+        </figure>
+      </div>
+
+      <h2 class="font-display">Approach and Innovation</h2>
+      <p class="body">This project’s main goals were to look magical and to make drinking water more convenient. By using an array of sensors to detect where cups are and then plotting that location to the water cannon, the table shoots a stream of water in the air to refill all cups within the sensing area. Optimizing the nozzle to incorporate a flexible hose with a “goldilocks” stream width allowed for good accuracy when partnered with a relay to engage/disengage the water pump. Some helpful design elements: 3D printing all the parts allowed for rapid prototyping, strong neodymium magnets for the bottom of cups gave good readings on the hall effect sensor array, and local processing on the microcontroller allowed the system to run independently from laptops (helpful since laptops and water don’t mix well).</p>
+      <div class="zen-gallery">
+        <figure class="zen-media-tile">
+            <img src="Images/Water-FillingTable/nozzleAssembly1.0.jpg" alt="Nozzle assembly 1.0 prototype" loading="lazy" />
+            <figcaption class="zen-caption">Nozzle assembly 1.0 prototype.</figcaption>
+          </figure>
+          <figure class="zen-media-tile">
+            <img src="Images/Water-FillingTable/nozzleAssembly1.1.jpg" alt="Nozzle assembly 1.1 prototype revision" loading="lazy" />
+            <figcaption class="zen-caption">Nozzle assembly 1.1 prototype integration.</figcaption>
+          </figure>
+          <figure class="zen-media-tile">
+            <img src="Images/Water-FillingTable/nozzleOptimization.jpg" alt="Nozzle optimization comparison" loading="lazy" />
+            <figcaption class="zen-caption">Nozzle optimization process to balance flow, pressure, and maneuverability.</figcaption>
+          </figure>
+          <figure class="zen-media-tile">
+          <img src="Images/Water-FillingTable/nozzleAssembly2.0.jpg" alt="Nozzle assembly 2.0 overview" loading="lazy" />
+          <figcaption class="zen-caption">Nozzle assembly 2.0 prototype.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <img src="Images/Water-FillingTable/nozzleAssembly2.2.jpg" alt="Nozzle assembly 2.2 revision" loading="lazy" />
+          <figcaption class="zen-caption">Nozzle assembly 2.0 partial integration.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <img src="Images/Water-FillingTable/nozzleAssembly2.3.jpg" alt="Nozzle assembly 2.3 revision" loading="lazy" />
+          <figcaption class="zen-caption">Nozzle assembly 2.0 fully integrated.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/nozzleAssembly2.4.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Nozzle assembly 2.4 motion test.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/nozzleAssembly3.0.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Nozzle assembly 3.0 integrated into table with dual rotating arms.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/sensingDemo.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">Sensing system demonstration.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <img src="Images/Water-FillingTable/table.jpg" alt="Table assembly overview" loading="lazy" />
+          <figcaption class="zen-caption">Table assembly overview.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <img src="Images/Water-FillingTable/underTable1.jpg" alt="Under-table routing" loading="lazy" />
+          <figcaption class="zen-caption">Under-table routing.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <img src="Images/Water-FillingTable/underTable2.jpg" alt="Under-table routing layout 2" loading="lazy" />
+          <figcaption class="zen-caption">Under-table routing.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+            <video autoplay loop muted playsinline preload="metadata">
+              <source src="Images/Water-FillingTable/turnDemo.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="zen-caption">Turn behavior demo.</figcaption>
+          </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/test1.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">System test 1.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="Images/Water-FillingTable/test2.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="zen-caption">System test 2.</figcaption>
+        </figure>
+      </div>
+
+      <a
+        class="process-doc-btn"
+        href="https://alexmullen-git.github.io/AlexMullenPS70/13_finalproject/index.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Click here to view more in-depth process documentation on my PS70 Assignments Website</a>
+    </div>
+  </div>
+</body>
+</html>
