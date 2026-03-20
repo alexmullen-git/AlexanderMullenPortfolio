@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Traffic Light</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .project-header {
+      display: grid;
+      gap: 2rem;
+      align-items: start;
+      margin-top: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    @media (min-width: 768px) {
+      .project-header {
+        grid-template-columns: minmax(0, 1fr) 23rem;
+        gap: 3rem;
+        margin-top: 2rem;
+        margin-bottom: 3.5rem;
+      }
+    }
+
+    .project-hero {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--surface-soft);
+      width: 100%;
+      max-width: 23rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .project-hero img { width: 100%; height: auto; object-fit: contain; display: block; }
+    .integration-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 0.75rem;
+    }
+    .integration-tile {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      background: rgba(11,15,31,0.7);
+      min-height: 13.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.75rem;
+    }
+    .integration-tile h3 {
+      color: white;
+      font-size: 1.25rem;
+      line-height: 1.2;
+    }
+    .integration-tile .integration-subtitle {
+      color: var(--accent-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .integration-tile .body {
+      color: var(--text);
+      line-height: 1.7;
+    }
+    @media (min-width: 768px) {
+      .integration-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-header">
+      <div class="project-meta project-content">
+        <span class="date">2026</span>
+        <h1 class="font-display">Traffic Light</h1>
+        <p class="subtitle">Modified standard lamp post to operate traffic lights.</p>
+        
+        <h2 class="font-display">Overview</h2>
+        <p class="body">In November, I was gifted two recycled traffic lights that were put out of commission; they only came in handy when I found two recycled lamps: one was broken in two pieces and the other had non-functional electronics. Upon closer inspection, I learned that conveniently the lamps produced 120v and the traffic lights needed 120v. After transplanting the working electronics into the complete lamp, I was able to create a working 120v lamp that I could transform into a traffic light stand. I cutting down the lamp, integrating the dimmer switch to the traffic light electronics, and 3D printing adapters/mounts for the final product – the absolute best dorm décor.</p>
+
+    </div>
+
+      <div class="project-hero">
+        <img src="Images/TrafficLight/full.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

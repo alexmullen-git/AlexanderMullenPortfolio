@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Optimized Fan Propeller</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .pullquote {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent-muted);
+      line-height: 1.4;
+      margin: 2rem 0;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--accent-soft);
+    }
+    .problem-solution {
+      display: grid;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 640px) { .problem-solution { grid-template-columns: 1fr 1fr; } }
+    .problem-solution > div {
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.6);
+    }
+    .problem-solution h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .minimal-hero {
+      aspect-ratio: 16/9;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--surface-soft);
+      margin: 2rem 0;
+    }
+    .minimal-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .minimal-hero iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .stl-viewer-section {
+      margin: 2rem 0 2.5rem;
+    }
+    .stl-viewer-frame {
+      margin-top: 0.8rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: radial-gradient(circle at top, rgba(30,41,59,0.75), rgba(11,15,31,0.95));
+      box-shadow: 0 22px 50px rgba(2,6,23,0.55);
+    }
+    .stl-viewer {
+      width: 100%;
+      height: min(58vh, 32rem);
+      min-height: 20rem;
+      position: relative;
+      touch-action: none;
+    }
+    .stl-viewer canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .stl-viewer-hint {
+      padding: 0.55rem 0.85rem 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .stl-loading {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      background: linear-gradient(to bottom, rgba(2,6,23,0.25), rgba(2,6,23,0.55));
+      pointer-events: none;
+    }
+    .stl-loading.hidden {
+      display: none;
+    }
+    .stl-carousel-controls {
+      margin-top: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 0 0.9rem 0.15rem;
+    }
+    .stl-carousel-buttons {
+      display: inline-flex;
+      gap: 0.55rem;
+    }
+    .stl-carousel-btn {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(129,140,248,0.35);
+      background: rgba(15,23,42,0.88);
+      color: var(--text);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    }
+    .stl-carousel-btn:hover {
+      border-color: rgba(129,140,248,0.72);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .stl-carousel-meta {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+    }
+    .zen-gallery {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .zen-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 1024px) {
+      .zen-gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .zen-media-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.8);
+      aspect-ratio: 1 / 1;
+    }
+    .zen-media-tile img,
+    .zen-media-tile video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .zen-media-tile:hover img,
+    .zen-media-tile:hover video {
+      transform: scale(1.04);
+    }
+    .zen-caption {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #fff;
+      background: linear-gradient(to top, rgba(2,6,23,0.94), rgba(2,6,23,0.25), transparent);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .zen-media-tile:hover .zen-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .process-doc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0.25rem 0 1.5rem;
+      padding: 0.72rem 1rem;
+      border-radius: 0.7rem;
+      border: 1px solid rgba(129,140,248,0.45);
+      background: rgba(79,70,229,0.12);
+      color: var(--accent-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      line-height: 1.35;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .process-doc-btn:hover {
+      background: rgba(79,70,229,0.22);
+      color: #fff;
+      border-color: rgba(129,140,248,0.65);
+      transform: translateY(-1px);
+    }
+    .collaborators {
+      margin-top: 3.5rem;
+    }
+    .collaborator-list {
+      margin-top: 1rem;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .collaborator-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .collaborator-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      padding: 1.25rem 1rem;
+      background: rgba(11,15,31,0.6);
+      min-height: 8.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .collaborator-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(129,140,248,0.42);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.65);
+    }
+    .collaborator-badge {
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 9999px;
+      display: grid;
+      place-items: center;
+      color: var(--accent-muted);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(129,140,248,0.4);
+    }
+    .collaborator-name {
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2026</span>
+      <h1 class="font-display">Optimized Fan Propeller</h1>
+      <p class="subtitle">Designed and optimized replacement fan propeller</p>
+    </div>
+
+    <div class="minimal-hero">
+      <img src="Images/Fan/final.jpg" alt="Layout of all propeller prototypes" />
+    </div>
+
+    <section class="stl-viewer-section project-content">
+      <h2 class="font-display">Interactive 3D Model - Selected Prototypes</h2>
+      <p class="body">Drag to rotate, scroll to zoom, and right-drag to pan around the printable propeller geometry.</p>
+      <div class="stl-viewer-frame">
+        <div id="fanStlViewer" class="stl-viewer">
+          <div class="stl-loading">Loading 3D model...</div>
+        </div>
+        <div class="stl-carousel-controls">
+          <div class="stl-carousel-buttons">
+            <button id="stlPrevBtn" class="stl-carousel-btn" type="button" aria-label="Previous STL model">&#8592;</button>
+            <button id="stlNextBtn" class="stl-carousel-btn" type="button" aria-label="Next STL model">&#8594;</button>
+          </div>
+          <span id="stlModelMeta" class="stl-carousel-meta">1 / 9</span>
+        </div>
+        <p id="stlModelHint" class="stl-viewer-hint">Model: EarlyEntryZipline.stl</p>
+      </div>
+    </section>
+
+    <div class="project-content">
+      <h2 class="font-display">Project Overview</h2>
+      <p class="body">After I accidentally broke the stock propeller on my desk fan, I set out on a mission to design a replacement that would be quieter and more efficient than the original. I researched many designs that are known to be detectibly quieter than traditional designs including: toroidal, zipline, and skewed traditional. Each of the propellers in the above pictures I designed, learning lofting, guide rails, and analytic tools like center of mass in Fusion. I even consulted AI to see what factors would dramatically decrease audible volume, to no avail. Ultimately, I discovered that while some of my designs were quieter than the original, frequency (speed) is the main contributor to loud propellers, and that was the one variable I could not change. I ended up completing this project with the orange, 4-blade propeller with my custom “Early Entry” blade design which was about the same as the original in noise but dramatically more directed and stronger in airflow. </p>
+
+      <h2 class="font-display">Project Highlights</h2>
+      <p class="body">Selected prototypes and their role in the design process</p>
+      <div class="zen-gallery">
+        <figure class="zen-media-tile">
+            <img src="Images/Fan/Props (1).jpg" alt="Nozzle assembly 1.0 prototype" loading="lazy" />
+            <figcaption class="zen-caption">First Toroidal propeller prototype with 35 degree pitch and 15% infill.</figcaption>
+          </figure>
+          <figure class="zen-media-tile">
+            <img src="Images/Fan/Props (2).jpg" alt="Nozzle assembly 1.1 prototype revision" loading="lazy" />
+            <figcaption class="zen-caption">Toroidal and Early Entry propeller prototypes with 20 degree pitch. Found that more blades are louder.</figcaption>
+          </figure>
+          <figure class="zen-media-tile">
+            <img src="Images/Fan/Props (3).jpg" alt="Nozzle optimization comparison" loading="lazy" />
+            <figcaption class="zen-caption">First prototype of Zipline-style propeller with uneven blade spacing.</figcaption>
+          </figure>
+          <figure class="zen-media-tile">
+          <img src="Images/Fan/Props (4).jpg" alt="Nozzle assembly 2.0 overview" loading="lazy" />
+          <figcaption class="zen-caption">Second prototype of Zipline-style propeller compared to Toroidal. Found that Zipline-style needs significant counterweight.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <img src="Images/Fan/Props (5).jpg" alt="Nozzle assembly 2.2 revision" loading="lazy" />
+          <figcaption class="zen-caption">Third prototype of Zipline-style propeller with adjustable bolt as counterweight. Resolved major imbalance issues, still imperfect but quieter than the rest and a good proof-of-concept.</figcaption>
+        </figure>
+        <figure class="zen-media-tile">
+          <img src="Images/Fan/Props (1).png" alt="Nozzle assembly 2.3 revision" loading="lazy" />
+          <figcaption class="zen-caption">Final Zipline-style propeller design utilizing COM analysis and aerodynamic counterweight. Found less noise than original Early Entry propeller with less airflow, retired Zipline-style in favor of even blade spacing.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { STLLoader } from "three/addons/loaders/STLLoader.js";
+
+    const MODELS = [
+      "Images/Fan/ToroidalProp.stl",
+      "Images/Fan/ToroidalProp1.stl",
+      "Images/Fan/AI-SuggestionsProp.stl",
+      "Images/Fan/EarlyEntryProp1.stl",
+      "Images/Fan/EarlyEntryProp.stl",
+      "Images/Fan/ZiplineV3Prop.stl",
+      "Images/Fan/ZiplineV4Prop.stl",
+      "Images/Fan/EarlyEntryZipline.stl",
+      "Images/Fan/FanBlade1.stl"
+    ];
+    const viewerEl = document.getElementById("fanStlViewer");
+    const loadingEl = viewerEl.querySelector(".stl-loading");
+    const prevBtn = document.getElementById("stlPrevBtn");
+    const nextBtn = document.getElementById("stlNextBtn");
+    const metaEl = document.getElementById("stlModelMeta");
+    const hintEl = document.getElementById("stlModelHint");
+    let modelIndex = 0;
+    let currentMesh = null;
+    const loader = new STLLoader();
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    viewerEl.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    camera.position.set(2.2, 1.6, 2.2);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.1);
+    keyLight.position.set(2.5, 3.2, 1.6);
+    scene.add(keyLight);
+    const rimLight = new THREE.DirectionalLight(0x8ea2ff, 0.5);
+    rimLight.position.set(-2.5, 1.6, -2.8);
+    scene.add(rimLight);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.target.set(0, 0, 0);
+    controls.minDistance = 0.35;
+    controls.maxDistance = 10;
+    controls.update();
+
+    function sizeRenderer() {
+      const width = viewerEl.clientWidth;
+      const height = viewerEl.clientHeight;
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+
+    function updateMeta() {
+      const filename = MODELS[modelIndex].split("/").pop();
+      metaEl.textContent = (modelIndex + 1) + " / " + MODELS.length;
+      hintEl.textContent = "Model: " + filename;
+    }
+
+    function clearCurrentMesh() {
+      if (!currentMesh) return;
+      scene.remove(currentMesh);
+      currentMesh.geometry.dispose();
+      currentMesh.material.dispose();
+      currentMesh = null;
+    }
+
+    function loadModel(index) {
+      modelIndex = (index + MODELS.length) % MODELS.length;
+      updateMeta();
+      loadingEl.textContent = "Loading 3D model...";
+      loadingEl.classList.remove("hidden");
+
+      loader.load(
+        MODELS[modelIndex],
+        (geometry) => {
+          clearCurrentMesh();
+          geometry.computeVertexNormals();
+          geometry.center();
+
+          const material = new THREE.MeshStandardMaterial({
+            color: 0x9caeff,
+            metalness: 0.15,
+            roughness: 0.35
+          });
+          currentMesh = new THREE.Mesh(geometry, material);
+          scene.add(currentMesh);
+
+          const box = new THREE.Box3().setFromObject(currentMesh);
+          const size = box.getSize(new THREE.Vector3()).length();
+          const fitDistance = size * 1.15;
+          camera.position.set(fitDistance, fitDistance * 0.7, fitDistance);
+          controls.minDistance = Math.max(size * 0.25, 0.2);
+          controls.maxDistance = Math.max(size * 8, 4);
+          controls.target.set(0, 0, 0);
+          controls.update();
+
+          loadingEl.classList.add("hidden");
+        },
+        undefined,
+        () => {
+          loadingEl.textContent = "Could not load STL model.";
+          loadingEl.classList.remove("hidden");
+        }
+      );
+    }
+
+    sizeRenderer();
+    const ro = new ResizeObserver(sizeRenderer);
+    ro.observe(viewerEl);
+
+    prevBtn.addEventListener("click", () => loadModel(modelIndex - 1));
+    nextBtn.addEventListener("click", () => loadModel(modelIndex + 1));
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+    loadModel(0);
+  </script>
+</body>
+</html>
