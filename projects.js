@@ -13,7 +13,7 @@
 
 const PROJECTS = [
   /*{ slug: "catamaran", title: "Pedal Catamaran", subtitle: "Worked with team to produce a catamaran from scratch", date: "2026", image: "Images/Catamaran/final.gif" },*/
-  { slug: "tentacle", title: "Controllable Tentacle", subtitle: "Built fully-articulate tentacle robot from scratch", date: "2026", image: "Images/Tentacle/final.jpg" },
+  { slug: "tentacle", title: "Controllable Tentacle", subtitle: "Fully-articulate tentacle robot built and programmed from scratch", date: "2026", image: "Images/Tentacle/final.jpg" },
   { slug: "fan", title: "Optimized Fan Propeller", subtitle: "Designed and optimized replacement fan propeller", date: "2026", image: "Images/Fan/final.jpg" },
   { slug: "traffic-light", title: "Traffic Light", subtitle: "Modified standard lamp post to operate traffic lights", date: "2026", image: "Images/TrafficLight/final.jpg" },
   /*{ slug: "websites", title: "Websites", subtitle: "Full-stack and static website development", date: "2021-Present", image: "Images/Websites/hero.jpg" },

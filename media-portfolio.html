@@ -39,6 +39,11 @@
       transform: translateY(14px) scale(0.97);
       transition: transform 280ms ease;
     }
+    .media-lightbox--sculpture .media-lightbox-panel {
+      width: min(96vw, 1680px);
+      height: min(92vh, 1000px);
+      max-height: min(92vh, calc(100vh - 2.5rem));
+    }
     .media-lightbox.is-open .media-lightbox-panel {
       transform: translateY(0) scale(1);
     }
@@ -46,8 +51,13 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+      object-position: center;
       display: block;
       background: rgba(2, 6, 23, 0.5);
+    }
+    .media-tile--sculpture .media-thumb img {
+      object-fit: contain;
+      object-position: center;
     }
     .media-lightbox-close {
       position: absolute;
@@ -74,6 +84,10 @@
       width: 14px;
       height: 14px;
     }
+    .media-badge--sculpture {
+      color: #99f6e4;
+      border-color: rgba(45, 212, 191, 0.55);
+    }
   </style>
 </head>
 <body>
@@ -90,7 +104,7 @@
   <div class="container">
     <section class="media-hero">
       <h1 class="font-display">Media Portfolio</h1>
-      <p>Selected photography and videography works</p>
+      <p>Selected photography, videography, graphic design, and sculpture works</p>
     </section>
 
     <section class="media-grid" id="media-grid"></section>
@@ -108,6 +122,7 @@
   </div>
 
   <script>
+    /* Types: "image" | "video" | "sculpture" — sculpture uses image/lightbox behavior with a Sculpture badge (like Video). */
     const MEDIA_ITEMS = [
       {
         type: "image",
@@ -144,6 +159,41 @@
         title: "Walking The Charles",
         subtitle: "Drone Photography, Massachusetts"
       },
+      {
+        type: "image",
+        src: "Images/MediaPortfolio/Lighthouse Point Edit-2.jpg",
+        href: "Images/MediaPortfolio/Lighthouse Point Edit-2.jpg",
+        title: "Lighthouse Point",
+        subtitle: "Drone Photography, Florida"
+      },
+      {
+        type: "sculpture",
+        src: "Images/MediaPortfolio/WoodReductive1.png",
+        href: "Images/MediaPortfolio/WoodReductive1.png",
+        title: "Organic Sculpture",
+        subtitle: "Balsa Wood, subtractive carving"
+      },
+      {
+        type: "sculpture",
+        src: "Images/MediaPortfolio/HangingCorners.jpg",
+        href: "Images/MediaPortfolio/HangingCorners.jpg",
+        title: "Hanging Corners",
+        subtitle: "Balsa Wood, acrylic"
+      },
+      {
+        type: "sculpture",
+        src: "Images/MediaPortfolio/Cube1.png",
+        href: "Images/MediaPortfolio/Cube1.png",
+        title: "Cube",
+        subtitle: "Balsa Wood, wire"
+      },
+      {
+        type: "image",
+        src: "Images/MediaPortfolio/PeterIsland.jpg",
+        href: "Images/MediaPortfolio/PeterIsland.jpg",
+        title: "Peter Island",
+        subtitle: "Drone Photography, British Virgin Islands"
+      },
     ];
 
     const mediaGrid = document.getElementById("media-grid");
@@ -153,7 +203,7 @@
 
     MEDIA_ITEMS.forEach((item) => {
       const a = document.createElement("a");
-      a.className = "media-tile";
+      a.className = "media-tile" + (item.type === "sculpture" ? " media-tile--sculpture" : "");
       a.href = item.href || item.src;
       if (item.type === "video") {
         a.target = "_blank";
@@ -161,16 +211,23 @@
       } else {
         a.addEventListener("click", (event) => {
           event.preventDefault();
-          openLightbox(item.src, item.title);
+          openLightbox(item);
         });
       }
+
+      const typeBadge =
+        item.type === "video"
+          ? '<div class="media-badge">Video</div>'
+          : item.type === "sculpture"
+            ? '<div class="media-badge media-badge--sculpture">Sculpture</div>'
+            : "";
 
       a.innerHTML = `
         <div class="media-thumb">
           <img src="${item.src.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;")}" alt="" loading="lazy" />
         </div>
         <div class="media-overlay">
-          ${item.type === "video" ? '<div class="media-badge">Video</div>' : ""}
+          ${typeBadge}
           <div class="media-title font-display">${escapeHtml(item.title)}</div>
           <div class="media-subtitle">${escapeHtml(item.subtitle)}</div>
         </div>
@@ -191,16 +248,17 @@
       }
     });
 
-    function openLightbox(src, title) {
-      lightboxImage.src = src;
-      lightboxImage.alt = title || "";
+    function openLightbox(item) {
+      lightboxImage.src = item.src;
+      lightboxImage.alt = item.title || "";
+      lightbox.classList.toggle("media-lightbox--sculpture", item.type === "sculpture");
       lightbox.classList.add("is-open");
       lightbox.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
     }
 
     function closeLightbox() {
-      lightbox.classList.remove("is-open");
+      lightbox.classList.remove("is-open", "media-lightbox--sculpture");
       lightbox.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
       window.setTimeout(() => {
