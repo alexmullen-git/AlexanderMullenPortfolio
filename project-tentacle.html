@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Controllable Tentacle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .tentacle-accent { color: #5eead4; }
+    .tentacle-glow {
+      box-shadow: 0 0 0 1px rgba(94,234,212,0.12), 0 24px 60px rgba(2,6,23,0.55);
+    }
+    .pullquote {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #99f6e4;
+      line-height: 1.45;
+      margin: 2rem 0;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0.75rem;
+      border-left: 3px solid #2dd4bf;
+      background: linear-gradient(105deg, rgba(15,118,110,0.18), rgba(11,15,31,0.5));
+    }
+    .minimal-hero {
+      aspect-ratio: 16/10;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 20%, rgba(45,212,191,0.12), var(--surface-soft));
+      margin: 2rem 0;
+      border: 1px solid rgba(94,234,212,0.15);
+    }
+    .minimal-hero img,
+    .minimal-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #5eead4;
+      margin-bottom: 0.35rem;
+    }
+    .tent-gallery {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 640px) {
+      .tent-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1024px) {
+      .tent-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .tent-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(94,234,212,0.12);
+      background: rgba(11,15,31,0.85);
+      aspect-ratio: 1 / 1;
+    }
+    .tent-tile img,
+    .tent-tile video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+    .tent-tile:hover img,
+    .tent-tile:hover video {
+      transform: scale(1.045);
+    }
+    .tent-caption {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: #fff;
+      background: linear-gradient(to top, rgba(2,6,23,0.95), rgba(2,6,23,0.2), transparent);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .tent-tile:hover .tent-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .video-row {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 768px) {
+      .video-row { grid-template-columns: 1fr 1fr; }
+    }
+    .video-row .minimal-hero {
+      margin: 0;
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+    }
+    /* Grid + aspect-ratio: percentage height on <video> often fails; fill the box explicitly */
+    .video-row .minimal-hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .problem-solution {
+      display: grid;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 640px) { .problem-solution { grid-template-columns: 1fr 1fr; } }
+    .problem-solution > div {
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(94,234,212,0.1);
+      background: rgba(11,15,31,0.65);
+    }
+    .problem-solution h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2026</span>
+      <h1 class="font-display">Controllable Tentacle</h1>
+      <p class="subtitle">Fully articulated tentacle robot built from scratch—segmented structure, custom actuation, and integrated housing.</p>
+    </div>
+
+    <div class="minimal-hero tentacle-glow">
+      <video autoplay muted loop playsinline preload="metadata" aria-label="Controllable tentacle prototype in motion">
+        <source src="Images/Tentacle/IMG_1412.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="project-content">
+      <h2 class="font-display">Overview</h2>
+      <p class="body">This project is a ground-up build of a tentacle-style manipulator: 3D-printed links for compliant motion, a dedicated actuator module, and iterative housings from open layouts to a closed shell. The goal was a device that looks and moves like a coherent limb—not a loose stack of parts—while staying debuggable through early prototypes.</p>
+      
+      <h2 class="font-display tentacle-accent">Actuation module design and early form</h2>
+      <p class="body">Hover tiles for short captions. Renders and photos track how the actuator concept and first vertical build came together.</p>
+      <div class="tent-gallery">
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/ActuatorModule.png" alt="Actuator module concept render" loading="lazy" />
+          <figcaption class="tent-caption">Actuator module design - housing attached to servo motor CAD shown.</figcaption>
+        </figure>
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/ActuatorModule1.png" alt="Actuator module iteration" loading="lazy" />
+          <figcaption class="tent-caption">Actuator module design - housing attached to servo motor and spool CAD shown..</figcaption>
+        </figure>
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/ActuatorModule2.png" alt="Actuator module refined render" loading="lazy" />
+          <figcaption class="tent-caption">Refined module before moving to integrated housing.</figcaption>
+        </figure>
+        <figure class="tent-tile">
+            <img src="Images/Tentacle/V1.jpg" alt="First tentacle prototype" loading="lazy" />
+            <figcaption class="tent-caption">V1 physical prototype—establishing segment stack and overall silhouette.</figcaption>
+          </figure>
+      </div>
+
+      <h2 class="font-display tentacle-accent">Housing</h2>
+      <p class="body">Base housing CAD design shown with actuator modules attached</p>
+      <div class="tent-gallery">
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/fullHousing.png" alt="Full housing render" loading="lazy" />
+          <figcaption class="tent-caption">Full base housing design with no cap - CAD.</figcaption>
+        </figure>
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/closedHousing.png" alt="Closed housing render" loading="lazy" />
+          <figcaption class="tent-caption">Closed base housing design with cap - CAD.</figcaption>
+        </figure>
+      </div>
+
+      <h2 class="font-display tentacle-accent">Integrated prototype</h2>
+      <p class="body">Final physical assembly on the powered base.</p>
+      <div class="tent-gallery">
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/final.jpg" alt="Final tentacle build" loading="lazy" />
+          <figcaption class="tent-caption">Final integration with tentioned tentacle attached.</figcaption>
+        </figure>
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/final1.jpg" alt="Alternate view of final build" loading="lazy" />
+          <figcaption class="tent-caption">Alternate angle on the finished prototype with tentacle attached.</figcaption>
+        </figure>
+      </div>
+
+      <h2 class="font-display tentacle-accent">GIFs &amp; footage</h2>
+      <p class="body">Short loops and clips show grab behavior, rotation, and desk testing.</p>
+      <div class="tent-gallery">
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/grab.gif" alt="Tentacle grab motion" loading="lazy" />
+          <figcaption class="tent-caption">Grab / interaction loop.</figcaption>
+        </figure>
+        <figure class="tent-tile">
+          <img src="Images/Tentacle/spin.gif" alt="Tentacle spin motion" loading="lazy" />
+          <figcaption class="tent-caption">Spin or sweep motion.</figcaption>
+        </figure>
+      </div>
+
+      <div class="video-row">
+        <div class="minimal-hero tentacle-glow">
+          <video autoplay muted loop playsinline preload="auto" poster="Images/Tentacle/final.jpg" aria-label="Tentacle prototype footage — desk testing">
+            <source src="Images/Tentacle/IMG_1409.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="minimal-hero tentacle-glow">
+          <video autoplay muted loop playsinline preload="auto" poster="Images/Tentacle/final1.jpg" aria-label="Tentacle prototype footage — alternate angle">
+            <source src="Images/Tentacle/IMG_1410.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <div class="problem-solution">
+        <div>
+          <h3>Mechanics</h3>
+          <p class="body">I designed a segmented tentacle that had two main elements that facilitates its movement. TPU spine: by designing each segment to snugly slide along a piece of flexible TPU filament, the tentacle can easily stretch and bend with uniform rigidity along the entire tentacle. Fishing line channel placement and leverage: each segment is smaller than the prior, thus the diminishing distance from the center of each segment’s channel creates diminishing leverage and far greater motion at the base of the tentacle. </p>
+        </div>
+        <div>
+          <h3>Programming &amp; Integration</h3>
+          <p class="body">Utilizing a servo to control each axis of movement allows for intentional and precise control when programming. I built a python app that sends serial commands that rotates the servos to the correctly plotted points (as per the calculated trigonometry of x,y points on a circle). To explain the proportions of control in short, when moving directly along an axis, the other two axes must also be rotated by a factor of -1.8 multiplied by the delta to prevent slack in the fishing line.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      document.querySelectorAll(".video-row video").forEach(function (video) {
+        function playMuted() {
+          video.muted = true;
+          var p = video.play();
+          if (p && typeof p.catch === "function") p.catch(function () {});
+        }
+        playMuted();
+        video.addEventListener("loadeddata", playMuted, { once: true });
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) playMuted();
+            });
+          }, { rootMargin: "80px", threshold: 0.05 }).observe(video);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

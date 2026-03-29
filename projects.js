@@ -12,10 +12,12 @@
  */
 
 const PROJECTS = [
+  /*{ slug: "catamaran", title: "Pedal Catamaran", subtitle: "Worked with team to produce a catamaran from scratch", date: "2026", image: "Images/Catamaran/final.gif" },*/
+  { slug: "tentacle", title: "Controllable Tentacle", subtitle: "Built fully-articulate tentacle robot from scratch", date: "2026", image: "Images/Tentacle/final.jpg" },
   { slug: "fan", title: "Optimized Fan Propeller", subtitle: "Designed and optimized replacement fan propeller", date: "2026", image: "Images/Fan/final.jpg" },
   { slug: "traffic-light", title: "Traffic Light", subtitle: "Modified standard lamp post to operate traffic lights", date: "2026", image: "Images/TrafficLight/final.jpg" },
-  { slug: "websites", title: "Websites", subtitle: "Full-stack and static website development", date: "2021-Present", image: "Images/Websites/hero.jpg" },
-  { slug: "closedAI", title: "ClosedAI Solutions", subtitle: "Co-Founder, AI software development company", date: "2025-Present", image: "Images/closedAI/logo.png" },
+  /*{ slug: "websites", title: "Websites", subtitle: "Full-stack and static website development", date: "2021-Present", image: "Images/Websites/hero.jpg" },
+  { slug: "closedAI", title: "ClosedAI Solutions", subtitle: "Co-Founder, AI software development company", date: "2025-Present", image: "Images/closedAI/logo.png" },*/
   { slug: "water-filling-table", title: "Water-Filling Table", subtitle: "Table built to detect cups and refill them with water", date: "2025", image: "Images/Water-FillingTable/final1.jpg" },
   { slug: "zen-garden", title: "Automatic Zen Garden", subtitle: "Custom drawing machine in the form of a 'zen garden'", date: "2025", image: "Images/ZenGarden/drawline.gif" },
   { slug: "ESP32", title: "ESP32 Integrations", subtitle: "Inputs, custom capacitive sensors, networking, and more", date: "2025", image: "Images/ESP32/handFinal.GIF" },
