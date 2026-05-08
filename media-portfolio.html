@@ -88,6 +88,35 @@
       color: #99f6e4;
       border-color: rgba(45, 212, 191, 0.55);
     }
+    .media-cta {
+      margin: 2rem 0 0;
+      display: flex;
+      justify-content: center;
+    }
+    .media-cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: 999px;
+      border: 1px solid rgba(165, 180, 252, 0.55);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+    .media-cta-button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(129, 140, 248, 0.8);
+      box-shadow: 0 10px 20px rgba(2, 6, 23, 0.28);
+    }
+    .media-cta-button:focus-visible {
+      outline: 2px solid rgba(129, 140, 248, 0.95);
+      outline-offset: 3px;
+    }
   </style>
 </head>
 <body>
@@ -108,6 +137,16 @@
     </section>
 
     <section class="media-grid" id="media-grid"></section>
+    <div class="media-cta">
+      <a
+        class="media-cta-button font-display"
+        href="https://drive.google.com/file/d/1OaX6bsBZGdWnHm1dVbj2MXt3A-1QZsSS/view?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        AP3D Art and Design Projects (Spring 2024)
+      </a>
+    </div>
   </div>
   <div class="media-lightbox" id="media-lightbox" aria-hidden="true">
     <div class="media-lightbox-panel">
