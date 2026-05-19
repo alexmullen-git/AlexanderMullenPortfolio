@@ -12,7 +12,7 @@
  */
 
 const PROJECTS = [
-  { slug: "propulsion", title: "Pedal Propulsion System", subtitle: "Developed a pedal-powered differential thrust propulsion system for a catamaran", date: "2026", image: "Images/propulsion/propulsion1.gif" },
+  { slug: "propulsion", title: "Pedal Propulsion System", subtitle: "Developed a pedal-powered differential thrust propulsion system for a catamaran", date: "2026", image: "Images/Propulsion/propulsion1.gif" },
   { slug: "catamaran", title: "Catamaran", subtitle: "Worked with a team to produce a catamaran from scratch", date: "2026", image: "Images/Catamaran/boat1.jpg" },
   { slug: "tentacle", title: "Controllable Tentacle", subtitle: "Fully-articulate tentacle robot built and programmed from scratch", date: "2026", image: "Images/Tentacle/grab.gif" },
   { slug: "fan", title: "Optimized Fan Propeller", subtitle: "Designed and optimized replacement fan propeller", date: "2026", image: "Images/Fan/final.jpg" },
