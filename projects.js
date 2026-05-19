@@ -12,6 +12,8 @@
  */
 
 const PROJECTS = [
+  { slug: "arm", title: "Robotic Arm", subtitle: "Built a robotic arm from scratch to pick and place objects", date: "2026", image: "Images/Arm/arm1.gif" },
+  { slug: "marble", title: "Marble Track System", subtitle: "Developed a mounting and track system for customizable marble runs", date: "2026", image: "Images/Marble/track1.jpg" },
   { slug: "propulsion", title: "Pedal Propulsion System", subtitle: "Developed a pedal-powered differential thrust propulsion system for a catamaran", date: "2026", image: "Images/Propulsion/propulsion1.gif" },
   { slug: "catamaran", title: "Catamaran", subtitle: "Worked with a team to produce a catamaran from scratch", date: "2026", image: "Images/Catamaran/boat1.jpg" },
   { slug: "tentacle", title: "Controllable Tentacle", subtitle: "Fully-articulate tentacle robot built and programmed from scratch", date: "2026", image: "Images/Tentacle/grab.gif" },

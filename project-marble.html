@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Marble Track System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .minimal-hero {
+      aspect-ratio: 16/9;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--surface-soft);
+      margin: 2rem 0;
+    }
+    .minimal-hero img,
+    .minimal-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .stl-viewer-section { margin: 2rem 0 2.5rem; }
+    .stl-viewer-frame {
+      margin-top: 0.8rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: radial-gradient(circle at top, rgba(30,41,59,0.75), rgba(11,15,31,0.95));
+      box-shadow: 0 22px 50px rgba(2,6,23,0.55);
+    }
+    .stl-viewer {
+      width: 100%;
+      height: min(58vh, 32rem);
+      min-height: 20rem;
+      position: relative;
+      touch-action: none;
+    }
+    .stl-viewer canvas { display: block; width: 100%; height: 100%; }
+    .stl-viewer-hint {
+      padding: 0.55rem 0.85rem 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .stl-loading {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background: linear-gradient(to bottom, rgba(2,6,23,0.25), rgba(2,6,23,0.55));
+      pointer-events: none;
+    }
+    .stl-loading.hidden { display: none; }
+    .stl-carousel-controls {
+      margin-top: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 0 0.9rem 0.15rem;
+    }
+    .stl-carousel-buttons { display: inline-flex; gap: 0.55rem; }
+    .stl-carousel-btn {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(129,140,248,0.35);
+      background: rgba(15,23,42,0.88);
+      color: var(--text);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    }
+    .stl-carousel-btn:hover {
+      border-color: rgba(129,140,248,0.72);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .stl-carousel-meta {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+    .marble-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 640px) {
+      .marble-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .marble-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.8);
+      aspect-ratio: 16 / 10;
+    }
+    .marble-tile img,
+    .marble-tile video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2026</span>
+      <h1 class="font-display">Marble Track System</h1>
+      <p class="subtitle">Mounting and track hardware for customizable marble runs on a pegboard wall</p>
+    </div>
+
+    <div class="minimal-hero">
+      <img src="Images/Marble/track1.jpg" alt="Marble track mounted on pegboard wall" />
+    </div>
+
+    <div class="project-content">
+      <h2 class="font-display">Overview</h2>
+      <p class="body">This project is a universal marble track system for a standard pegboard. 3D printed mounts secure wooden dowels to the pegboard, pivot mounts attach to the dowels, track mounts with dovetail joints connect to the pivot mounts, and the track clips into the mounts allowing the user to shape their own track then use the mounts to secure it. The focus was printing simplicity, low-profile hardware, and ease of use. See the interactive 3D models and demo tracks below!</p>
+    </div>
+
+    <section class="stl-viewer-section project-content">
+      <h2 class="font-display">Mounting Hardware — 3D Models</h2>
+      <p class="body">Pegboard clips, wire-track brackets, and related printed parts. Drag to rotate, scroll to zoom, right-drag to pan.</p>
+      <div class="stl-viewer-frame">
+        <div id="marbleStlViewer" class="stl-viewer">
+          <div class="stl-loading">Loading 3D model...</div>
+        </div>
+        <div class="stl-carousel-controls">
+          <div class="stl-carousel-buttons">
+            <button id="stlPrevBtn" class="stl-carousel-btn" type="button" aria-label="Previous STL model">&#8592;</button>
+            <button id="stlNextBtn" class="stl-carousel-btn" type="button" aria-label="Next STL model">&#8594;</button>
+          </div>
+          <span id="stlModelMeta" class="stl-carousel-meta">1 / 4</span>
+        </div>
+        <p id="stlModelHint" class="stl-viewer-hint">Model: pegMount.stl</p>
+      </div>
+    </section>
+
+    <div class="project-content">
+      <h2 class="font-display">In Action</h2>
+      <div class="marble-gallery">
+        <figure class="marble-tile">
+          <video src="Images/Marble/track1.mp4" autoplay muted loop playsinline></video>
+        </figure>
+        <figure class="marble-tile">
+          <video src="Images/Marble/track2.mp4" autoplay muted loop playsinline></video>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { STLLoader } from "three/addons/loaders/STLLoader.js";
+
+    const MODELS = [
+      "Images/Marble/pegMount.stl",
+      "Images/Marble/trackEndMount.stl",
+      "Images/Marble/trackMount.stl",
+      "Images/Marble/pivotMount.stl"
+    ];
+
+    const viewerEl = document.getElementById("marbleStlViewer");
+    const loadingEl = viewerEl.querySelector(".stl-loading");
+    const prevBtn = document.getElementById("stlPrevBtn");
+    const nextBtn = document.getElementById("stlNextBtn");
+    const metaEl = document.getElementById("stlModelMeta");
+    const hintEl = document.getElementById("stlModelHint");
+    const carouselControls = document.querySelector(".stl-carousel-controls");
+    let modelIndex = 0;
+    let currentMesh = null;
+    const loader = new STLLoader();
+
+    if (!MODELS.length) {
+      loadingEl.textContent = "No STL models configured yet.";
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+      carouselControls.style.opacity = "0.45";
+    } else {
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      viewerEl.appendChild(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+      camera.position.set(2.2, 1.6, 2.2);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.1);
+      keyLight.position.set(2.5, 3.2, 1.6);
+      scene.add(keyLight);
+      const rimLight = new THREE.DirectionalLight(0x8ea2ff, 0.5);
+      rimLight.position.set(-2.5, 1.6, -2.8);
+      scene.add(rimLight);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.08;
+      controls.minDistance = 0.35;
+      controls.maxDistance = 10;
+      controls.update();
+
+      function sizeRenderer() {
+        const width = viewerEl.clientWidth;
+        const height = viewerEl.clientHeight;
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      }
+
+      function updateMeta() {
+        const filename = MODELS[modelIndex].split("/").pop();
+        metaEl.textContent = (modelIndex + 1) + " / " + MODELS.length;
+        hintEl.textContent = "Model: " + filename;
+      }
+
+      function clearCurrentMesh() {
+        if (!currentMesh) return;
+        scene.remove(currentMesh);
+        currentMesh.geometry.dispose();
+        currentMesh.material.dispose();
+        currentMesh = null;
+      }
+
+      function loadModel(index) {
+        modelIndex = (index + MODELS.length) % MODELS.length;
+        updateMeta();
+        loadingEl.textContent = "Loading 3D model...";
+        loadingEl.classList.remove("hidden");
+
+        loader.load(
+          MODELS[modelIndex],
+          (geometry) => {
+            clearCurrentMesh();
+            geometry.computeVertexNormals();
+            geometry.center();
+
+            const material = new THREE.MeshStandardMaterial({
+              color: 0x9caeff,
+              metalness: 0.15,
+              roughness: 0.35
+            });
+            currentMesh = new THREE.Mesh(geometry, material);
+            scene.add(currentMesh);
+
+            const box = new THREE.Box3().setFromObject(currentMesh);
+            const size = box.getSize(new THREE.Vector3()).length();
+            const fitDistance = size * 1.15;
+            camera.position.set(fitDistance, fitDistance * 0.7, fitDistance);
+            controls.minDistance = Math.max(size * 0.25, 0.2);
+            controls.maxDistance = Math.max(size * 8, 4);
+            controls.target.set(0, 0, 0);
+            controls.update();
+
+            loadingEl.classList.add("hidden");
+          },
+          undefined,
+          () => {
+            loadingEl.textContent = "Could not load STL — add file to Images/Marble/.";
+            loadingEl.classList.remove("hidden");
+          }
+        );
+      }
+
+      sizeRenderer();
+      const ro = new ResizeObserver(sizeRenderer);
+      ro.observe(viewerEl);
+
+      prevBtn.addEventListener("click", () => loadModel(modelIndex - 1));
+      nextBtn.addEventListener("click", () => loadModel(modelIndex + 1));
+
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+      loadModel(0);
+    }
+  </script>
+</body>
+</html>
