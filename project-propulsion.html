@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Pedal Propulsion System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .prop-accent { color: #fcd34d; }
+    .prop-glow {
+      box-shadow: 0 0 0 1px rgba(251,191,36,0.14), 0 24px 60px rgba(2,6,23,0.55);
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #f59e0b;
+      margin-bottom: 0.35rem;
+    }
+    .minimal-hero {
+      aspect-ratio: 16/10;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 20%, rgba(251,191,36,0.1), var(--surface-soft));
+      margin: 2rem 0;
+      border: 1px solid rgba(251,191,36,0.14);
+    }
+    .minimal-hero img,
+    .minimal-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .minimal-hero--wide { aspect-ratio: 21/9; }
+    .prop-gallery {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 640px) {
+      .prop-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1024px) {
+      .prop-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .prop-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(251,191,36,0.12);
+      background: rgba(11,15,31,0.85);
+      aspect-ratio: 1 / 1;
+    }
+    .prop-tile img,
+    .prop-tile video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+    .prop-tile:hover img,
+    .prop-tile:hover video { transform: scale(1.045); }
+    .prop-tile--wide { aspect-ratio: 16 / 10; }
+    @media (min-width: 640px) {
+      .prop-tile--span-2 { grid-column: span 2; }
+    }
+    .prop-caption {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: #fff;
+      background: linear-gradient(to top, rgba(2,6,23,0.95), rgba(2,6,23,0.2), transparent);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .prop-tile:hover .prop-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .video-row {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 768px) {
+      .video-row { grid-template-columns: 1fr 1fr; }
+    }
+    .video-row .minimal-hero {
+      margin: 0;
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+    }
+    .video-row .minimal-hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .problem-solution {
+      display: grid;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 640px) { .problem-solution { grid-template-columns: 1fr 1fr; } }
+    .problem-solution > div {
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(251,191,36,0.1);
+      background: rgba(11,15,31,0.65);
+    }
+    .problem-solution h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .related-project-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0.25rem 0 1.5rem;
+      padding: 0.72rem 1rem;
+      border-radius: 0.7rem;
+      border: 1px solid rgba(251,191,36,0.45);
+      background: rgba(245,158,11,0.1);
+      color: #fcd34d;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      line-height: 1.35;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .related-project-btn:hover {
+      background: rgba(245,158,11,0.2);
+      color: #fff;
+      border-color: rgba(251,191,36,0.65);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2026</span>
+      <h1 class="font-display">Pedal Propulsion System</h1>
+      <p class="subtitle">Developed a pedal-powered differential thrust propulsion system for a catamaran—one drive per hull, independent control, and paddle arms that translate crank rotation into thrust.</p>
+    </div>
+
+    <div class="minimal-hero prop-glow">
+      <img src="Images/Propulsion/propulsion1.gif" alt="Pedal propulsion system driving paddles on the water" />
+    </div>
+
+    <div class="project-content">
+      <h2 class="font-display">Overview</h2>
+      <p class="body">Each hull of our catamaran carries its own pedal crank, sproket and chain system, and stern-mounted paddle module. Pedaling one side harder than the other gives differential thrust for steering without a separate rudder input— essentially tank steering. I iterated from cardboard proof-of-concepts through laser-cut plywood frames, 3D-printed sprockets, and full integration on the catamaran. Hover over the gallery tiles for short captions.</p>
+
+      <a class="related-project-btn" href="project-catamaran.html">← See more about the catamaran this system powers</a>
+
+      <p class="section-label">Proof of concept</p>
+      <p class="body">Early bench models explored pivot geometry, length of paddle arms,and reciprocating paddle motion before scaling to hull-mounted hardware.</p>
+      <div class="prop-gallery">
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/POC2.jpg" alt="Cardboard and wood proof-of-concept lever mechanism" loading="lazy" />
+          <figcaption class="prop-caption">Cardboard frame with a pivoting paddle arm, first motion study on the bench.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+            <img src="Images/Propulsion/POC1.gif" alt="Cardboard and wood proof-of-concept lever mechanism" loading="lazy" />
+            <figcaption class="prop-caption">Cardboard design for experimentation with pivot height, arm lengths, padle angle, and paddle length.</figcaption>
+          </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/propulsion5.jpg" alt="Full-scale wooden propulsion frame held in workshop" loading="lazy" />
+          <figcaption class="prop-caption">Final design for the paddle module, fully designed in CAD to allow laser-cut frame, 3D-printed pulleys, and 3D-printed joints.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/pedal8.jpg" alt="Dual-sided wooden propulsion assembly on workbench" loading="lazy" />
+          <figcaption class="prop-caption">Duplicated paddle modules for the catamaran, easy to assemble and replicate thanks to full CAD model.</figcaption>
+        </figure>
+      </div>
+
+      <p class="section-label">Fabrication</p>
+      <p class="body">Crank mounts, idler pulleys, and large drive sprockets—3D-printed, laser-cut, and test-fit before going into the hulls.</p>
+      <div class="prop-gallery">
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/pedal1.jpg" alt="Bicycle crankset on wooden A-frame on workbench" loading="lazy" />
+          <figcaption class="prop-caption">Crankset on a 2×4 A-frame— first pedal stand mock-up.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/pedal5.jpg" alt="Large sprocket being 3D printed on a Prusa XL" loading="lazy" />
+          <figcaption class="prop-caption">Custom drive sprocket designed in CAD and 3D-printed to accomodate a square dowel shaft for easy torque transfer.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/pedal6.jpg" alt="Laser cutter fabricating plywood frame" loading="lazy" />
+          <figcaption class="prop-caption">Laser-cutting a plywood linkage frame in the shop.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/pedal7.jpg" alt="Finished laser-cut plywood frame on honeycomb bed" loading="lazy" />
+          <figcaption class="prop-caption">Cut frame sillhouette showing mounting holes and slots.</figcaption>
+        </figure>
+      </div>
+
+      <p class="section-label">Hull integration</p>
+      <p class="body">Pedal cranks epoxied into custom mounts, with pulleys routing belt tension down to the stern linkage.</p>
+      <div class="prop-gallery">
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/pedal2.jpg" alt="Crankset mounted inside boat hull on wooden frame" loading="lazy" />
+          <figcaption class="prop-caption">Crank and idler pulleys bonded into the hull floor.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/pedal3.jpg" alt="Looking down a hull at crankset and pulley platform" loading="lazy" />
+          <figcaption class="prop-caption">Down-hull view—crank at the bow, pulley assembly aft.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/pedal4.jpg" alt="Cross-member with sanding disc and pulley mount in hull" loading="lazy" />
+          <figcaption class="prop-caption">close-up of the aft pulley assembly.</figcaption>
+        </figure>
+      </div>
+
+      <p class="section-label">Catamaran assembly</p>
+      <p class="body">Both hulls bridged with full stern assemblies—pedals, chains, and propulsion modules ready for launch.</p>
+      <div class="prop-gallery">
+        <figure class="prop-tile prop-tile--span-2 prop-tile--wide">
+          <img src="Images/Propulsion/assembly3.jpg" alt="Complete catamaran with dual pedal propulsion in workshop" loading="lazy" />
+          <figcaption class="prop-caption">catamaran with both propulsion modules installed.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/assembly1.jpg" alt="Overhead view of catamaran propulsion hardware" loading="lazy" />
+          <figcaption class="prop-caption">Rear view—sprockets, linkages, and propulsion modules.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/assembly2.jpg" alt="Angled view of pedal drives on catamaran" loading="lazy" />
+          <figcaption class="prop-caption">Rear view—pedal cranks, idler pulleys, and propulsion modules.</figcaption>
+        </figure>
+        <figure class="prop-tile prop-tile--span-2 prop-tile--wide">
+          <img src="Images/Propulsion/assembly4.JPEG" alt="Testing propulsion at the river before launch" loading="lazy" />
+          <figcaption class="prop-caption">Shore-side adjustment—propulsion modules mounted, ready to launch on the Charles.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/assembly5.JPG" alt="Team inspecting pedal boats on grass by the river" loading="lazy" />
+          <figcaption class="prop-caption">Pre-launch check with the team—both hull drives visible.</figcaption>
+        </figure>
+      </div>
+
+      <p class="section-label">On the water</p>
+      <p class="body">GIFs and clips from river trials—pedaling, differential thrust, and paddle motion in real conditions.</p>
+      <div class="prop-gallery">
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/propulsion2.gif" alt="Pedaling propulsion system creating a wake" loading="lazy" />
+          <figcaption class="prop-caption">Full system in motion, chain drive and stern propulsion module in motion.</figcaption>
+        </figure>
+        <figure class="prop-tile">
+          <img src="Images/Propulsion/propulsion3.gif" alt="Twin hull propulsion from rear camera view" loading="lazy" />
+          <figcaption class="prop-caption">Both propulsion modules working together to move the catamaran.</figcaption>
+        </figure>
+        <figure class="prop-tile prop-tile--span-2 prop-tile--wide">
+          <img src="Images/Propulsion/propulsion4.JPG" alt="Catamaran floating with pedal drives visible" loading="lazy" />
+          <figcaption class="prop-caption">Catamaran on the shore with full pedal and paddle hardware.</figcaption>
+        </figure>
+      </div>
+
+      <div class="problem-solution">
+        <div>
+          <h3>Differential thrust</h3>
+          <p class="body">Independent pedal inputs on port and starboard let the crew steer by varying effort on each side—no separate steering system required. Matching pedal rate gives straight-line travel; biasing one hull turns the catamaran in place or along an arc.</p>
+        </div>
+        <div>
+          <h3>Mechanical design</h3>
+          <p class="body">A bicycle crank drives a chain to a large sprocket at the stern, which actuates an arm-style wooden linkage and flat paddle blades. Laser-cut plywood keeps the frame repeatable; 3D-printed pulleys and shop-made mounts allows fine-tune adjustments before epoxying everything into the hulls.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      document.querySelectorAll(".video-row video, .prop-gallery video").forEach(function (video) {
+        function playMuted() {
+          video.muted = true;
+          var p = video.play();
+          if (p && typeof p.catch === "function") p.catch(function () {});
+        }
+        playMuted();
+        video.addEventListener("loadeddata", playMuted, { once: true });
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) playMuted();
+            });
+          }, { rootMargin: "80px", threshold: 0.05 }).observe(video);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
