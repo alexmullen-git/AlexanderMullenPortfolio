@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <title>Robotic Arm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .arm-accent { color: #93c5fd; }
+    .minimal-hero {
+      aspect-ratio: 16/9;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--surface-soft);
+      margin: 2rem 0;
+      border: 1px solid rgba(147,197,253,0.14);
+    }
+    .minimal-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .arm-pillars {
+      display: grid;
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+    @media (min-width: 640px) {
+      .arm-pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .arm-pillar {
+      padding: 1.25rem 1.35rem;
+      border-radius: 0.85rem;
+      border: 1px solid rgba(147,197,253,0.18);
+      background: rgba(11,15,31,0.65);
+    }
+    .arm-pillar h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .arm-pillar p {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-bottom: 0.35rem;
+    }
+    .arm-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 640px) {
+      .arm-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1024px) {
+      .arm-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .arm-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.8);
+      aspect-ratio: 1 / 1;
+    }
+    .arm-tile--wide { aspect-ratio: 16 / 10; }
+    @media (min-width: 640px) {
+      .arm-tile--span-2 { grid-column: span 2; }
+    }
+    .arm-tile img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+    .arm-tile:hover img { transform: scale(1.04); }
+    .arm-caption {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: #fff;
+      background: linear-gradient(to top, rgba(2,6,23,0.95), rgba(2,6,23,0.2), transparent);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .arm-tile:hover .arm-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .arm-video-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 768px) {
+      .arm-video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .arm-video-card {
+      border-radius: 0.9rem;
+      overflow: hidden;
+      border: 1px solid rgba(147,197,253,0.14);
+      background: rgba(11,15,31,0.85);
+    }
+    .arm-video-card--featured {
+      grid-column: 1 / -1;
+    }
+    .arm-video-wrap {
+      aspect-ratio: 16 / 10;
+      background: #020617;
+    }
+    .arm-video-wrap video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #020617;
+    }
+    .arm-video-label {
+      padding: 0.75rem 1rem 0.9rem;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+    .arm-video-label strong {
+      display: block;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2026</span>
+      <h1 class="font-display">Robotic Arm</h1>
+      <p class="subtitle">Built a robotic arm from scratch to pick and place objects</p>
+    </div>
+
+    <div class="minimal-hero">
+      <img src="Images/Arm/arm1.gif" alt="Robotic arm pick and place in motion" />
+    </div>
+
+    <div class="project-content">
+      <h2 class="font-display">Overview</h2>
+      <p class="body">The Robotic Arm project is a system built from scratch to pick and place cubes. At its current stage, the arm is fully functional; it can automatically calibrate to determine its current position, manually be controlled by a laptop program, save favorite positions, and move reliably between stored positions. The system incorporates limit switches, Nema 17 and Nema 23 stepper motors, a protoboard with drivers and microcontroller, and various fabricated parts (3D-printed, laser-cut, and handmade). The claw is a recent addition, and still needs to be tested and integrated into the programming; it is designed to open and close in a parallel fashion and will have a capacitive rubber grip to detect the force at which it is holding an object.</p>
+
+      <div class="arm-pillars">
+        <div class="arm-pillar">
+          <h3>Motion &amp; control</h3>
+          <p>Auto-calibration, laptop manual control, saved positions, and reliable moves between stored waypoints.</p>
+        </div>
+        <div class="arm-pillar">
+          <h3>Hardware</h3>
+          <p>Limit switches, Nema 17/23 stepper motors, driver protoboard, and mixed 3D-printed, laser-cut, and handmade structure.</p>
+        </div>
+        <div class="arm-pillar">
+          <h3>Gripper (in progress)</h3>
+          <p>Parallel-opening claw with planned capacitive rubber grip for hold-force sensing—integration and testing still ahead.</p>
+        </div>
+        <div class="arm-pillar">
+          <h3>Goal</h3>
+          <p>Reliable cube pick-and-place using the full stack above once the claw is wired into the control loop.</p>
+        </div>
+      </div>
+
+      <h2 class="font-display arm-accent">Software &amp; demos</h2>
+      <p class="body">See the below clips for the current capabilities of the arm.</p>
+      <div class="arm-video-grid">
+        <figure class="arm-video-card arm-video-card--featured">
+          <div class="arm-video-wrap">
+            <video controls playsinline preload="metadata" title="Pick-and-place demo">
+              <source src="Images/Arm/demo.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <figcaption class="arm-video-label">
+            <strong>Movement demo</strong>
+            Full run moving between saved positions.
+          </figcaption>
+        </figure>
+        <figure class="arm-video-card">
+          <div class="arm-video-wrap">
+            <video controls playsinline preload="metadata" title="Automatic calibration">
+              <source src="Images/Arm/calibration.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <figcaption class="arm-video-label">
+            <strong>Auto-calibration</strong>
+            Homing against limit switches to establish current position.
+          </figcaption>
+        </figure>
+        <figure class="arm-video-card">
+          <div class="arm-video-wrap">
+            <video controls playsinline preload="metadata" title="Updating saved positions">
+              <source src="Images/Arm/updatePosition.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <figcaption class="arm-video-label">
+            <strong>Update position function</strong>
+            Laptop program shows how to update the position of the arm using software mock-up.
+          </figcaption>
+        </figure>
+        <figure class="arm-video-card">
+          <div class="arm-video-wrap">
+            <video id="armTestingVideo" controls playsinline preload="metadata" muted title="Motion testing">
+              <source src="Images/Arm/testing.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <figcaption class="arm-video-label">
+            <strong>Early motion testing</strong>
+            First movement tests verifying reliable travel.
+          </figcaption>
+        </figure>
+      </div>
+
+      <h2 class="font-display arm-accent">Mechanical build &amp; electronics</h2>
+      <p class="body">Structure and wiring for the stepper-driven links, limit-switch homing, and control board.</p>
+      <div class="arm-gallery">
+        <figure class="arm-tile">
+          <img src="Images/Arm/arm1.jpg" alt="Completed robotic arm" loading="lazy" />
+          <figcaption class="arm-caption">Finished arm by window for display.</figcaption>
+        </figure>
+        <figure class="arm-tile">
+          <img src="Images/Arm/arm2.jpg" alt="Arm linkage detail" loading="lazy" />
+          <figcaption class="arm-caption">Nearly-completed arm in the workshop.</figcaption>
+        </figure>
+        <figure class="arm-tile">
+          <img src="Images/Arm/arm3.jpg" alt="Arm side profile" loading="lazy" />
+          <figcaption class="arm-caption">Size/height comparison with me in the frame!</figcaption>
+        </figure>
+        <figure class="arm-tile">
+          <img src="Images/Arm/arm4.jpg" alt="Arm side profile" loading="lazy" />
+          <figcaption class="arm-caption">Size/height comparison with me in the frame!</figcaption>
+        </figure>
+        <figure class="arm-tile">
+          <img src="Images/Arm/arm5.jpg" alt="Stepper motors and wiring on arm" loading="lazy" />
+          <figcaption class="arm-caption">Early-stage assembly.</figcaption>
+        </figure>
+        <figure class="arm-tile">
+          <img src="Images/Arm/arm6.jpg" alt="Arm ready for calibration" loading="lazy" />
+          <figcaption class="arm-caption">Early-stage assembly.</figcaption>
+        </figure>
+        <figure class="arm-tile arm-tile--wide arm-tile--span-2">
+          <img src="Images/Arm/protoboard.jpg" alt="Protoboard with motor drivers and microcontroller" loading="lazy" />
+          <figcaption class="arm-caption">Protoboard: stepper drivers, microcontroller, and LED. Limit-switch inputs not pictured.</figcaption>
+        </figure>
+      </div>
+
+      <h2 class="font-display arm-accent">Parallel gripper</h2>
+      <p class="body">Recent claw hardware: parallel-opening jaws and a planned capacitive rubber grip for hold-force feedback. Programming integration and pick-and-place testing are the next steps.</p>
+      <div class="arm-gallery">
+        <figure class="arm-tile">
+          <img src="Images/Arm/claw1.jpg" alt="Gripper prototype one" loading="lazy" />
+          <figcaption class="arm-caption">First parallel-jaw concept, front profile.</figcaption>
+        </figure>
+        <figure class="arm-tile">
+          <img src="Images/Arm/claw2.jpg" alt="Gripper prototype two" loading="lazy" />
+          <figcaption class="arm-caption">Closed claw, top profile.</figcaption>
+        </figure>
+        <figure class="arm-tile">
+          <img src="Images/Arm/claw3.jpg" alt="Gripper on arm end effector" loading="lazy" />
+          <figcaption class="arm-caption">Open claw, top profile.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var v = document.getElementById("armTestingVideo");
+      if (!v) return;
+      v.muted = true;
+      v.addEventListener("volumechange", function () {
+        v.muted = true;
+      });
+    })();
+  </script>
+</body>
+</html>
