@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <link rel="icon" href="Images/favicons/zen-garden.svg" type="image/svg+xml" />
   <title>Automatic Zen Garden</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,7 +46,8 @@
       background: var(--surface-soft);
       margin: 2rem 0;
     }
-    .minimal-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .minimal-hero img,
+    .minimal-hero video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .zen-gallery {
       display: grid;
       grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -72,14 +73,16 @@
       background: rgba(11,15,31,0.8);
       aspect-ratio: 1 / 1;
     }
-    .zen-media-tile img {
+    .zen-media-tile img,
+    .zen-media-tile video {
       width: 100%;
       height: 100%;
       display: block;
       object-fit: cover;
       transition: transform 0.3s ease;
     }
-    .zen-media-tile:hover img {
+    .zen-media-tile:hover img,
+    .zen-media-tile:hover video {
       transform: scale(1.04);
     }
     .zen-caption {
@@ -177,7 +180,7 @@
     </div>
 
     <div class="minimal-hero">
-      <img src="Images/ZenGarden/timelapsespiral.gif" alt="Automatic Zen Garden drawing a spiral pattern in real time" />
+      <video data-src="Images/ZenGarden/timelapsespiral.loop.mp4" muted loop playsinline preload="none" aria-label="Automatic Zen Garden drawing a spiral pattern in real time"></video>
     </div>
 
     <blockquote class="pullquote font-display">
@@ -189,23 +192,23 @@
       <p class="body">Fully-integrated design with homing mechanism and multiple drawing patterns</p>
       <div class="zen-gallery">
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/final1.jpg" alt="Final Zen Garden build overview" loading="lazy" />
+          <img src="Images/ZenGarden/final1.web.jpg" alt="Final Zen Garden build overview" loading="lazy" />
           <figcaption class="zen-caption">Final assembly with service opening for debugging and maintenance.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/final2.jpg" alt="Final Zen Garden build overview" loading="lazy" />
+          <img src="Images/ZenGarden/final2.web.jpg" alt="Final Zen Garden build overview" loading="lazy" />
           <figcaption class="zen-caption">Refined mechanism and chassis packaging.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/final3.jpg" alt="Final Zen Garden build overview" loading="lazy" />
+          <img src="Images/ZenGarden/final3.web.jpg" alt="Final Zen Garden build overview" loading="lazy" />
           <figcaption class="zen-caption">Top-down view of the Zen Garden with calibrated and completed 'Pizza' pattern.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/drawline.gif" alt="Zen Garden completing a 'pizza' pattern" loading="lazy" />
+          <video data-src="Images/ZenGarden/drawline.loop.mp4" muted loop playsinline preload="none" aria-label="Zen Garden completing a 'pizza' pattern"></video>
           <figcaption class="zen-caption">Zen Garden motion testing, completing the 'pizza' pattern.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/movinaround.gif" alt="Zen Garden completing a spiral pattern" loading="lazy" />
+          <video data-src="Images/ZenGarden/movinaround.loop.mp4" muted loop playsinline preload="none" aria-label="Zen Garden completing a spiral pattern"></video>
           <figcaption class="zen-caption">Zen Garden completing a spiral pattern.</figcaption>
         </figure>
       </div>
@@ -214,31 +217,31 @@
       <p class="body">From the beginning, my partner Victor and I wanted this design to be sleek and challenging; it is from these goals that we decided to create a machine that can draw on all points of a circle by creating a polar plotting mechanism with a magnetic end effector. By building our base on the rotation and radius axes instead of x and y, we can more efficiently draw circles and create patterns. Hover over each picture to get a brief explanation of its role in our design process. </p>
       <div class="zen-gallery">
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/firstpart.jpg" alt="Our first protoype parts to give proof of concept" loading="lazy" />
+          <img src="Images/ZenGarden/firstpart.web.jpg" alt="Our first protoype parts to give proof of concept" loading="lazy" />
           <figcaption class="zen-caption">Our first protoype parts to give proof of concept.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/firstproto.jpg" alt="Our first prototype with learnings about fit tolerances and recognition of excess bulk" loading="lazy" />
+          <img src="Images/ZenGarden/firstproto.web.jpg" alt="Our first prototype with learnings about fit tolerances and recognition of excess bulk" loading="lazy" />
           <figcaption class="zen-caption">Our first prototype with learnings about fit tolerances and recognition of excess bulk.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/secondproto.jpg" alt="Second prototype with bearing integration and extended design to allow for larger drawing area, with testing, learned of unneccessary redundancy" loading="lazy" />
+          <img src="Images/ZenGarden/secondproto.web.jpg" alt="Second prototype with bearing integration and extended design to allow for larger drawing area, with testing, learned of unneccessary redundancy" loading="lazy" />
           <figcaption class="zen-caption">Second prototype with bearing integration and extended design to allow for larger drawing area. With testing, we learned of unneccessary redundancy.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/thirdproto.jpg" alt="Final design for the mechanism with homing limit switch and hall-effect sensor, optimized traveler, and slip ring; allowing for precise traveler locating and maximum drawing area" loading="lazy" />
+          <img src="Images/ZenGarden/thirdproto.web.jpg" alt="Final design for the mechanism with homing limit switch and hall-effect sensor, optimized traveler, and slip ring; allowing for precise traveler locating and maximum drawing area" loading="lazy" />
           <figcaption class="zen-caption">Final design for the mechanism with homing limit switch and hall-effect sensor, optimized traveler, and slip ring; allowing for precise traveler locating and maximum drawing area.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/attachedtobase.jpg" alt="Final design mounted to base with electronics installed (excl. microcontroller and cooling fan)" loading="lazy" />
+          <img src="Images/ZenGarden/attachedtobase.web.jpg" alt="Final design mounted to base with electronics installed (excl. microcontroller and cooling fan)" loading="lazy" />
           <figcaption class="zen-caption">Final design mounted to base with electronics installed (excl. microcontroller and cooling fan).</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/lid.gif" alt="First movement test of assembled mechanism" loading="lazy" />
+          <video data-src="Images/ZenGarden/lid.loop.mp4" muted loop playsinline preload="none" aria-label="First movement test of assembled mechanism"></video>
           <figcaption class="zen-caption">First movement test of assembled mechanism.</figcaption>
         </figure>
         <figure class="zen-media-tile">
-          <img src="Images/ZenGarden/firstmovements.gif" alt="First motor-controlled movement tests, confirming the machine's ability to draw circles and lines" loading="lazy" />
+          <video data-src="Images/ZenGarden/firstmovements.loop.mp4" muted loop playsinline preload="none" aria-label="First motor-controlled movement tests, confirming the machine's ability to draw circles and lines"></video>
           <figcaption class="zen-caption">First motor-controlled movement tests, confirming the machine's ability to draw circles and lines.</figcaption>
         </figure>
       </div>
@@ -274,5 +277,6 @@
       </div>
     </section>
   </div>
+  <script src="lazy-video.js" defer></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <link rel="icon" href="Images/favicons/marble.svg" type="image/svg+xml" />
   <title>Marble Track System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -139,7 +139,7 @@
     </div>
 
     <div class="minimal-hero">
-      <img src="Images/Marble/track1.jpg" alt="Marble track mounted on pegboard wall" />
+      <img src="Images/Marble/track1.web.jpg" alt="Marble track mounted on pegboard wall" />
     </div>
 
     <div class="project-content">
@@ -169,10 +169,10 @@
       <h2 class="font-display">In Action</h2>
       <div class="marble-gallery">
         <figure class="marble-tile">
-          <video src="Images/Marble/track1.mp4" autoplay muted loop playsinline></video>
+          <video src="Images/Marble/track1.web.mp4" data-autoplay muted loop playsinline preload="none"></video>
         </figure>
         <figure class="marble-tile">
-          <video src="Images/Marble/track2.mp4" autoplay muted loop playsinline></video>
+          <video src="Images/Marble/track2.web.mp4" data-autoplay muted loop playsinline preload="none"></video>
         </figure>
       </div>
     </div>
@@ -315,5 +315,6 @@
       loadModel(0);
     }
   </script>
+  <script src="lazy-video.js" defer></script>
 </body>
 </html>

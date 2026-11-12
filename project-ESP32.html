@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <link rel="icon" href="Images/favicons/ESP32.svg" type="image/svg+xml" />
   <title>ESP32 Integrations</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -82,7 +82,8 @@
       gap: 0.9rem;
       margin-bottom: 1rem;
     }
-    .slide-images img {
+    .slide-images img,
+    .slide-images video {
       width: 100%;
       aspect-ratio: 16 / 10;
       object-fit: cover;
@@ -176,8 +177,8 @@
           <div id="carouselTrack" class="carousel-track">
             <article class="integration-slide">
               <div class="slide-images">
-                <img src="Images/ESP32/handTest.GIF" alt="Early hand sensor prototype in testing" />
-                <img src="Images/ESP32/handFinal.GIF" alt="Final hand sensor interaction behavior" />
+                <video data-src="Images/ESP32/handTest.loop.mp4" muted loop playsinline preload="none" aria-label="Early hand sensor prototype in testing"></video>
+                <video data-src="Images/ESP32/handFinal.loop.mp4" muted loop playsinline preload="none" aria-label="Final hand sensor interaction behavior"></video>
               </div>
               <h3 class="font-display">Input/Output Prototyping</h3>
               <p class="body">I built a simple input/output device using a servo, potentiometer, and custom-designed lasercut mount from cardboard. By taking the exact position of a potentiometer, I programmed a servo to match the detected angle every 50ms, giving the impression that these two axes are mechanically connected. Future integrations could include steering mechanisms and coordination in mechanically-infeasible areas.</p>
@@ -185,7 +186,7 @@
 
             <article class="integration-slide">
               <div class="slide-images">
-                <img src="Images/ESP32/CS.jpeg" alt="Capacitive sensor hardware setup" />
+                <img src="Images/ESP32/CS.web.jpg" alt="Capacitive sensor hardware setup" />
                 <img src="Images/ESP32/CSgraph.png" alt="Capacitive sensor calibration graph" />
               </div>
               <h3 class="font-display">Custom Capacitive Sensor Build and Calibration</h3>
@@ -194,8 +195,8 @@
 
             <article class="integration-slide">
               <div class="slide-images">
-                <video autoplay loop muted playsinline>
-                  <source src="Images/ESP32/DIY.mp4" type="video/mp4" />
+                <video data-autoplay loop muted playsinline preload="none">
+                  <source src="Images/ESP32/DIY.web.mp4" type="video/mp4" />
                 </video>
               </div>
               <h3 class="font-display">Networking</h3>
@@ -204,7 +205,7 @@
 
             <article class="integration-slide">
               <div class="slide-images">
-                <img src="Images/ESP32/US.jpg" alt="Ultrasonic sensor setup" />
+                <img src="Images/ESP32/US.web.jpg" alt="Ultrasonic sensor setup" />
                 <img src="Images/ESP32/USgraph.png" alt="Ultrasonic sensor calibration graph" />
               </div>
               <h3 class="font-display">Ultrasonic Sensor Calibration</h3>
@@ -213,8 +214,8 @@
 
             <article class="integration-slide">
               <div class="slide-images">
-                <img src="Images/ESP32/servo0.jpg" alt="Oscilloscope output of servo at 0 degrees" />
-                <img src="Images/ESP32/servo180.jpg" alt="Oscilloscope output of servo at 180 degrees" />
+                <img src="Images/ESP32/servo0.web.jpg" alt="Oscilloscope output of servo at 0 degrees" />
+                <img src="Images/ESP32/servo180.web.jpg" alt="Oscilloscope output of servo at 180 degrees" />
               </div>
               <h3 class="font-display">Oscilloscope Output of Servo Understanding</h3>
               <p class="body">While there are libraries like ESP32-Servo that handle numerical code into physical servo movement, how is that change communicated to the servos themselves? By connecting my microcontroller to an oscilloscope, I can read the pulse of voltage passing through the control wire, noting its width and frequency; with this information I can understand that at 0 degrees (left) the pulse is much narrower at 0.5ms and at 180 degrees (right), the pulse is nearly 5x wider at 2.4ms.</p>
@@ -268,5 +269,6 @@
 
     goToSlide(0);
   </script>
+  <script src="lazy-video.js" defer></script>
 </body>
 </html>

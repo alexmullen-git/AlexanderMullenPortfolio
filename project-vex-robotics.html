@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <link rel="icon" href="Images/favicons/vex-robotics.svg" type="image/svg+xml" />
   <title>Vex Robotics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,7 +33,8 @@
       gap: 1rem;
       margin-top: 1rem;
     }
-    .gallery img {
+    .gallery img,
+    .gallery video {
       width: 100%;
       height: auto;
       border-radius: 0.5rem;
@@ -79,13 +80,15 @@
       background: var(--surface-soft);
       overflow: hidden;
     }
-    .innovation-media img {
+    .innovation-media img,
+    .innovation-media video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.3s;
     }
-    .innovation-tile:hover .innovation-media img {
+    .innovation-tile:hover .innovation-media img,
+    .innovation-tile:hover .innovation-media video {
       transform: scale(1.03);
     }
     .innovation-body {
@@ -228,12 +231,12 @@
       <div>
         <h2 class="font-display">Gallery</h2>
         <div class="gallery">
-          <img src="Images/Vex/vex2.jpg" alt="" />
-          <img src="Images/Vex/vex3.jpg" alt="" />
-          <img src="Images/Vex/vex4.jpg" alt="" />
-          <img src="Images/Vex/vex.gif" alt="" />
-          <img src="Images/Vex/vex7.jpg" alt="" />
-          <img src="Images/Vex/vex9.jpg" alt="" />
+          <img src="Images/Vex/vex2.web.jpg" alt="" />
+          <img src="Images/Vex/vex3.web.jpg" alt="" />
+          <img src="Images/Vex/vex4.web.jpg" alt="" />
+          <video data-src="Images/Vex/vex.loop.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <img src="Images/Vex/vex7.web.jpg" alt="" />
+          <img src="Images/Vex/vex9.web.jpg" alt="" />
         </div>
         <p class="body" style="margin-top: 1rem;">Selected robots and integrations that I worked on.</p>
       </div>
@@ -246,7 +249,7 @@
       <div class="innovations-grid">
         <div class="innovation-tile">
           <div class="innovation-media">
-            <img src="Images/Vex/vex6.jpg" alt="" loading="lazy" />
+            <img src="Images/Vex/vex6.web.jpg" alt="" loading="lazy" />
           </div>
           <div class="innovation-body">
             <div class="innovation-title font-display">Axial-Actuating Wings</div>
@@ -256,7 +259,7 @@
 
         <div class="innovation-tile">
           <div class="innovation-media">
-            <img src="Images/Vex/vex8.jpg" alt="" loading="lazy" />
+            <img src="Images/Vex/vex8.web.jpg" alt="" loading="lazy" />
           </div>
           <div class="innovation-body">
             <div class="innovation-title font-display">High-Torque Pulling Arm</div>
@@ -266,7 +269,7 @@
 
         <div class="innovation-tile">
           <div class="innovation-media">
-            <img src="Images/Vex/vex5.gif" alt="" loading="lazy" />
+            <video data-src="Images/Vex/vex5.loop.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
           </div>
           <div class="innovation-body">
             <div class="innovation-title font-display">Pneumatic Disk Launcher</div>
@@ -279,7 +282,7 @@
     <section class="highlight-photo project-content">
       <h2 class="font-display">Team highlight</h2>
       <figure>
-        <img src="Images/Vex/TSAwin.jpg" alt="VEX robotics team celebrating with trophies" loading="lazy" />
+        <img src="Images/Vex/TSAwin.web.jpg" alt="VEX robotics team celebrating with trophies" loading="lazy" />
         <figcaption>TSA State recognition moment with teammates and mentor after awards ceremony and two first place finishes in Florida State TSA</figcaption>
       </figure>
     </section>
@@ -303,5 +306,6 @@
       </div>
     </section>
   </div>
+  <script src="lazy-video.js" defer></script>
 </body>
 </html>

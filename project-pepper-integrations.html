@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <link rel="icon" href="Images/favicons/pepper-integrations.svg" type="image/svg+xml" />
   <title>Pepper Integrations</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,7 +34,8 @@
       width: 100%;
       max-width: 17.6rem;
     }
-    .project-hero img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .project-hero img,
+    .project-hero video { width: 100%; height: 100%; object-fit: contain; display: block; }
     .integration-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -106,7 +107,7 @@
     </div>
 
       <div class="project-hero">
-        <img src="Images/Pepper/pepper.gif" alt="" />
+        <video data-src="Images/Pepper/pepper.loop.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
       </div>
     </div>
 
@@ -126,5 +127,6 @@
       </div>
     </div>
   </div>
+  <script src="lazy-video.js" defer></script>
 </body>
 </html>

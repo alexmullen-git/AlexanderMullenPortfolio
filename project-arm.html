@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <link rel="icon" href="Images/favicons/arm.svg" type="image/svg+xml" />
   <title>Robotic Arm</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,7 +19,8 @@
       margin: 2rem 0;
       border: 1px solid rgba(147,197,253,0.14);
     }
-    .minimal-hero img {
+    .minimal-hero img,
+    .minimal-hero video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -178,7 +179,7 @@
     </div>
 
     <div class="minimal-hero">
-      <img src="Images/Arm/arm1.gif" alt="Robotic arm pick and place in motion" />
+      <video data-src="Images/Arm/arm1.loop.mp4" muted loop playsinline preload="none" aria-label="Robotic arm pick and place in motion"></video>
     </div>
 
     <div class="project-content">
@@ -210,7 +211,7 @@
         <figure class="arm-video-card arm-video-card--featured">
           <div class="arm-video-wrap">
             <video controls playsinline preload="metadata" title="Pick-and-place demo">
-              <source src="Images/Arm/demo.mp4" type="video/mp4" />
+              <source src="Images/Arm/demo.web.mp4" type="video/mp4" />
             </video>
           </div>
           <figcaption class="arm-video-label">
@@ -221,7 +222,7 @@
         <figure class="arm-video-card">
           <div class="arm-video-wrap">
             <video controls playsinline preload="metadata" title="Automatic calibration">
-              <source src="Images/Arm/calibration.mp4" type="video/mp4" />
+              <source src="Images/Arm/calibration.web.mp4" type="video/mp4" />
             </video>
           </div>
           <figcaption class="arm-video-label">
@@ -232,7 +233,7 @@
         <figure class="arm-video-card">
           <div class="arm-video-wrap">
             <video controls playsinline preload="metadata" title="Updating saved positions">
-              <source src="Images/Arm/updatePosition.mp4" type="video/mp4" />
+              <source src="Images/Arm/updatePosition.web.mp4" type="video/mp4" />
             </video>
           </div>
           <figcaption class="arm-video-label">
@@ -243,7 +244,7 @@
         <figure class="arm-video-card">
           <div class="arm-video-wrap">
             <video id="armTestingVideo" controls playsinline preload="metadata" muted title="Motion testing">
-              <source src="Images/Arm/testing.mp4" type="video/mp4" />
+              <source src="Images/Arm/testing.web.mp4" type="video/mp4" />
             </video>
           </div>
           <figcaption class="arm-video-label">
@@ -257,31 +258,31 @@
       <p class="body">Structure and wiring for the stepper-driven links, limit-switch homing, and control board.</p>
       <div class="arm-gallery">
         <figure class="arm-tile">
-          <img src="Images/Arm/arm1.jpg" alt="Completed robotic arm" loading="lazy" />
+          <img src="Images/Arm/arm1.web.jpg" alt="Completed robotic arm" loading="lazy" />
           <figcaption class="arm-caption">Finished arm by window for display.</figcaption>
         </figure>
         <figure class="arm-tile">
-          <img src="Images/Arm/arm2.jpg" alt="Arm linkage detail" loading="lazy" />
+          <img src="Images/Arm/arm2.web.jpg" alt="Arm linkage detail" loading="lazy" />
           <figcaption class="arm-caption">Nearly-completed arm in the workshop.</figcaption>
         </figure>
         <figure class="arm-tile">
-          <img src="Images/Arm/arm3.jpg" alt="Arm side profile" loading="lazy" />
+          <img src="Images/Arm/arm3.web.jpg" alt="Arm side profile" loading="lazy" />
           <figcaption class="arm-caption">Size/height comparison with me in the frame!</figcaption>
         </figure>
         <figure class="arm-tile">
-          <img src="Images/Arm/arm4.jpg" alt="Arm side profile" loading="lazy" />
+          <img src="Images/Arm/arm4.web.jpg" alt="Arm side profile" loading="lazy" />
           <figcaption class="arm-caption">Size/height comparison with me in the frame!</figcaption>
         </figure>
         <figure class="arm-tile">
-          <img src="Images/Arm/arm5.jpg" alt="Stepper motors and wiring on arm" loading="lazy" />
+          <img src="Images/Arm/arm5.web.jpg" alt="Stepper motors and wiring on arm" loading="lazy" />
           <figcaption class="arm-caption">Early-stage assembly.</figcaption>
         </figure>
         <figure class="arm-tile">
-          <img src="Images/Arm/arm6.jpg" alt="Arm ready for calibration" loading="lazy" />
+          <img src="Images/Arm/arm6.web.jpg" alt="Arm ready for calibration" loading="lazy" />
           <figcaption class="arm-caption">Early-stage assembly.</figcaption>
         </figure>
         <figure class="arm-tile arm-tile--wide arm-tile--span-2">
-          <img src="Images/Arm/protoboard.jpg" alt="Protoboard with motor drivers and microcontroller" loading="lazy" />
+          <img src="Images/Arm/protoboard.web.jpg" alt="Protoboard with motor drivers and microcontroller" loading="lazy" />
           <figcaption class="arm-caption">Protoboard: stepper drivers, microcontroller, and LED. Limit-switch inputs not pictured.</figcaption>
         </figure>
       </div>
@@ -290,15 +291,15 @@
       <p class="body">Recent claw hardware: parallel-opening jaws and a planned capacitive rubber grip for hold-force feedback. Programming integration and pick-and-place testing are the next steps.</p>
       <div class="arm-gallery">
         <figure class="arm-tile">
-          <img src="Images/Arm/claw1.jpg" alt="Gripper prototype one" loading="lazy" />
+          <img src="Images/Arm/claw1.web.jpg" alt="Gripper prototype one" loading="lazy" />
           <figcaption class="arm-caption">First parallel-jaw concept, front profile.</figcaption>
         </figure>
         <figure class="arm-tile">
-          <img src="Images/Arm/claw2.jpg" alt="Gripper prototype two" loading="lazy" />
+          <img src="Images/Arm/claw2.web.jpg" alt="Gripper prototype two" loading="lazy" />
           <figcaption class="arm-caption">Closed claw, top profile.</figcaption>
         </figure>
         <figure class="arm-tile">
-          <img src="Images/Arm/claw3.jpg" alt="Gripper on arm end effector" loading="lazy" />
+          <img src="Images/Arm/claw3.web.jpg" alt="Gripper on arm end effector" loading="lazy" />
           <figcaption class="arm-caption">Open claw, top profile.</figcaption>
         </figure>
       </div>
@@ -314,5 +315,6 @@
       });
     })();
   </script>
+  <script src="lazy-video.js" defer></script>
 </body>
 </html>

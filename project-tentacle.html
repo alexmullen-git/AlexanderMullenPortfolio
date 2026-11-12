@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <link rel="icon" href="Images/favicons/tentacle.svg" type="image/svg+xml" />
   <title>Controllable Tentacle</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -171,7 +171,7 @@
 
     <div class="minimal-hero tentacle-glow">
       <video autoplay muted loop playsinline preload="metadata" aria-label="Controllable tentacle prototype in motion">
-        <source src="Images/Tentacle/IMG_1412.mp4" type="video/mp4" />
+        <source src="Images/Tentacle/IMG_1412.web.mp4" type="video/mp4" />
       </video>
     </div>
 
@@ -195,7 +195,7 @@
           <figcaption class="tent-caption">Refined module before moving to integrated housing.</figcaption>
         </figure>
         <figure class="tent-tile">
-            <img src="Images/Tentacle/V1.jpg" alt="First tentacle prototype" loading="lazy" />
+            <img src="Images/Tentacle/V1.web.jpg" alt="First tentacle prototype" loading="lazy" />
             <figcaption class="tent-caption">V1 physical prototype—establishing segment stack and overall silhouette.</figcaption>
           </figure>
       </div>
@@ -217,11 +217,11 @@
       <p class="body">Final physical assembly on the powered base.</p>
       <div class="tent-gallery">
         <figure class="tent-tile">
-          <img src="Images/Tentacle/final.jpg" alt="Final tentacle build" loading="lazy" />
+          <img src="Images/Tentacle/final.web.jpg" alt="Final tentacle build" loading="lazy" />
           <figcaption class="tent-caption">Final integration with tentioned tentacle attached.</figcaption>
         </figure>
         <figure class="tent-tile">
-          <img src="Images/Tentacle/final1.jpg" alt="Alternate view of final build" loading="lazy" />
+          <img src="Images/Tentacle/final1.web.jpg" alt="Alternate view of final build" loading="lazy" />
           <figcaption class="tent-caption">Alternate angle on the finished prototype with tentacle attached.</figcaption>
         </figure>
       </div>
@@ -230,11 +230,11 @@
       <p class="body">Short loops and clips show grab behavior, rotation, and desk testing.</p>
       <div class="tent-gallery">
         <figure class="tent-tile">
-          <img src="Images/Tentacle/grab.gif" alt="Tentacle grab motion" loading="lazy" />
+          <video data-src="Images/Tentacle/grab.loop.mp4" muted loop playsinline preload="none" aria-label="Tentacle grab motion"></video>
           <figcaption class="tent-caption">Grab / interaction loop.</figcaption>
         </figure>
         <figure class="tent-tile">
-          <img src="Images/Tentacle/spin.gif" alt="Tentacle spin motion" loading="lazy" />
+          <video data-src="Images/Tentacle/spin.loop.mp4" muted loop playsinline preload="none" aria-label="Tentacle spin motion"></video>
           <figcaption class="tent-caption">Spin or sweep motion.</figcaption>
         </figure>
       </div>
@@ -243,13 +243,13 @@
       <p class="body">Two more clips of the prototype in motion.</p>
       <div class="video-row">
         <div class="minimal-hero tentacle-glow">
-          <video autoplay muted loop playsinline preload="auto" poster="Images/Tentacle/final.jpg" aria-label="Tentacle prototype motion — clip one">
-            <source src="Images/Tentacle/IMG_1412.mp4" type="video/mp4" />
+          <video autoplay muted loop playsinline preload="auto" poster="Images/Tentacle/final.web.jpg" aria-label="Tentacle prototype motion — clip one">
+            <source src="Images/Tentacle/IMG_1412.web.mp4" type="video/mp4" />
           </video>
         </div>
         <div class="minimal-hero tentacle-glow">
-          <video autoplay muted loop playsinline preload="auto" poster="Images/Tentacle/final1.jpg" aria-label="Tentacle prototype motion — clip two">
-            <source src="Images/Tentacle/IMG_1413.mp4" type="video/mp4" />
+          <video autoplay muted loop playsinline preload="auto" poster="Images/Tentacle/final1.web.jpg" aria-label="Tentacle prototype motion — clip two">
+            <source src="Images/Tentacle/IMG_1413.web.mp4" type="video/mp4" />
           </video>
         </div>
       </div>
@@ -286,5 +286,6 @@
       });
     })();
   </script>
+  <script src="lazy-video.js" defer></script>
 </body>
 </html>

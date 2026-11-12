@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Images/favicon.png" type="image/png" />
+  <link rel="icon" href="Images/favicons/general.png" type="image/png" />
   <title>Alexander Mullen Innovation Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,7 +38,9 @@
       const img = (p.image || 'https://picsum.photos/seed/' + p.slug + '/400/240').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       a.innerHTML = `
         <div class="card-image">
-          <img src="${img}" alt="" loading="lazy" />
+          ${p.video
+            ? `<video data-src="${escapeAttr(p.video)}" poster="${img}" muted loop playsinline preload="none" aria-hidden="true"></video>`
+            : `<img src="${img}" alt="" loading="lazy" />`}
         </div>
         <div class="card-body">
           <span class="date">${escapeHtml(p.date)}</span>
@@ -49,6 +51,24 @@
       `;
       grid.appendChild(a);
     });
+    // Tile clips only download/play while on screen
+    const tileObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const v = e.target;
+        if (e.isIntersecting) {
+          if (!v.src) v.src = v.dataset.src;
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { rootMargin: '100px' }) : null;
+    document.querySelectorAll('.card-image video').forEach(v => {
+      if (tileObserver) tileObserver.observe(v); else { v.src = v.dataset.src; v.play().catch(() => {}); }
+    });
+    function escapeAttr(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
     function escapeHtml(s) {
       const div = document.createElement('div');
       div.textContent = s;
