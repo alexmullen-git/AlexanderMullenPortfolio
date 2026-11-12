@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicons/Jade.png" type="image/png" />
+  <title>Jade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .jade-accent { color: #6ee7a8; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6ee7a8;
+      margin-bottom: 0.35rem;
+    }
+    .minimal-hero {
+      aspect-ratio: 16/9;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--surface-soft);
+      margin: 2rem 0;
+      border: 1px solid rgba(110,231,168,0.18);
+    }
+    .minimal-hero img, .minimal-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .jade-facts {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin: 0 0 2.5rem;
+    }
+    @media (min-width: 640px) { .jade-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .jade-fact {
+      padding: 0.9rem 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.6);
+    }
+    .jade-fact span {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .jade-fact strong { color: #fff; font-weight: 600; font-size: 0.95rem; }
+    .problem-solution {
+      display: grid;
+      gap: 1.25rem;
+      margin: 1rem 0 2.5rem;
+    }
+    @media (min-width: 640px) { .problem-solution { grid-template-columns: 1fr 1fr; } }
+    .problem-solution > div {
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,15,31,0.6);
+    }
+    .problem-solution h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .problem-solution p { font-size: 0.95rem; line-height: 1.6; color: var(--text); margin: 0; }
+    .jade-pillars {
+      display: grid;
+      gap: 1rem;
+      margin: 1.5rem 0 2.5rem;
+    }
+    @media (min-width: 640px) { .jade-pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .jade-pillar {
+      padding: 1.25rem 1.35rem;
+      border-radius: 0.85rem;
+      border: 1px solid rgba(110,231,168,0.2);
+      background: rgba(11,15,31,0.65);
+    }
+    .jade-pillar h3 { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 0.4rem; }
+    .jade-pillar p { font-size: 0.92rem; line-height: 1.55; color: var(--text-muted); margin: 0; }
+    .jade-video-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin: 1rem 0 2.5rem;
+    }
+    @media (min-width: 768px) { .jade-video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .jade-video-card {
+      border-radius: 0.9rem;
+      overflow: hidden;
+      border: 1px solid rgba(110,231,168,0.16);
+      background: rgba(11,15,31,0.85);
+    }
+    .jade-video-wrap { aspect-ratio: 16 / 10; background: #020617; }
+    .jade-video-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .jade-video-wrap video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #020617;
+    }
+    .jade-video-label {
+      padding: 0.75rem 1rem 0.9rem;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+    .jade-video-label strong { display: block; color: #fff; font-weight: 600; margin-bottom: 0.2rem; }
+    .tier-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 0.5rem;
+      font-size: 0.9rem;
+    }
+    .tier-table th, .tier-table td {
+      text-align: left;
+      padding: 0.75rem 0.85rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      vertical-align: top;
+    }
+    .tier-table th {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .tier-table td:first-child { color: #fff; font-weight: 600; white-space: nowrap; }
+    .tier-table td { color: var(--text-muted); line-height: 1.5; }
+    .tier-note { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+    .tier-scroll { overflow-x: auto; }
+    .jade-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0.5rem 0 1rem; }
+    .jade-link-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.72rem 1rem;
+      border-radius: 0.7rem;
+      border: 1px solid rgba(110,231,168,0.45);
+      background: rgba(46,204,113,0.1);
+      color: #6ee7a8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .jade-link-btn:hover { background: rgba(46,204,113,0.2); color: #fff; transform: translateY(-1px); }
+    .jade-bench { margin: 0 0 2.5rem; }
+    .jade-bench-grid { display: grid; gap: 1rem; margin-top: 0.6rem; }
+    @media (min-width: 640px) { .jade-bench-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .jade-bench-card {
+      padding: 1.1rem 1.25rem;
+      border-radius: 0.85rem;
+      border: 1px solid rgba(110,231,168,0.25);
+      background: rgba(46,204,113,0.06);
+    }
+    .jade-bench-card span { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .jade-bench-card strong { display: block; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.6rem; color: #6ee7a8; line-height: 1.2; }
+    .jade-bench-card p { margin: 0.3rem 0 0; font-size: 0.9rem; color: var(--text-muted); }
+    .jade-bench-note { margin-top: 0.7rem; font-size: 0.8rem; line-height: 1.5; color: var(--text-muted); }
+    .jade-bench-note code { color: var(--text); font-size: 0.78rem; }
+    .jade-arch {
+      margin: 1rem 0 2.5rem;
+      padding: 1rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(110,231,168,0.16);
+      background: rgba(11,15,31,0.85);
+    }
+    .jade-arch svg { width: 100%; height: auto; display: block; }
+    .jade-arch figcaption { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.6rem; text-align: center; }
+    .arch-boundary { fill: none; stroke: rgba(110,231,168,0.45); stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .arch-tag { fill: #6ee7a8; font: 600 11px 'Inter', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+    .arch-box rect { fill: rgba(16,21,37,1); stroke: rgba(110,231,168,0.4); stroke-width: 1; }
+    .arch-t { fill: #fff; font: 600 12.5px 'Inter', sans-serif; text-anchor: middle; }
+    .arch-s { fill: #94A3B8; font: 400 10.5px 'Inter', sans-serif; text-anchor: middle; }
+    .arch-line line { stroke: #6ee7a8; stroke-width: 1.5; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2025</span>
+      <h1 class="font-display">Jade</h1>
+      <p class="subtitle">ClosedAI Solutions' on-device processing LLM app</p>
+    </div>
+
+    <div class="minimal-hero">
+      <img src="Images/Jade/JadeCookie.gif" alt="Asking Jade how to make a delicious chocolate chip cookie" />
+    </div>
+
+    <div class="jade-facts">
+      <div class="jade-fact"><span>Role</span><strong>Co-Founder</strong></div>
+      <div class="jade-fact"><span>Stack</span><strong>Flutter / Dart · SQLite</strong></div>
+      <div class="jade-fact"><span>Platforms</span><strong>Windows · macOS</strong></div>
+      <div class="jade-fact"><span>Traction</span><strong>3 paid licenses</strong></div>
+    </div>
+
+    <div class="jade-bench">
+      <div class="section-label">Measured performance · CPU-only laptop (i7-1280P, 32 GB RAM, no GPU)</div>
+      <div class="jade-bench-grid">
+        <div class="jade-bench-card">
+          <span>7B model (Qwen 2.5 7B)</span>
+          <strong>8–10 tokens/sec</strong>
+          <p>About 1.7× average reading speed</p>
+        </div>
+        <div class="jade-bench-card">
+          <span>1B model (Llama 3.2 1B)</span>
+          <strong>30–36 tokens/sec</strong>
+          <p>About 6× average reading speed</p>
+        </div>
+      </div>
+      <p class="jade-bench-note">Average adult reading speed is roughly 4 words (5–6 tokens) per second. Generation speed from Ollama's <code>eval_count</code> / <code>eval_duration</code>. 7B measured on an otherwise idle laptop; 1B measured with other applications running.</p>
+    </div>
+
+    <div class="project-content">
+      <h2 class="font-display">Overview</h2>
+      <p class="body">Jade is a private, local-first desktop AI app that runs open-source LLMs entirely on the user's machine: streaming chat, document analysis, and persistent history, with no cloud API behind it. It is the flagship product of ClosedAI Solutions, the company I co-founded with William Wakefield (Yale) in 2025, built for small and mid-sized businesses in healthcare, finance, legal, and retail that need AI but can't send client data to someone else's servers.</p>
+
+      <div class="problem-solution">
+        <div>
+          <h3>The problem</h3>
+          <p>Popular AI tools are cloud-based: your data goes to external servers and may train future models. For firms handling client records that is a compliance risk, so many avoid AI altogether and fall behind.</p>
+        </div>
+        <div>
+          <h3>Our approach</h3>
+          <p>Run the model on the user's own hardware. Prompts and documents never leave the machine, with 100% offline processing. The hard part is packaging that so a non-technical team can install and use it.</p>
+        </div>
+      </div>
+
+      <h2 class="font-display jade-accent">Demos</h2>
+      <div class="jade-video-grid">
+        <figure class="jade-video-card">
+          <div class="jade-video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/NprcSy_XK1s?autoplay=1&mute=1&loop=1&playlist=NprcSy_XK1s&controls=0&modestbranding=1&playsinline=1&rel=0"
+              title="Jade document analysis demo"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <figcaption class="jade-video-label">
+            <strong>Document analysis</strong>
+            Loading a PDF and asking questions about it, with the file never leaving the device.
+          </figcaption>
+        </figure>
+        <figure class="jade-video-card">
+          <div class="jade-video-wrap">
+            <video autoplay loop muted playsinline preload="metadata" title="Jade stop generation demo">
+              <source src="Images/Jade/stop_demo_web.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <figcaption class="jade-video-label">
+            <strong>Streaming and stop</strong>
+            Tokens stream in as they are generated; stopping mid-response keeps the partial answer.
+          </figcaption>
+        </figure>
+        <figure class="jade-video-card">
+          <div class="jade-video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/v7FQnpNI8h0?autoplay=1&mute=1&loop=1&playlist=v7FQnpNI8h0&controls=0&modestbranding=1&playsinline=1&rel=0"
+              title="Jade model switching demo"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <figcaption class="jade-video-label">
+            <strong>Model switching</strong>
+            Downloading an open-source model and hot-swapping between models mid-session.
+          </figcaption>
+        </figure>
+        <figure class="jade-video-card">
+          <div class="jade-video-wrap">
+            <video autoplay loop muted playsinline preload="metadata" title="Jade installer demo">
+              <source src="Images/Jade/installer_web.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <figcaption class="jade-video-label">
+            <strong>Guided install</strong>
+            The Windows installer sets up the local runtime and a default model.
+          </figcaption>
+        </figure>
+      </div>
+
+      <h2 class="font-display">How Jade works</h2>
+      <div class="jade-pillars">
+        <div class="jade-pillar">
+          <h3>Model-agnostic runtime</h3>
+          <p>Open-source models sourced from Ollama: download any by name with live progress, filter installed models, and hot-swap between them mid-session. The last-used model is remembered.</p>
+        </div>
+        <div class="jade-pillar">
+          <h3>Resilient streaming</h3>
+          <p>Real-time token streaming with mid-generation cancel. Stopping a response saves the partial answer, so no work is lost.</p>
+        </div>
+        <div class="jade-pillar">
+          <h3>On-device document analysis</h3>
+          <p>PDF, DOCX, and XLSX files are parsed into model context locally, with attachment previews and per-file removal. Nothing is uploaded.</p>
+        </div>
+        <div class="jade-pillar">
+          <h3>Local persistence</h3>
+          <p>Full conversation history in SQLite, with Markdown rendering and syntax-highlighted code blocks.</p>
+        </div>
+        <div class="jade-pillar">
+          <h3>Guided installers</h3>
+          <p>Windows and macOS installers bootstrap the inference runtime and a default model, turning setup into a guided install.</p>
+        </div>
+        <div class="jade-pillar">
+          <h3>One codebase</h3>
+          <p>A single Flutter/Dart codebase powers both the Windows and macOS apps.</p>
+        </div>
+      </div>
+
+      <h2 class="font-display jade-accent">Architecture</h2>
+      <figure class="jade-arch">
+        <svg viewBox="0 0 700 320" role="img" aria-label="Jade architecture: Flutter UI talks to app logic, which uses a local inference runtime and model, a SQLite store, and document parsers, all on the user's device">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0L10 5L0 10z" fill="#6ee7a8" />
+            </marker>
+          </defs>
+          <rect x="8" y="8" width="684" height="304" rx="16" class="arch-boundary" />
+          <text x="26" y="34" class="arch-tag">Everything runs on the user's device: 100% offline processing</text>
+
+          <g class="arch-box"><rect x="30" y="70" width="125" height="72" rx="10" /><text x="92" y="100" class="arch-t">Flutter UI</text><text x="92" y="120" class="arch-s">chat · streaming</text><text x="92" y="134" class="arch-s">Markdown</text></g>
+          <g class="arch-box"><rect x="205" y="70" width="125" height="72" rx="10" /><text x="267" y="100" class="arch-t">App logic (Dart)</text><text x="267" y="120" class="arch-s">model manager</text><text x="267" y="134" class="arch-s">cancel · ingest</text></g>
+          <g class="arch-box"><rect x="380" y="70" width="125" height="72" rx="10" /><text x="442" y="100" class="arch-t">Ollama server</text><text x="442" y="120" class="arch-s">local inference</text><text x="442" y="134" class="arch-s">runtime</text></g>
+          <g class="arch-box"><rect x="555" y="70" width="125" height="72" rx="10" /><text x="617" y="100" class="arch-t">Open-source LLM</text><text x="617" y="120" class="arch-s">download by name</text><text x="617" y="134" class="arch-s">hot-swappable</text></g>
+
+          <g class="arch-box"><rect x="117" y="210" width="125" height="72" rx="10" /><text x="179" y="240" class="arch-t">SQLite</text><text x="179" y="260" class="arch-s">conversation history</text><text x="179" y="274" class="arch-s">partial responses</text></g>
+          <g class="arch-box"><rect x="292" y="210" width="125" height="72" rx="10" /><text x="354" y="240" class="arch-t">Document parsers</text><text x="354" y="260" class="arch-s">PDF · DOCX · XLSX</text><text x="354" y="274" class="arch-s">into model context</text></g>
+
+          <g class="arch-line">
+            <line x1="157" y1="106" x2="203" y2="106" marker-start="url(#arr)" marker-end="url(#arr)" />
+            <line x1="332" y1="106" x2="378" y2="106" marker-start="url(#arr)" marker-end="url(#arr)" />
+            <line x1="507" y1="106" x2="553" y2="106" marker-start="url(#arr)" marker-end="url(#arr)" />
+            <line x1="250" y1="144" x2="190" y2="208" marker-end="url(#arr)" />
+            <line x1="284" y1="144" x2="344" y2="208" marker-end="url(#arr)" />
+          </g>
+        </svg>
+        <figcaption>Simplified architecture. Prompts, files, and history never cross the device boundary.</figcaption>
+      </figure>
+
+      <h2 class="font-display">My role</h2>
+      <p class="body">As co-founder I shaped what Jade should be and how it is positioned for businesses that can't use cloud AI, and built the product alongside William, who led the AI and engineering side with a focus on healthcare applications. I focused on the desktop app's features and UI.
+      </p>
+
+      <div class="jade-links">
+        <a class="jade-link-btn" href="https://www.closedaisolutions.com/" target="_blank" rel="noopener noreferrer">Visit ClosedAI Solutions</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
