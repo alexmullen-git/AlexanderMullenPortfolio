@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicons/prod.png" type="image/png" />
+  <title>Prod</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .prod-accent { color: #d98b2b; }
+    .minimal-hero {
+      aspect-ratio: 16/9;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--surface-soft);
+      margin: 2rem 0;
+      border: 1px solid rgba(200,120,30,0.18);
+    }
+    .minimal-hero img, .minimal-hero video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .prod-facts { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 0 2.5rem; }
+    @media (min-width: 640px) { .prod-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .prod-fact { padding: 0.9rem 1rem; border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(11,15,31,0.6); }
+    .prod-fact span { display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .prod-fact strong { color: #fff; font-weight: 600; font-size: 0.95rem; }
+    .problem-solution { display: grid; gap: 1.25rem; margin: 1rem 0 2.5rem; }
+    @media (min-width: 640px) { .problem-solution { grid-template-columns: 1fr 1fr; } }
+    .problem-solution > div { padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(11,15,31,0.6); }
+    .problem-solution h3 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .problem-solution p { font-size: 0.95rem; line-height: 1.6; color: var(--text); margin: 0; }
+    .prod-pillars { display: grid; gap: 1rem; margin: 1.5rem 0 2.5rem; }
+    @media (min-width: 640px) { .prod-pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .prod-pillar { padding: 1.25rem 1.35rem; border-radius: 0.85rem; border: 1px solid rgba(200,120,30,0.2); background: rgba(11,15,31,0.65); }
+    .prod-pillar h3 { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 0.4rem; }
+    .prod-pillar p { font-size: 0.92rem; line-height: 1.55; color: var(--text-muted); margin: 0; }
+    .prod-media-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin: 1rem 0 2.5rem; }
+    @media (min-width: 768px) { .prod-media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .prod-media-card { border-radius: 0.9rem; overflow: hidden; border: 1px solid rgba(200,120,30,0.16); background: rgba(11,15,31,0.85); margin: 0; }
+    .prod-media-wrap { aspect-ratio: 16 / 10; background: #020617; }
+    .prod-media-wrap video, .prod-media-wrap img { width: 100%; height: 100%; display: block; object-fit: contain; background: #020617; }
+    .prod-media-label { padding: 0.75rem 1rem 0.9rem; font-size: 0.88rem; line-height: 1.45; color: var(--text-muted); }
+    .prod-media-label strong { display: block; color: #fff; font-weight: 600; margin-bottom: 0.2rem; }
+    .tier-table { width: 100%; border-collapse: collapse; margin: 1rem 0 0.5rem; font-size: 0.9rem; }
+    .tier-table th, .tier-table td { text-align: left; padding: 0.75rem 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+    .tier-table th { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+    .tier-table td:first-child { color: #fff; font-weight: 600; white-space: nowrap; }
+    .tier-table td { color: var(--text-muted); line-height: 1.5; }
+    .tier-scroll { overflow-x: auto; }
+    .int-note { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+    .prod-list { margin: 0 0 2.5rem 1.1rem; padding: 0; color: var(--text-muted); line-height: 1.7; font-size: 0.95rem; }
+    .prod-list li { margin-bottom: 0.35rem; }
+    .prod-list strong { color: #fff; font-weight: 600; }
+    .prod-arch { margin: 1rem 0 2.5rem; padding: 1rem; border-radius: 0.9rem; border: 1px solid rgba(200,120,30,0.16); background: rgba(11,15,31,0.85); }
+    .prod-arch svg { width: 100%; height: auto; display: block; }
+    .prod-arch figcaption { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.6rem; text-align: center; }
+    .arch-boundary { fill: none; stroke: rgba(200,120,30,0.45); stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .arch-tag { fill: #d98b2b; font: 600 11px 'Inter', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+    .arch-box rect { fill: rgba(16,21,37,1); stroke: rgba(200,120,30,0.4); stroke-width: 1; }
+    .arch-t { fill: #fff; font: 600 12.5px 'Inter', sans-serif; text-anchor: middle; }
+    .arch-s { fill: #94A3B8; font: 400 10.5px 'Inter', sans-serif; text-anchor: middle; }
+    .arch-line line { stroke: #d98b2b; stroke-width: 1.5; }
+    .integration-carousel { margin: 0.5rem 0 2.5rem; }
+    .integration-header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+    .integration-header h2 { margin-bottom: 0; }
+    .carousel-controls { display: flex; gap: 0.75rem; }
+    .carousel-btn { border: 1px solid rgba(255,255,255,0.15); background: rgba(11,15,31,0.8); color: var(--text); width: 2.5rem; height: 2.5rem; border-radius: 9999px; font-size: 1rem; cursor: pointer; transition: all 0.2s ease; }
+    .carousel-btn:hover { border-color: rgba(200,120,30,0.6); color: #fff; background: rgba(15,23,42,1); }
+    .carousel-window { overflow: hidden; margin-top: 1rem; }
+    .carousel-track { display: flex; transition: transform 0.35s ease; }
+    .integration-slide { width: 100%; flex: 0 0 100%; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.08); border-radius: 1rem; padding: 1.5rem; background: rgba(11,15,31,0.7); }
+    .slide-media { margin-bottom: 1rem; border-radius: 0.75rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #020617; display: flex; justify-content: center; }
+    .slide-media img, .slide-media video { display: block; width: 100%; height: auto; }
+    .slide-media-phone video { width: auto; height: auto; max-height: 34rem; max-width: 100%; }
+    .integration-slide h3 { color: #fff; font-size: 1.25rem; line-height: 1.2; margin-bottom: 0.5rem; }
+    .integration-slide .body { color: var(--text); line-height: 1.7; margin: 0; }
+    .carousel-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+    .carousel-dot { width: 0.6rem; height: 0.6rem; border-radius: 9999px; border: none; padding: 0; background: rgba(148,163,184,0.5); cursor: pointer; }
+    .carousel-dot.active { background: #d98b2b; }
+
+    /* ---- Prod theme: warm near-black, amber glow, serif headings (matches the app) ---- */
+    :root {
+      --bg: #141210;
+      --surface: #1c1a17;
+      --surface-soft: #1c1a17;
+      --text: #ede6dc;
+      --text-muted: #a39a8e;
+      --amber: #d98b2b;
+      --amber-line: #2e2a25;
+      --amber-glow: none;
+      --tile: #1c1a17;
+    }
+    body { background: radial-gradient(900px 420px at 50% -120px, rgba(200,120,30,0.07), transparent 70%), var(--bg); }
+    .font-display { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; }
+    .brand.font-display, nav .brand { font-family: 'Source Serif 4', Georgia, serif; }
+    .project-meta h1 { font-size: 3rem; font-weight: 600; letter-spacing: -0.01em; }
+    .project-meta .subtitle { color: var(--text-muted); }
+    .project-content h2 { font-size: 1.75rem; font-weight: 600; letter-spacing: 0; text-transform: none; color: #f3eee4; margin: 3rem 0 1rem; }
+    .project-content h2.prod-accent { color: #f3eee4; }
+    .integration-header h2 { margin: 3rem 0 0; }
+    .minimal-hero { border: 1px solid var(--amber-line); background: var(--tile); }
+    .prod-fact, .problem-solution > div, .prod-pillar, .integration-slide { background: var(--tile); border: 1px solid var(--amber-line); box-shadow: var(--amber-glow); }
+    .prod-fact span, .problem-solution h3 { color: var(--text-muted); }
+    .problem-solution h3 { color: var(--amber); }
+    .prod-pillar { border-left: 3px solid var(--amber); }
+    .prod-pillar p, .tier-table td, .prod-list { color: var(--text-muted); }
+    .tier-table td:first-child, .prod-list strong, .prod-pillar h3, .prod-fact strong, .integration-slide h3 { color: #f3eee4; }
+    .tier-table th, .tier-table td { border-bottom-color: rgba(200,120,30,0.16); }
+    .tier-table code, .integration-slide code, .prod-list code { background: rgba(200,120,30,0.12); color: #f7c775; padding: 0.05rem 0.35rem; border-radius: 0.3rem; font-size: 0.85em; }
+    .prod-arch { background: var(--tile); border-color: var(--amber-line); box-shadow: var(--amber-glow); }
+    .arch-box rect { fill: #141210; stroke: #5a4020; }
+    /* Glow only on the four fact tiles, stepped down like the app's urgency tiers */
+    .prod-fact { border-radius: 12px; }
+    .prod-fact.glow-t0 { box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 0 30px rgba(200,120,30,.36); border-color: color-mix(in srgb, rgb(200,120,30) 65%, #2e2a25); }
+    .prod-fact.glow-t2 { box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 0 24px rgba(200,120,30,.24); border-color: color-mix(in srgb, rgb(200,120,30) 45%, #2e2a25); }
+    .prod-fact.glow-t4 { box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 0 17px rgba(200,120,30,.13); border-color: color-mix(in srgb, rgb(200,120,30) 27%, #2e2a25); }
+    .prod-fact.glow-later { box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 0 12px rgba(200,120,30,.05); border-color: color-mix(in srgb, rgb(200,120,30) 12%, #2e2a25); }
+    .carousel-btn { background: var(--tile); border-color: var(--amber-line); }
+    .carousel-btn:hover { background: #26231e; border-color: var(--amber); }
+    .carousel-dot { background: rgba(162,154,141,0.45); }
+
+    /* ---- Carousel sizing: never taller than the screen ---- */
+    .integration-slide { display: grid; gap: 1rem 1.5rem; align-content: start; }
+    .slide-media { margin-bottom: 0; background: #0d0c0a; border-color: var(--amber-line); align-items: center; }
+    .slide-media img, .slide-media video { width: 100%; height: auto; max-height: min(42vh, 22rem); object-fit: contain; }
+    .slide-media-phone video { width: auto; max-height: min(42vh, 22rem); }
+    .slide-copy .body { margin: 0; }
+    @media (min-width: 700px) {
+      .integration-slide.is-phone { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); align-items: center; }
+    }
+    @media (max-width: 600px) {
+      .project-meta h1 { font-size: 2.4rem; }
+      .integration-slide { padding: 1rem; }
+      .slide-media img, .slide-media video { max-height: 40vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container-narrow">
+    <a href="index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Innovation and Design
+    </a>
+
+    <div class="project-meta">
+      <span class="date">2026</span>
+      <h1 class="font-display">Prod</h1>
+      <p class="subtitle">A dashboard-based productivity app that never hides what you're responsible for</p>
+    </div>
+
+    <div class="minimal-hero">
+      <img src="Images/Prod/DashboardView.png" alt="The Prod dashboard with project tiles at different urgency glow levels" />
+    </div>
+
+    <div class="prod-facts">
+      <div class="prod-fact glow-t0"><span>Status</span><strong>In daily use</strong></div>
+      <div class="prod-fact glow-t2"><span>Stack</span><strong>Electron · TS</strong></div>
+      <div class="prod-fact glow-t4"><span>Platform</span><strong>Windows</strong></div>
+      <div class="prod-fact glow-later"><span>Tests</span><strong>151 passing</strong></div>
+    </div>
+
+    <div class="project-content">
+      <h2 class="font-display">Overview</h2>
+      <p class="body">Prod is a personal productivity desktop app that I use every day. Most to-do apps sort by urgency and separate many lists, so whatever is most pressing buries everything else and the context of each list is lost. In Prod, every class, club, and project keeps a permanent dashboard tile. Urgency changes a tile's order and glow, never whether you can see it.</p>
+
+      <div class="problem-solution" style="grid-template-columns: 1fr;">
+        <div>
+          <h3>My approach</h3>
+          <p>Each project gets its own permanent tile, and the tasks it owns live inside it, so every task keeps its context. A glow carries the urgency, fading from "today" through "later" to "none", with red-orange for overdue tasks. Tiles glide to new positions as things change.</p>
+        </div>
+      </div>
+
+      <div class="integration-header">
+        <h2 class="font-display prod-accent">In action</h2>
+        <div class="carousel-controls">
+          <button id="carouselPrev" class="carousel-btn" type="button" aria-label="Previous slide">&#8592;</button>
+          <button id="carouselNext" class="carousel-btn" type="button" aria-label="Next slide">&#8594;</button>
+        </div>
+      </div>
+      <div class="integration-carousel" aria-label="Prod walkthrough carousel">
+        <div id="carouselWindow" class="carousel-window">
+          <div id="carouselTrack" class="carousel-track">
+            <article class="integration-slide">
+              <div class="slide-media">
+                <video data-autoplay loop muted playsinline preload="none" aria-label="Switching between Urgency and Most open sorting, then opening a task"><source src="Images/Prod/MostOpen.mp4" type="video/mp4" /></video>
+              </div>
+              <h3 class="font-display">Sorting and the task drawer</h3>
+              <p class="body">Flip between Urgency and Most open, and tiles glide to their new positions. Opening a task shows its status, due date, note, and the linked Google Calendar block.</p>
+            </article>
+
+            <article class="integration-slide">
+              <div class="slide-media">
+                <video data-autoplay loop muted playsinline preload="none" aria-label="Typing into the quick-add shortcut"><source src="Images/Prod/QuickAdd.mp4" type="video/mp4" /></video>
+              </div>
+              <h3 class="font-display">Quick-add shortcut</h3>
+              <p class="body">A global hotkey opens a capture box from anywhere. It parses the project and due date as you type, for example <code>complete homework #cs85 tomorrow</code>.</p>
+            </article>
+
+            <article class="integration-slide">
+              <div class="slide-media">
+                <img src="Images/Prod/TodayView.png" alt="The Today view listing overdue tasks, scheduled blocks, and tasks due today" />
+              </div>
+              <h3 class="font-display">Today view</h3>
+              <p class="body">What needs attention, the day's scheduled calendar blocks, and anything due today with no time set aside, all in one list.</p>
+            </article>
+
+            <article class="integration-slide">
+              <div class="slide-media">
+                <video data-autoplay loop muted playsinline preload="none" aria-label="Connecting Google Calendar in Prod's settings"><source src="Images/Prod/GoogleAuth.mp4" type="video/mp4" /></video>
+              </div>
+              <h3 class="font-display">Connecting Google Calendar</h3>
+              <p class="body">Add your own Google Cloud credentials in Settings, then sign in through the browser. Prod creates a dedicated "Prod" calendar and asks only for the narrowest permission it needs. Google shows an "unverified app" screen because the app is in testing mode.</p>
+            </article>
+
+            <article class="integration-slide">
+              <div class="slide-media">
+                <video data-autoplay loop muted playsinline preload="none" aria-label="Adding a task in Prod and seeing its block appear in Google Calendar"><source src="Images/Prod/Calendar.mp4" type="video/mp4" /></video>
+              </div>
+              <h3 class="font-display">Calendar sync</h3>
+              <p class="body">Adding a task with a due date from the command palette creates a one-hour block in Google Calendar, which stays in sync if you drag it.</p>
+            </article>
+
+            <article class="integration-slide is-phone">
+              <div class="slide-media slide-media-phone">
+                <video data-autoplay loop muted playsinline preload="none" aria-label="The Prod email digest and checklist on an iPhone"><source src="Images/Prod/iPhoneEmail.web.mp4" type="video/mp4" /></video>
+              </div>
+              <div class="slide-copy">
+                <h3 class="font-display">Email digest on iPhone</h3>
+                <p class="body">One button emails a snapshot of every tile. The attached checklist lets you tick tasks off on your phone and remembers them locally, with nothing syncing back to the app.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div id="carouselDots" class="carousel-dots" aria-label="Slide indicators"></div>
+      </div>
+
+      <h2 class="font-display">Features</h2>
+      <div class="prod-pillars">
+        <div class="prod-pillar">
+          <h3>Permanent tiles &amp; glow tiers</h3>
+          <p>A tile glows by its most urgent open task: T0 is due today, T1 tomorrow, up to T5 at five days out. Later is six or more days, and Overdue turns red-orange. Tiles reorder with animation, with two sort modes: Urgency and Most open.</p>
+        </div>
+        <div class="prod-pillar">
+          <h3>Fast capture</h3>
+          <p>A global quick-add hotkey, a Ctrl+K-style command palette, and a Today view. Prod can run in the background from the tray.</p>
+        </div>
+        <div class="prod-pillar">
+          <h3>Tasks that stay out of the way</h3>
+          <p>Three task states, due dates, notes, undo-delete, and completed tasks that auto-clear after 24 hours.</p>
+        </div>
+      </div>
+
+      <h2 class="font-display prod-accent">Integrations</h2>
+      <div class="tier-scroll">
+        <table class="tier-table">
+          <thead><tr><th>Integration</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>Google Calendar</td><td>Auto-creates a one-hour block on a dedicated "Prod" calendar, titled <code>[Project] Task</code>. Blocks you drag around sync back, with a warning if one lands after the due date or has already passed. Changes queue offline and sync upon reconnecting. It requests the least-invasive Google permission available.</td></tr>
+            <tr><td>Microsoft Azure (To Do)</td><td>The "Planned" view becomes a tile ranked by the same rules as everything else. You can complete and add tasks, and sign-in happens in your browser.</td></tr>
+            <tr><td>SMTP Email digest</td><td>One button emails a snapshot of every tile. An attached HTML checklist remembers your ticks locally, so it works on a phone without anything syncing back.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="int-note">Each integration is optional.</p>
+
+      <h2 class="font-display prod-accent">Architecture</h2>
+      <figure class="prod-arch">
+        <svg viewBox="0 0 700 330" role="img" aria-label="Prod architecture: a sandboxed UI talks through a typed preload bridge to the Electron main process, which uses SQLite, an urgency engine, and three optional integrations">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0L10 5L0 10z" fill="#d98b2b" />
+            </marker>
+          </defs>
+          <rect x="8" y="8" width="684" height="314" rx="16" class="arch-boundary" />
+          <text x="26" y="34" class="arch-tag">Electron desktop app</text>
+
+          <g class="arch-box"><rect x="30" y="70" width="125" height="72" rx="10" /><text x="92" y="100" class="arch-t">Sandboxed UI</text><text x="92" y="120" class="arch-s">tiles · Today view</text><text x="92" y="134" class="arch-s">command palette</text></g>
+          <g class="arch-box"><rect x="205" y="70" width="125" height="72" rx="10" /><text x="267" y="100" class="arch-t">Preload bridge</text><text x="267" y="120" class="arch-s">typed, limited API</text><text x="267" y="134" class="arch-s">no secrets exposed</text></g>
+          <g class="arch-box"><rect x="380" y="70" width="125" height="72" rx="10" /><text x="442" y="100" class="arch-t">Main process</text><text x="442" y="120" class="arch-s">app services</text><text x="442" y="134" class="arch-s">encrypted credentials</text></g>
+          <g class="arch-box"><rect x="555" y="70" width="125" height="72" rx="10" /><text x="617" y="100" class="arch-t">SQLite</text><text x="617" y="120" class="arch-s">single local file</text><text x="617" y="134" class="arch-s">easy to back up</text></g>
+
+          <g class="arch-box"><rect x="30" y="215" width="125" height="72" rx="10" /><text x="92" y="245" class="arch-t">Urgency engine</text><text x="92" y="265" class="arch-s">pure and unit-tested</text><text x="92" y="279" class="arch-s">ranks every tile</text></g>
+          <g class="arch-box"><rect x="205" y="215" width="125" height="72" rx="10" /><text x="267" y="245" class="arch-t">Google Calendar</text><text x="267" y="265" class="arch-s">offline outbox</text><text x="267" y="279" class="arch-s">with retries</text></g>
+          <g class="arch-box"><rect x="380" y="215" width="125" height="72" rx="10" /><text x="442" y="245" class="arch-t">Microsoft To Do</text><text x="442" y="265" class="arch-s">via Azure sign-in</text><text x="442" y="279" class="arch-s">"Planned" tile</text></g>
+          <g class="arch-box"><rect x="555" y="215" width="125" height="72" rx="10" /><text x="617" y="245" class="arch-t">Email digest</text><text x="617" y="265" class="arch-s">sent over SMTP</text><text x="617" y="279" class="arch-s">HTML checklist</text></g>
+          <text x="92" y="306" class="arch-s">Core logic</text>
+          <text x="442" y="306" class="arch-s">Optional integrations</text>
+
+          <g class="arch-line">
+            <line x1="157" y1="106" x2="203" y2="106" marker-start="url(#arr)" marker-end="url(#arr)" />
+            <line x1="332" y1="106" x2="378" y2="106" marker-start="url(#arr)" marker-end="url(#arr)" />
+            <line x1="507" y1="106" x2="553" y2="106" marker-start="url(#arr)" marker-end="url(#arr)" />
+            <line x1="400" y1="144" x2="100" y2="213" marker-end="url(#arr)" />
+            <line x1="420" y1="144" x2="275" y2="213" marker-end="url(#arr)" />
+            <line x1="442" y1="144" x2="442" y2="213" marker-end="url(#arr)" />
+            <line x1="470" y1="144" x2="600" y2="213" marker-end="url(#arr)" />
+          </g>
+        </svg>
+        <figcaption>Simplified architecture. The UI never sees passwords or tokens; they stay in the main process.</figcaption>
+      </figure>
+
+      <h2 class="font-display">Engineering</h2>
+      <ul class="prod-list">
+        <li><strong>One urgency engine.</strong> A tested module ranks tiles, tasks, and the To Do tile.</li>
+        <li><strong>Offline-first calendar sync.</strong> Changes go through an outbox with retries, so nothing is lost without a connection.</li>
+        <li><strong>Security.</strong> A sandboxed window, a typed bridge to the system, and credentials encrypted with Windows' own protection.</li>
+        <li><strong>Reliability.</strong> All data lives in one backup-friendly file; Windows installer is included.</li>
+        <li><strong>Process.</strong> About 7,200 lines of app code and 1,700 lines of tests, with 151 passing tests. Built in phases with checkpoints and a two-week rule for adopting new dependencies, with AI assistance.</li>
+      </ul>
+
+      <h2 class="font-display">Limits &amp; next steps</h2>
+      <p class="body">Prod is Windows-only for now and the installer is unsigned. Google sign-ins are in testing mode, so they expire weekly. The next step is a web portal that syncs with the desktop app to be accessed off-device.</p>
+    </div>
+  </div>
+  <script>
+    const track = document.getElementById("carouselTrack");
+    const dotsWrap = document.getElementById("carouselDots");
+    const slides = Array.from(track.children);
+    let currentIndex = 0;
+
+    function renderDots() {
+      dotsWrap.innerHTML = "";
+      slides.forEach((_, idx) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "carousel-dot" + (idx === currentIndex ? " active" : "");
+        dot.setAttribute("aria-label", "Go to slide " + (idx + 1));
+        dot.addEventListener("click", () => goToSlide(idx));
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = (index + slides.length) % slides.length;
+      track.style.transform = "translateX(-" + currentIndex * 100 + "%)";
+      renderDots();
+    }
+
+    document.getElementById("carouselPrev").addEventListener("click", () => goToSlide(currentIndex - 1));
+    document.getElementById("carouselNext").addEventListener("click", () => goToSlide(currentIndex + 1));
+
+    goToSlide(0);
+  </script>
+  <script src="lazy-video.js" defer></script>
+</body>
+</html>
