@@ -13,8 +13,8 @@
  */
 
 const PROJECTS = [
-  { slug: "prod", title: "Prod", subtitle: "Personal desktop productivity app with custom urgency engine", date: "2026", image: "Images/Prod/DashboardView.png" },
   { slug: "arm", title: "Robotic Arm", subtitle: "Built a robotic arm from scratch to pick and place objects", date: "2026", image: "Images/Arm/arm1.tile.jpg", video: "Images/Arm/arm1.tile.mp4" },
+  { slug: "prod", title: "Prod", subtitle: "Personal desktop productivity app with custom urgency engine", date: "2026", image: "Images/Prod/DashboardView.png" },
   { slug: "propulsion", title: "Pedal Propulsion System", subtitle: "Developed a pedal-powered differential thrust propulsion system for a catamaran", date: "2026", image: "Images/Propulsion/propulsion1.tile.jpg", video: "Images/Propulsion/propulsion1.tile.mp4" },
   { slug: "tentacle", title: "Controllable Tentacle", subtitle: "Fully-articulate tentacle robot built and programmed from scratch", date: "2026", image: "Images/Tentacle/grab.tile.jpg", video: "Images/Tentacle/grab.tile.mp4" },
   { slug: "fan", title: "Optimized Fan Propeller", subtitle: "Designed and optimized replacement fan propeller", date: "2026", image: "Images/Fan/final.web.jpg" },
