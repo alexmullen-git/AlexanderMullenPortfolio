@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Images/favicons/cs85.svg" type="image/svg+xml" />
+  <title>CS85 Projects</title>
+  <meta name="description" content="Eight apps built in Harvard CS85: orbital mechanics, manuscript reading, audio signal processing, computer vision and preference modelling." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ------------------------------------------------------------------
+       CS85 page. The header above uses the site's shared styles.css;
+       everything below is scoped to .cs85 so nothing else on the site changes.
+       ------------------------------------------------------------------ */
+    .cs85 {
+      --ink: #0a0b10;
+      --panel: #11131b;
+      --panel-2: #171a24;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-2: rgba(255, 255, 255, 0.14);
+      --paper: #f1ece2;
+      --fg: #e9e6df;
+      --muted: #9b9a96;
+      --faint: #6d6c69;
+      --hl: #f3c969;
+      --serif: 'Fraunces', Georgia, serif;
+      --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+      --sans: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 85% -10%, rgba(243, 201, 105, 0.07), transparent 60%),
+        radial-gradient(900px 500px at -10% 30%, rgba(120, 140, 255, 0.06), transparent 60%),
+        var(--ink);
+      color: var(--fg);
+      font-family: var(--sans);
+      overflow-x: clip;
+    }
+    .cs85 *:focus-visible { outline: 2px solid var(--hl); outline-offset: 3px; border-radius: 4px; }
+    .cs85 .wrap { max-width: 78rem; margin: 0 auto; padding: 0 1.5rem; }
+    .cs85 .back-btn { margin: 2.5rem 0 0; }
+    .cs85 .mono { font-family: var(--mono); }
+
+    /* ---------- Intro ---------- */
+    .intro { padding: 3.5rem 0 3rem; border-bottom: 1px solid var(--line); }
+    .eyebrow { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--hl); }
+    .intro h1 {
+      margin-top: 1.25rem;
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(2.6rem, 7vw, 5.6rem); line-height: 0.98; letter-spacing: -0.03em;
+      color: var(--paper); max-width: 14ch;
+    }
+    .intro h1 em { font-style: italic; color: var(--hl); }
+    .intro .lede { margin-top: 1.75rem; max-width: 40rem; font-size: 1.15rem; line-height: 1.65; color: var(--fg); }
+    .intro .how { margin-top: 1rem; max-width: 40rem; font-size: 0.95rem; line-height: 1.6; color: var(--muted); }
+    .stats { margin-top: 2.75rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    @media (min-width: 760px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .stat { background: var(--panel); padding: 1.25rem 1.4rem; }
+    .stat b { display: block; font: 400 2.4rem/1 var(--serif); color: var(--paper); letter-spacing: -0.02em; }
+    .stat span { display: block; margin-top: 0.5rem; font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+
+    /* ---------- Skill filter ---------- */
+    .skills { position: sticky; top: 4rem; z-index: 20; padding: 1rem 0; background: linear-gradient(var(--ink) 70%, transparent); }
+    .skills .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .skills .label { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-right: 0.25rem; }
+    .chip {
+      font: 500 0.78rem/1 var(--sans); color: var(--fg);
+      padding: 0.5rem 0.75rem; border-radius: 999px; border: 1px solid var(--line-2);
+      background: rgba(255, 255, 255, 0.03); cursor: pointer; white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .chip:hover { border-color: rgba(243, 201, 105, 0.5); }
+    .chip[aria-pressed="true"] { background: var(--hl); border-color: var(--hl); color: #1a1408; }
+    .skills .clear { font-size: 0.78rem; color: var(--muted); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .skills .clear[hidden] { display: none; }
+    @media (max-width: 640px) {
+      .skills { position: static; }
+      .skills .row { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 0.4rem; scrollbar-width: none; }
+    }
+
+    /* ---------- Project (shared) ---------- */
+    .proj { --a: var(--hl); transition: opacity 0.35s, filter 0.35s; }
+    .proj.dim { opacity: 0.22; filter: saturate(0.3); }
+    .proj.match .frame { box-shadow: 0 0 0 2px var(--a), 0 30px 80px -30px rgba(0, 0, 0, 0.9); }
+    .num { font: 500 0.75rem/1 var(--mono); color: var(--a); letter-spacing: 0.1em; }
+    .field { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .proj h2 { font-family: var(--serif); font-weight: 400; color: var(--paper); letter-spacing: -0.02em; }
+    .proj .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .proj .tags span { font-size: 0.72rem; padding: 0.3rem 0.55rem; border-radius: 6px; background: rgba(255, 255, 255, 0.05); color: var(--fg); border: 1px solid var(--line); }
+    .frame {
+      position: relative; border-radius: 14px; overflow: hidden; background: var(--panel-2);
+      border: 1px solid var(--line-2);
+      box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.9);
+      transition: box-shadow 0.35s;
+    }
+    .frame img, .frame video { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .frame .cap {
+      position: absolute; left: 0.75rem; bottom: 0.75rem;
+      font: 500 0.7rem/1 var(--mono); letter-spacing: 0.06em; color: #fff;
+      background: rgba(10, 11, 16, 0.72); backdrop-filter: blur(6px);
+      padding: 0.4rem 0.55rem; border-radius: 6px; border: 1px solid var(--line-2);
+    }
+    .frame.light { background: #fff; }
+    .frame.light img { object-fit: contain; }
+
+    /* ---------- Flagship ---------- */
+    .flagships { padding: 2rem 0 1rem; }
+    .flag { display: grid; gap: 2rem; padding: 3rem 0; border-bottom: 1px solid var(--line); align-items: center; }
+    @media (min-width: 980px) {
+      .flag { padding: 4.5rem 0; }
+      .flag { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 3.5rem; }
+      .flag.flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr); }
+      .flag.flip .media { order: 2; }
+    }
+    .flag .media .frame { aspect-ratio: 16 / 9; }
+    .flag details.work { order: 3; }
+    .flag .text { display: flex; flex-direction: column; gap: 1rem; }
+    .flag .text .top { display: flex; gap: 1rem; align-items: baseline; }
+    .flag h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.02; }
+    .flag .say { font-size: 1.08rem; line-height: 1.6; color: var(--fg); }
+    .flag .proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-top: 0.25rem; }
+    .flag .proof div { border-top: 1px solid var(--a); padding-top: 0.6rem; }
+    .flag .proof b { display: block; font: 400 1.55rem/1 var(--serif); color: var(--paper); }
+    .flag .proof span { display: block; margin-top: 0.35rem; font-size: 0.75rem; color: var(--muted); line-height: 1.35; }
+
+    /* ---------- "See it work" panel ---------- */
+    details.work { grid-column: 1 / -1; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); overflow: hidden; }
+    details.work > summary {
+      list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1rem 1.25rem; font: 500 0.9rem/1.2 var(--sans); color: var(--paper);
+    }
+    details.work > summary::-webkit-details-marker { display: none; }
+    details.work > summary .hint { font: 400 0.8rem/1.2 var(--sans); color: var(--muted); }
+    details.work > summary .chev { width: 1.9rem; height: 1.9rem; flex: none; border-radius: 50%; border: 1px solid var(--line-2); display: grid; place-items: center; transition: transform 0.25s, background 0.25s; }
+    details.work[open] > summary .chev { transform: rotate(45deg); background: var(--a); border-color: var(--a); color: #111; }
+    details.work > summary:hover .chev { border-color: var(--a); }
+    .work-body { padding: 0 1.25rem 1.5rem; display: grid; gap: 1.5rem; }
+    .gallery { display: grid; gap: 0.75rem; grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 760px) { .gallery.g2 { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } .gallery.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .gallery figure { margin: 0; display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+    .gallery .frame { box-shadow: none; cursor: zoom-in; }
+    .gallery .frame.vid { cursor: default; }
+    .gallery figcaption { font-size: 0.78rem; color: var(--muted); line-height: 1.45; }
+    .pna { display: grid; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 760px) { .pna { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .pna h3 { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--a); margin-bottom: 0.6rem; }
+    .pna p { font-size: 0.92rem; line-height: 1.65; color: var(--fg); }
+    .pna code { font-family: var(--mono); font-size: 0.85em; color: var(--paper); }
+
+    /* ---------- Grid of smaller builds ---------- */
+    .more { padding: 5rem 0 2rem; }
+    .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 2rem; margin-bottom: 2rem; }
+    .section-head h2 { font: 400 clamp(1.8rem, 3.5vw, 2.6rem)/1.05 var(--serif); color: var(--paper); letter-spacing: -0.02em; }
+    .section-head p { color: var(--muted); max-width: 30rem; font-size: 0.95rem; line-height: 1.55; }
+    .cards { display: grid; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 820px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .mini { border: 1px solid var(--line); border-radius: 16px; background: var(--panel); padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+    .mini .frame { aspect-ratio: 16 / 10; box-shadow: none; }
+    .mini .meta { padding: 0 0.35rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .mini .meta .top { display: flex; gap: 0.75rem; align-items: baseline; }
+    .mini h2 { font-size: 1.6rem; line-height: 1.1; }
+    .mini .say { font-size: 0.95rem; line-height: 1.55; color: var(--fg); }
+    .mini details.work { border-radius: 12px; background: var(--panel-2); }
+    .mini .pna { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+
+    /* Diagram cards (projects without a screenshot) */
+    .diagram { width: 100%; height: 100%; display: block; }
+    .diagram text { font-family: var(--sans); }
+
+    /* ---------- Final project + footer ---------- */
+    .final {
+      margin: 3rem 0 1rem; padding: 2rem; border-radius: 16px; border: 1px dashed var(--line-2);
+      display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; justify-content: space-between;
+    }
+    .final h2 { font: 400 1.6rem/1.1 var(--serif); color: var(--paper); }
+    .final p { color: var(--muted); font-size: 0.95rem; }
+    .final .pulse { display: inline-flex; align-items: center; gap: 0.5rem; font: 500 0.75rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--hl); }
+    .final .pulse::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--hl); animation: cs85pulse 1.6s ease-in-out infinite; }
+    @keyframes cs85pulse { 50% { opacity: 0.25; } }
+    .outro { padding: 3rem 0 5rem; color: var(--faint); font-size: 0.85rem; line-height: 1.6; }
+
+    /* ---------- Lightbox ---------- */
+    dialog.lb { border: 0; padding: 0; background: transparent; max-width: min(96vw, 1800px); max-height: 94vh; }
+    dialog.lb::backdrop { background: rgba(5, 6, 10, 0.88); backdrop-filter: blur(4px); }
+    dialog.lb img { display: block; max-width: 100%; max-height: 90vh; border-radius: 10px; }
+    dialog.lb button { position: fixed; top: 1rem; right: 1rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 1px solid var(--line-2); background: var(--panel); color: var(--fg); font-size: 1.2rem; cursor: pointer; }
+
+    /* Gentle entrance */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .reveal.in { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .final .pulse::before { animation: none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="brand font-display">Alexander Mullen Portfolio</a>
+      <div class="links">
+        <a href="index.html">Innovation and Design</a>
+        <a href="media-portfolio.html">Media Portfolio</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="cs85">
+    <div class="wrap">
+      <a href="index.html" class="back-btn">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Innovation and Design
+      </a>
+
+      <!-- ============ INTRO ============ -->
+      <section class="intro">
+        <p class="eyebrow">Harvard CS85 · Fall 2026</p>
+        <h1>Eight apps, <em>four fields,</em> one semester.</h1>
+        <p class="lede">Over one course I built software that tracks asteroids, teaches people to read 19th-century handwriting, turns speech into sheet music and learns what art you like. Each one began as a question from a different field, and each one forced me to learn a new technical skill to answer it.</p>
+        <p class="how">I built these with Claude as my coding partner. I chose the problems, the data and the design, and I tested each build. Three of the apps also use Claude while they run, to read images.</p>
+        <div class="stats">
+          <div class="stat"><b>8</b><span>working apps, from a three-file static site to a React and TypeScript desktop tool</span></div>
+          <div class="stat"><b>1.58M</b><span>real asteroid orbits processed from the Minor Planet Center</span></div>
+          <div class="stat"><b>6</b><span>public data sources: NASA, JPL, the Minor Planet Center and Harvard Art Museums</span></div>
+          <div class="stat"><b>0</b><span>frameworks in most builds: the FFT, the orbit maths and the preference model are written by hand</span></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ SKILL FILTER ============ -->
+    <div class="skills" aria-label="Filter projects by skill">
+      <div class="wrap">
+        <div class="row" role="group" aria-label="Skills">
+          <span class="label">Skills</span>
+          <button class="chip" data-skill="api" aria-pressed="false">API integration</button>
+          <button class="chip" data-skill="llm" aria-pressed="false">Multimodal LLMs</button>
+          <button class="chip" data-skill="sci" aria-pressed="false">Scientific computing</button>
+          <button class="chip" data-skill="gfx" aria-pressed="false">3D &amp; animation</button>
+          <button class="chip" data-skill="dsp" aria-pressed="false">Audio DSP</button>
+          <button class="chip" data-skill="cv" aria-pressed="false">Computer vision</button>
+          <button class="chip" data-skill="ml" aria-pressed="false">Preference modelling</button>
+          <button class="chip" data-skill="data" aria-pressed="false">Data pipelines</button>
+          <button class="chip" data-skill="backend" aria-pressed="false">Serverless &amp; auth</button>
+          <button class="chip" data-skill="app" aria-pressed="false">React + TypeScript</button>
+          <button class="clear" type="button" hidden>Show all</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FLAGSHIPS ============ -->
+    <div class="wrap flagships">
+
+      <!-- 01 Sentry -->
+      <article class="proj flag reveal" style="--a:#ff8a4c" data-skills="api sci gfx data">
+        <div class="media">
+          <div class="frame">
+            <img src="Images/CS85/sentry-hero.webp" alt="Sentry Orbit Explorer: a 3D view of the inner solar system with hundreds of asteroid orbits, and a side panel telling the story of asteroid 2024 YR4" width="2400" height="1350" />
+          </div>
+        </div>
+        <div class="text">
+          <div class="top"><span class="num">01</span><span class="field">Astronomy · 3D</span></div>
+          <h2>Sentry Orbit Explorer</h2>
+          <p class="say">Every asteroid NASA can't yet rule out hitting Earth, in a 3D solar system you can run forward or backward through time.</p>
+          <div class="proof">
+            <div><b>2,247</b><span>objects on JPL's impact watch list</span></div>
+            <div><b>2,819</b><span>removed objects, shown on request</span></div>
+            <div><b>300 yr</b><span>of dates to jump between, 1900 to 2199</span></div>
+          </div>
+          <div class="tags"><span>three.js</span><span>JPL Sentry API</span><span>JPL SBDB</span><span>Kepler's equation</span><span>Python</span></div>
+        </div>
+        <details class="work">
+          <summary><span>See it work <span class="hint">· 11-second clip, 3 notes</span></span><span class="chev" aria-hidden="true">+</span></summary>
+          <div class="work-body">
+            <div class="gallery">
+              <figure>
+                <div class="frame vid"><video data-play muted loop playsinline preload="none" poster="Images/CS85/sentry-poster.webp" width="1280" height="720"><source src="Images/CS85/sentry-demo.mp4" type="video/mp4" /></video></div>
+                <figcaption>Dragging to rotate the solar system, then opening the 2024 YR4 timeline while the clock runs forward.</figcaption>
+              </figure>
+            </div>
+            <div class="pna">
+              <div><h3>Problem</h3><p>JPL's Sentry list is a table of numbers such as the Palermo scale and the MOID that mean little to most people. I wanted the list to feel like a place you can move around in.</p></div>
+              <div><h3>How it works</h3><p>A Python build step pulls the Sentry list and each object's orbital elements from JPL's Small-Body Database and embeds them in the page. In the browser, each orbit is solved with Kepler's equation for any date, drawn in three.js and coloured by Palermo scale. Filters cover orbit distance, impact probability and Palermo rating.</p></div>
+              <div><h3>Next</h3><p>The orbits ignore planetary gravity, which the page says openly. The next step is perturbations from the planets, so close approaches can be predicted rather than only described.</p></div>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <!-- 02 Lectio -->
+      <article class="proj flag flip reveal" style="--a:#e8a512" data-skills="llm cv">
+        <div class="media">
+          <div class="frame light">
+            <img style="object-fit: cover; object-position: top" src="Images/CS85/lectio-lines.webp" alt="An 1833 handwritten pension declaration with each line of writing outlined in blue, one line highlighted in amber" width="1812" height="877" loading="lazy" decoding="async" />
+            <span class="cap">Line detection, running in the browser</span>
+          </div>
+        </div>
+        <div class="text">
+          <div class="top"><span class="num">02</span><span class="field">Paleography · Vision AI</span></div>
+          <h2>Lectio</h2>
+          <p class="say">Upload a photo of a manuscript. Lectio finds each line, and when you point at one, Claude teaches you how to read it: the letterforms, the abbreviations and what it means.</p>
+          <div class="proof">
+            <div><b>0</b><span>AI calls needed to find the lines on a page</span></div>
+            <div><b>3</b><span>teaching levels, from beginner to specialist</span></div>
+            <div><b>6</b><span>topics per lesson, from letterforms to translation</span></div>
+          </div>
+          <div class="tags"><span>Claude vision</span><span>Structured JSON</span><span>Streaming</span><span>Adaptive thresholding</span><span>Canvas</span></div>
+        </div>
+        <details class="work">
+          <summary><span>See it work <span class="hint">· 2 images, 3 notes</span></span><span class="chev" aria-hidden="true">+</span></summary>
+          <div class="work-body">
+            <div class="gallery g2">
+              <figure>
+                <div class="frame"><img src="Images/CS85/lectio-desk.webp" alt="Lectio's reading desk with the uploaded manuscript on the left" loading="lazy" width="2304" height="1440" /></div>
+                <figcaption>The reading desk: the page on the left, the line list and lessons on the right.</figcaption>
+              </figure>
+              <figure>
+                <div class="frame"><img src="Images/CS85/lectio-landing.webp" alt="Lectio's start screen with an example lesson explaining the abbreviation dñs" loading="lazy" width="2304" height="1440" /></div>
+                <figcaption>The start screen shows a sample lesson, so you know what to expect before you upload.</figcaption>
+              </figure>
+              <!-- To add a recording of a full lesson, put a <figure> with <video data-src="Images/CS85/lectio-demo.mp4" ...> here. -->
+            </div>
+            <div class="pna">
+              <div><h3>Problem</h3><p>Reading old handwriting is usually taught slowly, one person at a time. A transcription alone gives you the answer but doesn't teach you to read the page yourself.</p></div>
+              <div><h3>How it works</h3><p>The page is split into lines in the browser: an adaptive threshold finds the ink, and autocorrelation finds the line spacing. The lines are numbered in a margin so Claude's transcription matches each detected line exactly. Lessons then stream in line by line, and you can ask follow-up questions.</p></div>
+              <div><h3>Next</h3><p>Practice mode: hide the transcription, let the reader type their own reading, and mark it letter by letter against Claude's version.</p></div>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <!-- 03 Voice to Music -->
+      <article class="proj flag reveal" style="--a:#87a1ff" data-skills="dsp">
+        <div class="media">
+          <div class="frame">
+            <img src="Images/CS85/v2m-hero.webp" alt="Voice to Music: a piano roll above a grand-staff score transcribed from a voice recording, with the current bar highlighted" width="1466" height="825" loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <div class="text">
+          <div class="top"><span class="num">03</span><span class="field">Audio · Signal processing</span></div>
+          <h2>Voice to Music</h2>
+          <p class="say">Turns a voice recording into piano and sheet music, using pitch detection and a synthesizer written from scratch.</p>
+          <div class="proof">
+            <div><b>128</b><span>notes from a 7.5-second recording</span></div>
+            <div><b>2,048</b><span>samples per hand-written FFT window</span></div>
+            <div><b>1</b><span>outside library, used only to draw the score</span></div>
+          </div>
+          <div class="tags"><span>Web Audio</span><span>FFT / STFT</span><span>Additive synthesis</span><span>abcjs</span></div>
+        </div>
+        <details class="work">
+          <summary><span>See it work <span class="hint">· playback clip, 3 notes</span></span><span class="chev" aria-hidden="true">+</span></summary>
+          <div class="work-body">
+            <div class="gallery">
+              <figure>
+                <div class="frame vid"><video data-play muted loop playsinline preload="none" poster="Images/CS85/v2m-poster.webp" width="1280" height="800"><source src="Images/CS85/v2m-demo.mp4" type="video/mp4" /></video></div>
+                <figcaption>Playback with the piano roll and the score following along. The clip is silent; in the app, a slider blends the original voice with the piano.</figcaption>
+              </figure>
+            </div>
+            <div class="pna">
+              <div><h3>Problem</h3><p>Speech has a melody that we hear but rarely notice. I wanted to make that melody visible and playable.</p></div>
+              <div><h3>How it works</h3><p>The audio is resampled to 16 kHz and analysed with an FFT written by hand. The strongest spectral peaks in each window become notes. A three-partial piano voice renders them, and the notes are snapped to a 16th-note grid and written as a grand-staff score that highlights bar by bar.</p></div>
+              <div><h3>Next</h3><p>Live microphone input with a rolling score, and a "melody only" mode that keeps just the pitch you hear in the voice.</p></div>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <!-- 04 Image Insight -->
+      <article class="proj flag flip reveal" style="--a:#d7936f" data-skills="cv llm">
+        <div class="media">
+          <div class="frame" style="background:#131210">
+            <img src="Images/CS85/insight-hero.webp" alt="Image Insight: a photo of two wooden boats with a rule-of-thirds grid, next to its measured colour card with an eight-colour palette, a temperature bar, a complementary harmony reading and saturation and brightness histograms" width="2400" height="1350" loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <div class="text">
+          <div class="top"><span class="num">04</span><span class="field">Art · Computer vision</span></div>
+          <h2>Image Insight</h2>
+          <p class="say">Measures a painting's or photograph's palette, tone and composition in the browser, then adds Claude's reading, clearly labelled as interpretation.</p>
+          <div class="proof">
+            <div><b>10</b><span>report sections, from colour to mood</span></div>
+            <div><b>2</b><span>labels on every row: Measured or Interpreted</span></div>
+            <div><b>0</b><span>GPS data sent unless you opt in</span></div>
+          </div>
+          <div class="tags"><span>k-means in Lab space</span><span>Histograms</span><span>EXIF</span><span>Claude vision</span></div>
+        </div>
+        <details class="work">
+          <summary><span>See it work <span class="hint">· 2 images, 3 notes</span></span><span class="chev" aria-hidden="true">+</span></summary>
+          <div class="work-body">
+            <div class="gallery g2">
+              <figure>
+                <div class="frame" style="background:#1b1916"><img src="Images/CS85/insight-color.webp" alt="The colour card at full size: palette with hex codes, temperature, harmony, saturation and brightness" loading="lazy" width="1047" height="1233" style="object-fit: contain" /></div>
+                <figcaption>Colour: an eight-colour palette clustered in Lab space, temperature, harmony, saturation and brightness.</figcaption>
+              </figure>
+              <figure>
+                <div class="frame" style="background:#1b1916"><img src="Images/CS85/insight-tone.webp" alt="Tone card with an RGB histogram, contrast, key and clipping measurements" loading="lazy" width="1047" height="872" style="object-fit: contain" /></div>
+                <figcaption>Tone: RGB and luminance histograms, contrast, key, and clipped highlights and shadows.</figcaption>
+              </figure>
+            </div>
+            <div class="pna">
+              <div><h3>Problem</h3><p>AI image descriptions blend what can be measured with what is opinion, and a reader can't tell which is which.</p></div>
+              <div><h3>How it works</h3><p>Colour, tone and geometry are computed in the browser first: k-means clustering in CIE Lab space, hue-template fitting for harmony, and histograms. Claude then adds medium, light, style and mood, and every row is tagged so you can tell measurement from interpretation.</p></div>
+              <div><h3>Next</h3><p>Side-by-side comparison of two works, so the measurements become an argument about style and not only a description.</p></div>
+            </div>
+          </div>
+        </details>
+      </article>
+    </div>
+
+    <!-- ============ MORE BUILDS ============ -->
+    <div class="wrap more">
+      <div class="section-head reveal">
+        <h2>More builds</h2>
+        <p>Smaller projects, each chosen to practise one thing the larger ones didn't: big data, preference modelling, a full app stack and a secure backend.</p>
+      </div>
+      <div class="cards">
+
+        <!-- 05 Reading the Asteroid Belt -->
+        <article class="proj mini reveal" style="--a:#4aa8ff" data-skills="data sci gfx">
+          <div class="frame light"><img src="Images/CS85/belt-chart.webp" alt="Scatter chart of 1,580,046 asteroids by orbit size and eccentricity, with near-Earth objects in red and 2026 discoveries in blue" loading="lazy" width="1200" height="776" /></div>
+          <div class="meta">
+            <div class="top"><span class="num">05</span><span class="field">Astronomy · Data</span></div>
+            <h2>Reading the Asteroid Belt</h2>
+            <p class="say">Three charts and an animated map that explain the structure hidden in 1.58 million real asteroid orbits.</p>
+            <div class="tags"><span>MPC orbit file</span><span>Python + matplotlib</span><span>Canvas</span></div>
+          </div>
+          <details class="work">
+            <summary><span>See it work</span><span class="chev" aria-hidden="true">+</span></summary>
+            <div class="work-body">
+              <div class="gallery">
+                <figure>
+                  <div class="frame vid"><video data-play muted loop playsinline preload="none" poster="Images/CS85/belt-poster.webp" width="720" height="508"><source src="Images/CS85/belt-demo.mp4" type="video/mp4" /></video></div>
+                  <figcaption>The orbit viewer at 100 days per second. The dashed rings are the Kirkwood gaps, where Jupiter has cleared the belt.</figcaption>
+                </figure>
+              </div>
+              <div class="gallery g2">
+                <figure><div class="frame light"><img src="Images/CS85/belt-gaps.webp" alt="Histogram of asteroid orbit sizes with dips at Jupiter resonances" loading="lazy" width="1200" height="777" /></div><figcaption>The Kirkwood gaps.</figcaption></figure>
+                <figure><div class="frame light"><img src="Images/CS85/belt-discoveries.webp" alt="Bar chart of asteroid discoveries per half-month from 2024 to 2026" loading="lazy" width="1200" height="659" /></div><figcaption>Discoveries per half-month, 2024–2026.</figcaption></figure>
+              </div>
+              <div class="pna">
+                <div><h3>How it works</h3><p>A Python script reads the Minor Planet Center's full orbit file, draws the charts, and samples 6,700 orbits for an animated viewer that runs in the browser. This is the dataset behind Sentry Orbit Explorer (01).</p></div>
+              </div>
+            </div>
+          </details>
+        </article>
+
+        <!-- 06 Taste Test -->
+        <article class="proj mini reveal" style="--a:#b18cff" data-skills="ml api">
+          <div class="frame" style="background:#15111f">
+            <svg class="diagram" viewBox="0 0 800 500" role="img" aria-label="Diagram of Taste Test's four phases: Explore, 12 rounds; Refine, 8 rounds; Predict, 5 rounds; then Results, all driven by an Elo and logistic-regression model">
+              <defs>
+                <linearGradient id="tt-g" x1="0" x2="1"><stop offset="0" stop-color="#b18cff"/><stop offset="1" stop-color="#d9d4e8"/></linearGradient>
+                <marker id="tt-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#b18cff"/></marker>
+              </defs>
+              <text x="40" y="62" fill="#e9e6df" font-size="30" font-family="Fraunces, Georgia, serif">Which of these do you like least?</text>
+              <g transform="translate(40 92)">
+                <rect width="160" height="120" rx="10" fill="#2a2140"/><rect x="176" width="160" height="120" rx="10" fill="#3a2d57"/>
+                <rect x="352" width="160" height="120" rx="10" fill="#2a2140" stroke="#b18cff" stroke-width="3"/><rect x="528" width="160" height="120" rx="10" fill="#3a2d57"/>
+                <path d="M412 44 452 84M452 44 412 84" stroke="#b18cff" stroke-width="5" stroke-linecap="round"/>
+              </g>
+              <g font-size="15" fill="#e9e6df">
+                <g transform="translate(40 270)"><rect width="160" height="76" rx="12" fill="none" stroke="#b18cff"/><text x="16" y="32" font-weight="600">Explore</text><text x="16" y="56" fill="#9b9a96">12 rounds · 4-up</text></g>
+                <g transform="translate(236 270)"><rect width="160" height="76" rx="12" fill="none" stroke="#b18cff"/><text x="16" y="32" font-weight="600">Refine</text><text x="16" y="56" fill="#9b9a96">8 rounds · A/B</text></g>
+                <g transform="translate(432 270)"><rect width="160" height="76" rx="12" fill="none" stroke="#b18cff"/><text x="16" y="32" font-weight="600">Predict</text><text x="16" y="56" fill="#9b9a96">5 rounds · it guesses</text></g>
+                <g transform="translate(628 270)"><rect width="132" height="76" rx="12" fill="url(#tt-g)"/><text x="16" y="32" font-weight="600" fill="#15111f">Results</text><text x="16" y="56" fill="#3a2d57">profile + picks</text></g>
+                <path d="M200 308h30M396 308h30M592 308h30" stroke="#b18cff" stroke-width="2" marker-end="url(#tt-ar)"/>
+              </g>
+              <g transform="translate(40 392)" font-size="14">
+                <rect width="720" height="66" rx="12" fill="#211a33"/>
+                <text x="20" y="28" fill="#e9e6df" font-weight="600">Elo ratings + online logistic regression</text>
+                <text x="20" y="50" fill="#9b9a96">colour · era · culture · medium · painting vs sculpture → picks the most uncertain pair next</text>
+              </g>
+            </svg>
+          </div>
+          <div class="meta">
+            <div class="top"><span class="num">06</span><span class="field">Art · Modelling</span></div>
+            <h2>Taste Test</h2>
+            <p class="say">A quick game that learns which art you like, then tries to predict your next choice before you make it.</p>
+            <div class="tags"><span>Harvard Art Museums API</span><span>IIIF</span><span>Elo</span><span>Logistic regression</span><span>No build step</span></div>
+          </div>
+          <details class="work">
+            <summary><span>See it work</span><span class="chev" aria-hidden="true">+</span></summary>
+            <div class="work-body">
+              <!-- Add gameplay screenshots or a recording here: it needs a Harvard Art Museums API key to run. -->
+              <div class="pna">
+                <div><h3>How it works</h3><p>Every choice goes into an event log. Elo ratings and a logistic-regression model over colour, era, culture and medium are rebuilt by replaying that log, which makes undo trivial. The model picks the pair it is least sure about to ask next, then tests itself by predicting your picks, with its confidence shown.</p></div>
+                <div><h3>Built to be safe</h3><p>The site is fully static, with no server and no tracking. Visitors bring their own free API key, and a Content-Security-Policy only lets the page contact the museum's API.</p></div>
+              </div>
+            </div>
+          </details>
+        </article>
+
+        <!-- 07 Scriptorium -->
+        <article class="proj mini reveal" style="--a:#d0675f" data-skills="app llm">
+          <div class="frame"><img src="Images/CS85/scriptorium.webp" alt="Scriptorium, a desktop transcription app with a manuscript in the viewer and image controls for contrast and brightness" loading="lazy" width="2304" height="1440" /></div>
+          <div class="meta">
+            <div class="top"><span class="num">07</span><span class="field">Paleography · App</span></div>
+            <h2>Scriptorium</h2>
+            <p class="say">A desktop transcription workbench for handwritten documents, with editing, translation and annotated PDF export.</p>
+            <div class="tags"><span>React 19</span><span>TypeScript</span><span>Vite</span><span>pdf.js</span><span>IndexedDB</span></div>
+          </div>
+          <details class="work">
+            <summary><span>See it work</span><span class="chev" aria-hidden="true">+</span></summary>
+            <div class="work-body">
+              <div class="pna">
+                <div><h3>How it works</h3><p>Opens PNG, JPG, multi-page TIFF and PDF files. A small local bridge sends pages to Claude Code on the same computer, and the results come back as typed regions (body, marginalia, insertions) with a confidence score for each. Unclear words are highlighted, every region can be edited, and exports include text, Markdown, JSON and an annotated PDF.</p></div>
+                <div><h3>Where it led</h3><p>Scriptorium was the heavyweight first version. Lectio (02) took the same problem, made it lighter, and turned it into a teacher.</p></div>
+              </div>
+            </div>
+          </details>
+        </article>
+
+        <!-- 08 Cosmic Radar -->
+        <article class="proj mini reveal" style="--a:#4fd1c5" data-skills="api backend">
+          <div class="frame" style="background:#0d1517">
+            <svg class="diagram" viewBox="0 0 800 500" role="img" aria-label="Architecture diagram: the browser calls the site's own API routes, which add the secret NASA key on the server and forward requests to NASA's picture-of-the-day and near-Earth-object APIs; Firebase handles sign-in and saved favourites">
+              <defs><marker id="cr-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#4fd1c5"/></marker></defs>
+              <g font-size="15" fill="#e9e6df">
+                <g transform="translate(40 180)"><rect width="190" height="120" rx="14" fill="#13262a" stroke="#4fd1c5"/><text x="20" y="40" font-weight="600" font-size="18">Browser</text><text x="20" y="68" fill="#9b9a96">no API key here</text><text x="20" y="92" fill="#9b9a96">/api/apod · /api/asteroids</text></g>
+                <g transform="translate(305 180)"><rect width="190" height="120" rx="14" fill="#4fd1c5"/><text x="20" y="40" font-weight="600" font-size="18" fill="#0d1517">Serverless proxy</text><text x="20" y="68" fill="#0d1517">adds the secret key</text><text x="20" y="92" fill="#0d1517">caches for 5 minutes</text></g>
+                <g transform="translate(570 120)"><rect width="190" height="96" rx="14" fill="#13262a" stroke="#4fd1c5"/><text x="20" y="40" font-weight="600" font-size="18">NASA APOD</text><text x="20" y="66" fill="#9b9a96">picture of the day</text></g>
+                <g transform="translate(570 266)"><rect width="190" height="96" rx="14" fill="#13262a" stroke="#4fd1c5"/><text x="20" y="40" font-weight="600" font-size="18">NASA NeoWs</text><text x="20" y="66" fill="#9b9a96">near-Earth asteroids</text></g>
+                <g transform="translate(40 386)"><rect width="455" height="76" rx="14" fill="none" stroke="#4fd1c5" stroke-dasharray="6 6"/><text x="20" y="32" font-weight="600">Firebase</text><text x="20" y="56" fill="#9b9a96">Google sign-in · favourites and settings saved per user</text></g>
+                <path d="M230 240h68" stroke="#4fd1c5" stroke-width="2" marker-end="url(#cr-ar)"/>
+                <path d="M495 225 563 180M495 255 563 305" stroke="#4fd1c5" stroke-width="2" marker-end="url(#cr-ar)"/>
+                <path d="M135 300v80" stroke="#4fd1c5" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#cr-ar)"/>
+              </g>
+              <text x="40" y="80" fill="#e9e6df" font-size="30" font-family="Fraunces, Georgia, serif">Cosmic Radar</text>
+              <text x="40" y="112" fill="#9b9a96" font-size="16">How the API key stays out of the browser</text>
+            </svg>
+          </div>
+          <div class="meta">
+            <div class="top"><span class="num">08</span><span class="field">Astronomy · Backend</span></div>
+            <h2>Cosmic Radar</h2>
+            <p class="say">NASA's picture of the day and this week's near-Earth asteroids, with the API key kept safely on the server.</p>
+            <div class="tags"><span>NASA APOD</span><span>NASA NeoWs</span><span>Serverless functions</span><span>Firebase Auth</span><span>Firestore</span></div>
+          </div>
+          <details class="work">
+            <summary><span>See it work</span><span class="chev" aria-hidden="true">+</span></summary>
+            <div class="work-body">
+              <!-- Add a screenshot of the live site here once deployment is confirmed. -->
+              <div class="pna">
+                <div><h3>How it works</h3><p>The page never talks to NASA directly. It calls its own serverless functions, which add the secret key, forward the request and cache the answer at the edge. Signing in with Google syncs your favourite pictures and display settings through Firestore; guests' settings stay in the browser.</p></div>
+                <div><h3>Why it's here</h3><p>It is my earliest build here, and the only one with real accounts and a database behind it.</p></div>
+              </div>
+            </div>
+          </details>
+        </article>
+      </div>
+
+      <!-- Final project slot -->
+      <div class="final reveal">
+        <div>
+          <span class="pulse">In progress</span>
+          <h2>Final project</h2>
+        </div>
+        <p>The semester's last and largest build. It will go here when it ships.</p>
+      </div>
+    </div>
+
+    <div class="wrap outro">
+      <p>Data: NASA/JPL Center for Near-Earth Object Studies, the Minor Planet Center, NASA APOD and NeoWs, and Harvard Art Museums. The manuscript shown is an 1833 Revolutionary War pension declaration. Screenshots and clips were captured from the working apps.</p>
+    </div>
+  </main>
+
+  <dialog class="lb" id="lb" aria-label="Enlarged image">
+    <button type="button" aria-label="Close">×</button>
+    <img alt="" />
+  </dialog>
+
+  <script>
+  (function () {
+    // ---- Skill filter: highlight projects that use a skill, dim the rest ----
+    var chips = document.querySelectorAll('.skills .chip');
+    var clearBtn = document.querySelector('.skills .clear');
+    var projects = document.querySelectorAll('.proj');
+    function applyFilter(skill) {
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.skill === skill)); });
+      projects.forEach(function (p) {
+        var has = skill && (' ' + p.dataset.skills + ' ').indexOf(' ' + skill + ' ') > -1;
+        p.classList.toggle('dim', !!skill && !has);
+        p.classList.toggle('match', !!has);
+        if (skill) p.classList.add('in');
+      });
+      clearBtn.hidden = !skill;
+    }
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var on = c.getAttribute('aria-pressed') === 'true';
+        applyFilter(on ? null : c.dataset.skill);
+        if (!on) {
+          var first = document.querySelector('.proj.match');
+          if (first && first.getBoundingClientRect().top > window.innerHeight * 0.8) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+    clearBtn.addEventListener('click', function () { applyFilter(null); });
+
+    // ---- "See it work": load and play clips only while the panel is open and visible ----
+    var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting && v.closest('details').open) { v.play().catch(function () {}); } else { v.pause(); }
+      });
+    }, { threshold: 0.25 }) : null;
+    document.querySelectorAll('details.work').forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        d.querySelectorAll('video[data-play]').forEach(function (v) {
+          if (d.open) {
+            if (v.preload === 'none') { v.preload = 'auto'; v.load(); }
+            if (io) io.observe(v);
+            v.play().catch(function () {});
+          } else { v.pause(); }
+        });
+      });
+    });
+
+    // ---- Lightbox for gallery images ----
+    var lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+    document.querySelectorAll('.gallery .frame:not(.vid) img').forEach(function (img) {
+      img.addEventListener('click', function () {
+        lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt;
+        if (lb.showModal) lb.showModal(); else window.open(img.src);
+      });
+    });
+    lb.querySelector('button').addEventListener('click', function () { lb.close(); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+
+    // ---- Entrance animation ----
+    var rev = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var ro = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      rev.forEach(function (r) { ro.observe(r); });
+    } else { rev.forEach(function (r) { r.classList.add('in'); }); }
+  })();
+  </script>
+</body>
+</html>
