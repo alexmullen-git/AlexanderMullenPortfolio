@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="Images/favicons/cs85.svg" type="image/svg+xml" />
   <title>CS85 Projects</title>
-  <meta name="description" content="Eight apps built in Harvard CS85: orbital mechanics, manuscript reading, audio signal processing, computer vision and preference modelling." />
+  <meta name="description" content="Projects in astronomy, paleography, music and art, built for Harvard CS85: Introduction to Generative AI via Building Software for the Study of the Arts and Sciences." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* ------------------------------------------------------------------
@@ -49,16 +49,22 @@
       margin-top: 1.25rem;
       font-family: var(--serif); font-weight: 400;
       font-size: clamp(2.6rem, 7vw, 5.6rem); line-height: 0.98; letter-spacing: -0.03em;
-      color: var(--paper); max-width: 14ch;
+      color: var(--paper); max-width: 18ch;
     }
     .intro h1 em { font-style: italic; color: var(--hl); }
     .intro .lede { margin-top: 1.75rem; max-width: 40rem; font-size: 1.15rem; line-height: 1.65; color: var(--fg); }
     .intro .how { margin-top: 1rem; max-width: 40rem; font-size: 0.95rem; line-height: 1.6; color: var(--muted); }
-    .stats { margin-top: 2.75rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-    @media (min-width: 760px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-    .stat { background: var(--panel); padding: 1.25rem 1.4rem; }
-    .stat b { display: block; font: 400 2.4rem/1 var(--serif); color: var(--paper); letter-spacing: -0.02em; }
-    .stat span { display: block; margin-top: 0.5rem; font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+    .fields { margin-top: 2.75rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    @media (min-width: 640px) { .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1000px) { .fields { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .fieldcard { --a: var(--hl); background: var(--panel); padding: 1.4rem 1.4rem 1.5rem; border-top: 2px solid var(--a); display: flex; flex-direction: column; gap: 0.6rem; }
+    .fieldcard .fname { font: 400 1.7rem/1 var(--serif); color: var(--paper); letter-spacing: -0.01em; }
+    .fieldcard p { font-size: 0.85rem; line-height: 1.5; color: var(--muted); }
+    .fieldcard ul { list-style: none; margin-top: auto; padding-top: 0.4rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .fieldcard a { color: var(--fg); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .fieldcard a::before { content: "→ "; color: var(--a); }
+    .fieldcard a:hover { color: var(--a); }
+    .proj { scroll-margin-top: 9rem; }
 
     /* ---------- Skill filter ---------- */
     .skills { position: sticky; top: 4rem; z-index: 20; padding: 1rem 0; background: linear-gradient(var(--ink) 70%, transparent); }
@@ -141,9 +147,17 @@
     .gallery figure { margin: 0; display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
     .gallery .frame { box-shadow: none; cursor: zoom-in; }
     .gallery .frame.vid { cursor: default; }
+    .frame .sound {
+      position: absolute; right: 0.75rem; bottom: 0.75rem; display: inline-flex; align-items: center; gap: 0.45rem;
+      font: 500 0.8rem/1 var(--sans); color: #fff; cursor: pointer;
+      background: rgba(10, 11, 16, 0.78); backdrop-filter: blur(6px);
+      padding: 0.55rem 0.8rem; border-radius: 999px; border: 1px solid var(--line-2);
+    }
+    .frame .sound:hover { border-color: var(--a); }
+    .frame .sound[aria-pressed="true"] { background: var(--a); border-color: var(--a); color: #111; }
     .gallery figcaption { font-size: 0.78rem; color: var(--muted); line-height: 1.45; }
     .pna { display: grid; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); }
-    @media (min-width: 760px) { .pna { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (min-width: 760px) { .pna { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; } }
     .pna h3 { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--a); margin-bottom: 0.6rem; }
     .pna p { font-size: 0.92rem; line-height: 1.65; color: var(--fg); }
     .pna code { font-family: var(--mono); font-size: 0.85em; color: var(--paper); }
@@ -218,14 +232,30 @@
       <!-- ============ INTRO ============ -->
       <section class="intro">
         <p class="eyebrow">Harvard CS85 · Fall 2026</p>
-        <h1>Eight apps, <em>four fields,</em> one semester.</h1>
-        <p class="lede">Over one course I built software that tracks asteroids, teaches people to read 19th-century handwriting, turns speech into sheet music and learns what art you like. Each one began as a question from a different field, and each one forced me to learn a new technical skill to answer it.</p>
-        <p class="how">I built these with Claude as my coding partner. I chose the problems, the data and the design, and I tested each build. Three of the apps also use Claude while they run, to read images.</p>
-        <div class="stats">
-          <div class="stat"><b>8</b><span>working apps, from a three-file static site to a React and TypeScript desktop tool</span></div>
-          <div class="stat"><b>1.58M</b><span>real asteroid orbits processed from the Minor Planet Center</span></div>
-          <div class="stat"><b>6</b><span>public data sources: NASA, JPL, the Minor Planet Center and Harvard Art Museums</span></div>
-          <div class="stat"><b>0</b><span>frameworks in most builds: the FFT, the orbit maths and the preference model are written by hand</span></div>
+        <h1>Four fields <em>of projects.</em></h1>
+        <p class="lede">Built for CS85: Introduction to Generative AI via Building Software for the Study of the Arts and Sciences. Each project takes a real question from astronomy, paleography, music or art and turns it into a working tool.</p>
+        <p class="how">I built them with Claude as my coding partner: I chose the questions, the data and the design, and tested every build. Lectio, Image Insight and Scriptorium also call Claude while they run, to read images.</p>
+        <div class="fields" role="navigation" aria-label="Projects by field">
+          <div class="fieldcard" style="--a:#ff8a4c">
+            <span class="fname">Astronomy</span>
+            <p>Real orbital data from NASA, JPL and the Minor Planet Center, made explorable.</p>
+            <ul><li><a href="#sentry">Sentry Orbit Explorer</a></li><li><a href="#belt">Reading the Asteroid Belt</a></li><li><a href="#cosmic">Cosmic Radar</a></li></ul>
+          </div>
+          <div class="fieldcard" style="--a:#e8a512">
+            <span class="fname">Paleography</span>
+            <p>Reading old handwriting, and teaching other people to read it.</p>
+            <ul><li><a href="#lectio">Lectio</a></li><li><a href="#scriptorium">Scriptorium</a></li></ul>
+          </div>
+          <div class="fieldcard" style="--a:#87a1ff">
+            <span class="fname">Music</span>
+            <p>Hearing, and writing down, the melody hidden in ordinary speech.</p>
+            <ul><li><a href="#voice">Voice to Music</a></li></ul>
+          </div>
+          <div class="fieldcard" style="--a:#b18cff">
+            <span class="fname">Art</span>
+            <p>Measuring what makes an image work, and learning what a viewer likes.</p>
+            <ul><li><a href="#insight">Image Insight</a></li><li><a href="#taste">Taste Test</a></li></ul>
+          </div>
         </div>
       </section>
     </div>
@@ -254,7 +284,7 @@
     <div class="wrap flagships">
 
       <!-- 01 Sentry -->
-      <article class="proj flag reveal" style="--a:#ff8a4c" data-skills="api sci gfx data">
+      <article id="sentry" class="proj flag reveal" style="--a:#ff8a4c" data-skills="api sci gfx data">
         <div class="media">
           <div class="frame">
             <img src="Images/CS85/sentry-hero.webp" alt="Sentry Orbit Explorer: a 3D view of the inner solar system with hundreds of asteroid orbits, and a side panel telling the story of asteroid 2024 YR4" width="2400" height="1350" />
@@ -272,7 +302,7 @@
           <div class="tags"><span>three.js</span><span>JPL Sentry API</span><span>JPL SBDB</span><span>Kepler's equation</span><span>Python</span></div>
         </div>
         <details class="work">
-          <summary><span>See it work <span class="hint">· 11-second clip, 3 notes</span></span><span class="chev" aria-hidden="true">+</span></summary>
+          <summary><span>See it work <span class="hint">· 11-second clip</span></span><span class="chev" aria-hidden="true">+</span></summary>
           <div class="work-body">
             <div class="gallery">
               <figure>
@@ -281,19 +311,18 @@
               </figure>
             </div>
             <div class="pna">
-              <div><h3>Problem</h3><p>JPL's Sentry list is a table of numbers such as the Palermo scale and the MOID that mean little to most people. I wanted the list to feel like a place you can move around in.</p></div>
-              <div><h3>How it works</h3><p>A Python build step pulls the Sentry list and each object's orbital elements from JPL's Small-Body Database and embeds them in the page. In the browser, each orbit is solved with Kepler's equation for any date, drawn in three.js and coloured by Palermo scale. Filters cover orbit distance, impact probability and Palermo rating.</p></div>
-              <div><h3>Next</h3><p>The orbits ignore planetary gravity, which the page says openly. The next step is perturbations from the planets, so close approaches can be predicted rather than only described.</p></div>
+              <div><h3>Focus</h3><p>Making JPL's impact watch list understandable. Its key numbers, such as the Palermo scale and an orbit's closest distance to Earth's, mean little on their own. The explorer places every listed object in a solar system you can rotate, search and run through time.</p></div>
+              <div><h3>How it works</h3><p>A Python build step pulls the Sentry list and each object's orbital elements from JPL's Small-Body Database and embeds them in the page. In the browser, each orbit is solved with Kepler's equation for any date, drawn in three.js and colored by Palermo scale. Filters cover orbit distance, impact probability and Palermo rating.</p></div>
             </div>
           </div>
         </details>
       </article>
 
       <!-- 02 Lectio -->
-      <article class="proj flag flip reveal" style="--a:#e8a512" data-skills="llm cv">
+      <article id="lectio" class="proj flag flip reveal" style="--a:#e8a512" data-skills="llm cv">
         <div class="media">
           <div class="frame light">
-            <img style="object-fit: cover; object-position: top" src="Images/CS85/lectio-lines.webp" alt="An 1833 handwritten pension declaration with each line of writing outlined in blue, one line highlighted in amber" width="1812" height="877" loading="lazy" decoding="async" />
+            <img style="object-fit: cover; object-position: top" src="Images/CS85/lectio-lines.webp" alt="An 1833 handwritten pension declaration with each line of writing outlined in blue, one line highlighted in amber" width="1812" height="877" />
             <span class="cap">Line detection, running in the browser</span>
           </div>
         </div>
@@ -309,7 +338,7 @@
           <div class="tags"><span>Claude vision</span><span>Structured JSON</span><span>Streaming</span><span>Adaptive thresholding</span><span>Canvas</span></div>
         </div>
         <details class="work">
-          <summary><span>See it work <span class="hint">· 2 images, 3 notes</span></span><span class="chev" aria-hidden="true">+</span></summary>
+          <summary><span>See it work <span class="hint">· 2 images</span></span><span class="chev" aria-hidden="true">+</span></summary>
           <div class="work-body">
             <div class="gallery g2">
               <figure>
@@ -323,19 +352,18 @@
               <!-- To add a recording of a full lesson, put a <figure> with <video data-src="Images/CS85/lectio-demo.mp4" ...> here. -->
             </div>
             <div class="pna">
-              <div><h3>Problem</h3><p>Reading old handwriting is usually taught slowly, one person at a time. A transcription alone gives you the answer but doesn't teach you to read the page yourself.</p></div>
+              <div><h3>Focus</h3><p>Teaching people to read old handwriting themselves, rather than handing them a finished transcription. Each line of the page becomes a short lesson on its letterforms, abbreviations, spelling and meaning, pitched at the reader's level.</p></div>
               <div><h3>How it works</h3><p>The page is split into lines in the browser: an adaptive threshold finds the ink, and autocorrelation finds the line spacing. The lines are numbered in a margin so Claude's transcription matches each detected line exactly. Lessons then stream in line by line, and you can ask follow-up questions.</p></div>
-              <div><h3>Next</h3><p>Practice mode: hide the transcription, let the reader type their own reading, and mark it letter by letter against Claude's version.</p></div>
             </div>
           </div>
         </details>
       </article>
 
       <!-- 03 Voice to Music -->
-      <article class="proj flag reveal" style="--a:#87a1ff" data-skills="dsp">
+      <article id="voice" class="proj flag reveal" style="--a:#87a1ff" data-skills="dsp">
         <div class="media">
           <div class="frame">
-            <img src="Images/CS85/v2m-hero.webp" alt="Voice to Music: a piano roll above a grand-staff score transcribed from a voice recording, with the current bar highlighted" width="1466" height="825" loading="lazy" decoding="async" />
+            <img src="Images/CS85/v2m-hero.webp" alt="Voice to Music: a piano roll above a grand-staff score transcribed from a voice recording, with the current bar highlighted" width="1466" height="825" />
           </div>
         </div>
         <div class="text">
@@ -350,28 +378,27 @@
           <div class="tags"><span>Web Audio</span><span>FFT / STFT</span><span>Additive synthesis</span><span>abcjs</span></div>
         </div>
         <details class="work">
-          <summary><span>See it work <span class="hint">· playback clip, 3 notes</span></span><span class="chev" aria-hidden="true">+</span></summary>
+          <summary><span>See it work <span class="hint">· playback clip with sound</span></span><span class="chev" aria-hidden="true">+</span></summary>
           <div class="work-body">
             <div class="gallery">
               <figure>
-                <div class="frame vid"><video data-play muted loop playsinline preload="none" poster="Images/CS85/v2m-poster.webp" width="1280" height="800"><source src="Images/CS85/v2m-demo.mp4" type="video/mp4" /></video></div>
-                <figcaption>Playback with the piano roll and the score following along. The clip is silent; in the app, a slider blends the original voice with the piano.</figcaption>
+                <div class="frame vid"><video data-play muted loop playsinline preload="none" poster="Images/CS85/v2m-poster.webp" width="1280" height="800"><source src="Images/CS85/v2m-demo.mp4" type="video/mp4" /></video><button class="sound" type="button" aria-pressed="false"><span class="ico" aria-hidden="true">&#128263;</span><span class="lbl">Sound on</span></button></div>
+                <figcaption>Playback with the piano roll and the score following along. Turn the sound on to hear the 50/50 blend of the original voice and the piano transcription.</figcaption>
               </figure>
             </div>
             <div class="pna">
-              <div><h3>Problem</h3><p>Speech has a melody that we hear but rarely notice. I wanted to make that melody visible and playable.</p></div>
+              <div><h3>Focus</h3><p>The melody inside ordinary speech: something we hear but rarely notice. The app turns a spoken recording into piano notes and a readable score, and lets you blend the piano with the original voice to compare them.</p></div>
               <div><h3>How it works</h3><p>The audio is resampled to 16 kHz and analysed with an FFT written by hand. The strongest spectral peaks in each window become notes. A three-partial piano voice renders them, and the notes are snapped to a 16th-note grid and written as a grand-staff score that highlights bar by bar.</p></div>
-              <div><h3>Next</h3><p>Live microphone input with a rolling score, and a "melody only" mode that keeps just the pitch you hear in the voice.</p></div>
             </div>
           </div>
         </details>
       </article>
 
       <!-- 04 Image Insight -->
-      <article class="proj flag flip reveal" style="--a:#d7936f" data-skills="cv llm">
+      <article id="insight" class="proj flag flip reveal" style="--a:#d7936f" data-skills="cv llm">
         <div class="media">
           <div class="frame" style="background:#131210">
-            <img src="Images/CS85/insight-hero.webp" alt="Image Insight: a photo of two wooden boats with a rule-of-thirds grid, next to its measured colour card with an eight-colour palette, a temperature bar, a complementary harmony reading and saturation and brightness histograms" width="2400" height="1350" loading="lazy" decoding="async" />
+            <img src="Images/CS85/insight-hero.webp" alt="Image Insight: a photo of two wooden boats with a rule-of-thirds grid, next to its measured color card with an eight-color palette, a temperature bar, a complementary harmony reading and saturation and brightness histograms" width="2400" height="1350" />
           </div>
         </div>
         <div class="text">
@@ -379,19 +406,19 @@
           <h2>Image Insight</h2>
           <p class="say">Measures a painting's or photograph's palette, tone and composition in the browser, then adds Claude's reading, clearly labelled as interpretation.</p>
           <div class="proof">
-            <div><b>10</b><span>report sections, from colour to mood</span></div>
+            <div><b>10</b><span>report sections, from color to mood</span></div>
             <div><b>2</b><span>labels on every row: Measured or Interpreted</span></div>
             <div><b>0</b><span>GPS data sent unless you opt in</span></div>
           </div>
           <div class="tags"><span>k-means in Lab space</span><span>Histograms</span><span>EXIF</span><span>Claude vision</span></div>
         </div>
         <details class="work">
-          <summary><span>See it work <span class="hint">· 2 images, 3 notes</span></span><span class="chev" aria-hidden="true">+</span></summary>
+          <summary><span>See it work <span class="hint">· 2 images</span></span><span class="chev" aria-hidden="true">+</span></summary>
           <div class="work-body">
             <div class="gallery g2">
               <figure>
-                <div class="frame" style="background:#1b1916"><img src="Images/CS85/insight-color.webp" alt="The colour card at full size: palette with hex codes, temperature, harmony, saturation and brightness" loading="lazy" width="1047" height="1233" style="object-fit: contain" /></div>
-                <figcaption>Colour: an eight-colour palette clustered in Lab space, temperature, harmony, saturation and brightness.</figcaption>
+                <div class="frame" style="background:#1b1916"><img src="Images/CS85/insight-color.webp" alt="The color card at full size: palette with hex codes, temperature, harmony, saturation and brightness" loading="lazy" width="1047" height="1233" style="object-fit: contain" /></div>
+                <figcaption>Color: an eight-color palette clustered in Lab space, temperature, harmony, saturation and brightness.</figcaption>
               </figure>
               <figure>
                 <div class="frame" style="background:#1b1916"><img src="Images/CS85/insight-tone.webp" alt="Tone card with an RGB histogram, contrast, key and clipping measurements" loading="lazy" width="1047" height="872" style="object-fit: contain" /></div>
@@ -399,9 +426,8 @@
               </figure>
             </div>
             <div class="pna">
-              <div><h3>Problem</h3><p>AI image descriptions blend what can be measured with what is opinion, and a reader can't tell which is which.</p></div>
-              <div><h3>How it works</h3><p>Colour, tone and geometry are computed in the browser first: k-means clustering in CIE Lab space, hue-template fitting for harmony, and histograms. Claude then adds medium, light, style and mood, and every row is tagged so you can tell measurement from interpretation.</p></div>
-              <div><h3>Next</h3><p>Side-by-side comparison of two works, so the measurements become an argument about style and not only a description.</p></div>
+              <div><h3>Focus</h3><p>Separating what can be measured in an image from what is interpretation. AI descriptions usually blend the two; here the palette, tone and geometry are computed, and Claude's reading of medium, light and mood is labelled as opinion.</p></div>
+              <div><h3>How it works</h3><p>Color, tone and geometry are computed in the browser first: k-means clustering in CIE Lab space, hue-template fitting for harmony, and histograms. Claude then adds medium, light, style and mood, and every row is tagged so you can tell measurement from interpretation.</p></div>
             </div>
           </div>
         </details>
@@ -412,12 +438,12 @@
     <div class="wrap more">
       <div class="section-head reveal">
         <h2>More builds</h2>
-        <p>Smaller projects, each chosen to practise one thing the larger ones didn't: big data, preference modelling, a full app stack and a secure backend.</p>
+        <p>Smaller projects that extend the same four fields: a full asteroid catalogue, a model of artistic taste, a desktop transcription app and a secure NASA dashboard.</p>
       </div>
       <div class="cards">
 
         <!-- 05 Reading the Asteroid Belt -->
-        <article class="proj mini reveal" style="--a:#4aa8ff" data-skills="data sci gfx">
+        <article id="belt" class="proj mini reveal" style="--a:#4aa8ff" data-skills="data sci gfx">
           <div class="frame light"><img src="Images/CS85/belt-chart.webp" alt="Scatter chart of 1,580,046 asteroids by orbit size and eccentricity, with near-Earth objects in red and 2026 discoveries in blue" loading="lazy" width="1200" height="776" /></div>
           <div class="meta">
             <div class="top"><span class="num">05</span><span class="field">Astronomy · Data</span></div>
@@ -439,14 +465,15 @@
                 <figure><div class="frame light"><img src="Images/CS85/belt-discoveries.webp" alt="Bar chart of asteroid discoveries per half-month from 2024 to 2026" loading="lazy" width="1200" height="659" /></div><figcaption>Discoveries per half-month, 2024–2026.</figcaption></figure>
               </div>
               <div class="pna">
-                <div><h3>How it works</h3><p>A Python script reads the Minor Planet Center's full orbit file, draws the charts, and samples 6,700 orbits for an animated viewer that runs in the browser. This is the dataset behind Sentry Orbit Explorer (01).</p></div>
+                <div><h3>Focus</h3><p>Explaining the structure of the asteroid belt from the full public catalogue rather than a textbook diagram: where the asteroids are, where Jupiter has cleared gaps, and how fast new ones are being found.</p></div>
+                <div><h3>How it works</h3><p>A Python script reads the Minor Planet Center's complete orbit file, draws the charts, and samples 6,700 orbits for an animated viewer that runs in the browser. This is the dataset behind Sentry Orbit Explorer (01).</p></div>
               </div>
             </div>
           </details>
         </article>
 
         <!-- 06 Taste Test -->
-        <article class="proj mini reveal" style="--a:#b18cff" data-skills="ml api">
+        <article id="taste" class="proj mini reveal" style="--a:#b18cff" data-skills="ml api">
           <div class="frame" style="background:#15111f">
             <svg class="diagram" viewBox="0 0 800 500" role="img" aria-label="Diagram of Taste Test's four phases: Explore, 12 rounds; Refine, 8 rounds; Predict, 5 rounds; then Results, all driven by an Elo and logistic-regression model">
               <defs>
@@ -469,7 +496,7 @@
               <g transform="translate(40 392)" font-size="14">
                 <rect width="720" height="66" rx="12" fill="#211a33"/>
                 <text x="20" y="28" fill="#e9e6df" font-weight="600">Elo ratings + online logistic regression</text>
-                <text x="20" y="50" fill="#9b9a96">colour · era · culture · medium · painting vs sculpture → picks the most uncertain pair next</text>
+                <text x="20" y="50" fill="#9b9a96">color · era · culture · medium · painting vs sculpture → picks the most uncertain pair next</text>
               </g>
             </svg>
           </div>
@@ -484,15 +511,15 @@
             <div class="work-body">
               <!-- Add gameplay screenshots or a recording here: it needs a Harvard Art Museums API key to run. -->
               <div class="pna">
-                <div><h3>How it works</h3><p>Every choice goes into an event log. Elo ratings and a logistic-regression model over colour, era, culture and medium are rebuilt by replaying that log, which makes undo trivial. The model picks the pair it is least sure about to ask next, then tests itself by predicting your picks, with its confidence shown.</p></div>
-                <div><h3>Built to be safe</h3><p>The site is fully static, with no server and no tracking. Visitors bring their own free API key, and a Content-Security-Policy only lets the page contact the museum's API.</p></div>
+                <div><h3>Focus</h3><p>Learning a person's taste in art from a few quick choices between works from the Harvard Art Museums, then proving it by predicting which of two unseen works they will prefer.</p></div>
+                <div><h3>How it works</h3><p>Every choice goes into an event log. Elo ratings and a logistic-regression model over color, era, culture and medium are rebuilt by replaying that log, which makes undo trivial. The model picks the pair it is least sure about to ask next, then tests itself by predicting your picks, with its confidence shown. The site is fully static with no tracking; visitors bring their own free API key, and a Content-Security-Policy only lets the page contact the museum's API.</p></div>
               </div>
             </div>
           </details>
         </article>
 
         <!-- 07 Scriptorium -->
-        <article class="proj mini reveal" style="--a:#d0675f" data-skills="app llm">
+        <article id="scriptorium" class="proj mini reveal" style="--a:#d0675f" data-skills="app llm">
           <div class="frame"><img src="Images/CS85/scriptorium.webp" alt="Scriptorium, a desktop transcription app with a manuscript in the viewer and image controls for contrast and brightness" loading="lazy" width="2304" height="1440" /></div>
           <div class="meta">
             <div class="top"><span class="num">07</span><span class="field">Paleography · App</span></div>
@@ -504,15 +531,15 @@
             <summary><span>See it work</span><span class="chev" aria-hidden="true">+</span></summary>
             <div class="work-body">
               <div class="pna">
+                <div><h3>Focus</h3><p>A complete desktop workbench for transcribing and translating handwritten documents. It was the first take on the problem; Lectio (02) later turned the same idea into a teacher.</p></div>
                 <div><h3>How it works</h3><p>Opens PNG, JPG, multi-page TIFF and PDF files. A small local bridge sends pages to Claude Code on the same computer, and the results come back as typed regions (body, marginalia, insertions) with a confidence score for each. Unclear words are highlighted, every region can be edited, and exports include text, Markdown, JSON and an annotated PDF.</p></div>
-                <div><h3>Where it led</h3><p>Scriptorium was the heavyweight first version. Lectio (02) took the same problem, made it lighter, and turned it into a teacher.</p></div>
               </div>
             </div>
           </details>
         </article>
 
         <!-- 08 Cosmic Radar -->
-        <article class="proj mini reveal" style="--a:#4fd1c5" data-skills="api backend">
+        <article id="cosmic" class="proj mini reveal" style="--a:#4fd1c5" data-skills="api backend">
           <div class="frame" style="background:#0d1517">
             <svg class="diagram" viewBox="0 0 800 500" role="img" aria-label="Architecture diagram: the browser calls the site's own API routes, which add the secret NASA key on the server and forward requests to NASA's picture-of-the-day and near-Earth-object APIs; Firebase handles sign-in and saved favourites">
               <defs><marker id="cr-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#4fd1c5"/></marker></defs>
@@ -541,8 +568,8 @@
             <div class="work-body">
               <!-- Add a screenshot of the live site here once deployment is confirmed. -->
               <div class="pna">
+                <div><h3>Focus</h3><p>Browsing NASA's picture of the day and tracking this week's near-Earth asteroids, with secure accounts: the API key never reaches the browser, and favourites follow you between visits.</p></div>
                 <div><h3>How it works</h3><p>The page never talks to NASA directly. It calls its own serverless functions, which add the secret key, forward the request and cache the answer at the edge. Signing in with Google syncs your favourite pictures and display settings through Firestore; guests' settings stay in the browser.</p></div>
-                <div><h3>Why it's here</h3><p>It is my earliest build here, and the only one with real accounts and a database behind it.</p></div>
               </div>
             </div>
           </details>
@@ -613,6 +640,19 @@
             v.play().catch(function () {});
           } else { v.pause(); }
         });
+      });
+    });
+
+    // ---- Sound toggle for clips with audio (browsers only autoplay muted video) ----
+    document.querySelectorAll('.frame .sound').forEach(function (btn) {
+      var v = btn.parentNode.querySelector('video');
+      btn.addEventListener('click', function () {
+        var on = v.muted;
+        v.muted = !on;
+        btn.setAttribute('aria-pressed', String(on));
+        btn.querySelector('.lbl').textContent = on ? 'Sound off' : 'Sound on';
+        btn.querySelector('.ico').innerHTML = on ? '&#128266;' : '&#128263;';
+        if (on) { v.currentTime = 0; v.play().catch(function () {}); }
       });
     });
 
