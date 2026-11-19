@@ -108,11 +108,27 @@
     .prod-pillar p, .tier-table td, .prod-list { color: var(--text-muted); }
     .tier-table td:first-child, .prod-list strong, .prod-pillar h3, .prod-fact strong, .integration-slide h3 { color: #f3eee4; }
     .tier-table th, .tier-table td { border-bottom-color: rgba(200,120,30,0.16); }
-    .tier-table code, .integration-slide code, .prod-list code { background: rgba(200,120,30,0.12); color: #f7c775; padding: 0.05rem 0.35rem; border-radius: 0.3rem; font-size: 0.85em; }
+    .tier-table code, .integration-slide code, .prod-list code, .prod-pillar code { background: rgba(200,120,30,0.12); color: #f7c775; padding: 0.05rem 0.35rem; border-radius: 0.3rem; font-size: 0.85em; }
     .prod-arch { background: var(--tile); border-color: var(--amber-line); box-shadow: var(--amber-glow); }
     .arch-box rect { fill: #141210; stroke: #5a4020; }
     /* Glow only on the four fact tiles, stepped down like the app's urgency tiers */
     .prod-fact { border-radius: 12px; }
+    .prod-fact em { display: block; margin-top: 0.3rem; font-style: normal; font-size: 0.78rem; line-height: 1.35; color: var(--text-muted); }
+    .pro-tag, .desk-tag { display: inline-block; vertical-align: 0.12em; margin-left: 0.35rem; padding: 0.08rem 0.45rem; border-radius: 999px; font: 600 0.66rem/1.4 'Inter', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+    .pro-tag { color: #f0a85a; background: rgba(200,120,30,0.16); border: 1px solid rgba(200,120,30,0.45); }
+    .desk-tag { color: var(--text-muted); background: transparent; border: 1px solid #3a352e; }
+    .body .pro-tag { margin-left: 0; }
+    .versions { margin-bottom: 1.25rem; }
+    .versions h3 { color: #f3eee4; text-transform: none; letter-spacing: 0; font-size: 0.95rem; }
+    .media-note { font-size: 0.82rem; color: var(--text-muted); margin: 0.75rem 0 0; text-align: center; }
+    .arch-toggle { display: inline-flex; gap: 0.25rem; padding: 0.25rem; border: 1px solid #2e2a25; border-radius: 999px; background: var(--tile); margin-bottom: 0.75rem; }
+    .arch-toggle button { border: 0; background: transparent; color: var(--text-muted); font: 500 0.85rem 'Inter', sans-serif; padding: 0.4rem 0.9rem; border-radius: 999px; cursor: pointer; }
+    .arch-toggle button[aria-selected="true"] { background: rgba(200,120,30,0.18); color: #f3eee4; }
+    .prod-arch[hidden] { display: none; }
+    .project-content .body + .body { margin-top: 1rem; }
+    .project-content > .body { margin-bottom: 1rem; }
+    .sub-head { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; font-weight: 600; color: #f3eee4; margin: 1.5rem 0 0.75rem; }
+    .project-content h2 .pro-tag { vertical-align: 0.35em; }
     .prod-fact.glow-t0 { box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 0 30px rgba(200,120,30,.36); border-color: color-mix(in srgb, rgb(200,120,30) 65%, #2e2a25); }
     .prod-fact.glow-t2 { box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 0 24px rgba(200,120,30,.24); border-color: color-mix(in srgb, rgb(200,120,30) 45%, #2e2a25); }
     .prod-fact.glow-t4 { box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 0 17px rgba(200,120,30,.13); border-color: color-mix(in srgb, rgb(200,120,30) 27%, #2e2a25); }
@@ -167,15 +183,27 @@
     </div>
 
     <div class="prod-facts">
-      <div class="prod-fact glow-t0"><span>Status</span><strong>In daily use</strong></div>
-      <div class="prod-fact glow-t2"><span>Stack</span><strong>Electron · TS</strong></div>
-      <div class="prod-fact glow-t4"><span>Platform</span><strong>Windows</strong></div>
-      <div class="prod-fact glow-later"><span>Tests</span><strong>151 passing</strong></div>
+      <div class="prod-fact glow-t0"><span>Status</span><strong>User testing</strong><em>Pro, limited access</em></div>
+      <div class="prod-fact glow-t2"><span>Platforms</span><strong>Windows + Web</strong><em>iPhone, Mac, any browser</em></div>
+      <div class="prod-fact glow-t4"><span>Stack</span><strong>Electron · Cloudflare</strong><em>TypeScript, React, SQLite</em></div>
+      <div class="prod-fact glow-later"><span>Tests</span><strong>151 · 172</strong><em>desktop · Pro, all passing</em></div>
     </div>
 
     <div class="project-content">
       <h2 class="font-display">Overview</h2>
-      <p class="body">Prod is a personal productivity desktop app that I use every day. Most to-do apps sort by urgency and separate many lists, so whatever is most pressing buries everything else and the context of each list is lost. In Prod, every class, club, and project keeps a permanent dashboard tile. Urgency changes a tile's order and glow, never whether you can see it.</p>
+      <p class="body">Prod began as a personal Windows desktop app that I use every day. Most to-do apps sort by urgency and separate many lists, so whatever is most pressing buries everything else and the context of each list is lost. In Prod, every class, club, and project keeps a permanent dashboard tile. Urgency changes a tile's order and glow, never whether you can see it.</p>
+      <p class="body">Prod Pro is the cloud version: a web-based redesign that installs on an iPhone Home Screen and runs in any desktop browser, with the same tiles, glow, and calendar sync. Features marked <span class="pro-tag">Pro</span> below are specific to it.</p>
+
+      <div class="problem-solution versions">
+        <div>
+          <h3>Prod · the first app</h3>
+          <p>A Windows desktop app built on Electron. Everything is stored in one local file, works fully offline, and connects to Google Calendar, Microsoft To Do, and email.</p>
+        </div>
+        <div>
+          <h3>Prod Pro · the cloud version</h3>
+          <p>An installable web app for iPhone and desktop browsers, running on Cloudflare's free tier for $0 a month. Private accounts, offline support, and an iPhone-first design. Access is currently limited to approved testers.</p>
+        </div>
+      </div>
 
       <div class="problem-solution" style="grid-template-columns: 1fr;">
         <div>
@@ -223,7 +251,7 @@
                 <video data-autoplay loop muted playsinline preload="none" aria-label="Connecting Google Calendar in Prod's settings"><source src="Images/Prod/GoogleAuth.mp4" type="video/mp4" /></video>
               </div>
               <h3 class="font-display">Connecting Google Calendar</h3>
-              <p class="body">Add your own Google Cloud credentials in Settings, then sign in through the browser. Prod creates a dedicated "Prod" calendar and asks only for the narrowest permission it needs. Google shows an "unverified app" screen because the app is in testing mode.</p>
+              <p class="body">Sign in with Google from Settings. Prod creates its own dedicated "Prod" calendar and asks only for the narrowest permission available, one that can manage only the calendars the app created, never the rest of your schedule.</p>
             </article>
 
             <article class="integration-slide">
@@ -246,6 +274,7 @@
           </div>
         </div>
         <div id="carouselDots" class="carousel-dots" aria-label="Slide indicators"></div>
+        <p class="media-note">Footage shows the desktop app, using demo data. Prod Pro shares the same design.</p>
       </div>
 
       <h2 class="font-display">Features</h2>
@@ -256,11 +285,35 @@
         </div>
         <div class="prod-pillar">
           <h3>Fast capture</h3>
-          <p>A global quick-add hotkey, a Ctrl+K-style command palette, and a Today view. Prod can run in the background from the tray.</p>
+          <p>Quick-add understands shorthand like <code>pset 4 #cs50 fri</code>, filling in the title, project, and due date, and asks rather than guessing when no project is named. Ctrl/Cmd+K opens fuzzy search across tasks, projects, and actions. On desktop it is a global hotkey; in Pro it is a floating + button.</p>
+        </div>
+        <div class="prod-pillar">
+          <h3>Today view</h3>
+          <p>What needs attention, a timeline of today's calendar blocks with a "now" line, tasks due today with no time set aside, and what's coming up. In Pro it is the default page on phones.</p>
         </div>
         <div class="prod-pillar">
           <h3>Tasks that stay out of the way</h3>
           <p>Three task states, due dates, notes, undo-delete, and completed tasks that auto-clear after 24 hours.</p>
+        </div>
+        <div class="prod-pillar">
+          <h3>Runs in the background <span class="desk-tag">Desktop</span></h3>
+          <p>Prod lives in the Windows tray and stays ready for the quick-add hotkey. All data sits in one local file that is easy to back up.</p>
+        </div>
+        <div class="prod-pillar">
+          <h3>Built for the iPhone <span class="pro-tag">Pro</span></h3>
+          <p>Installs from Safari with Add to Home Screen, with in-app instructions. Bottom sheets instead of pop-ups, large touch targets, a custom date picker, and layouts that respect the notch and the on-screen keyboard.</p>
+        </div>
+        <div class="prod-pillar">
+          <h3>Works offline <span class="pro-tag">Pro</span></h3>
+          <p>Opens with no signal and shows your last data. Adding and completing tasks are saved on the device and sent once you are back online, without duplicates. Other edits pause with a calm message, and typed text is never lost.</p>
+        </div>
+        <div class="prod-pillar">
+          <h3>Private accounts with Google sign-in <span class="pro-tag">Pro</span></h3>
+          <p>Each person gets a completely private dashboard. Signing in with Google means Prod Pro never stores a password, sign-in stays inside the app (pop-ups break in installed iPhone apps), and sessions last about a year with "Sign out everywhere" available.</p>
+        </div>
+        <div class="prod-pillar">
+          <h3>Admin, setup, and your data <span class="pro-tag">Pro</span></h3>
+          <p>A password-protected admin page manages the approved-user list, and removing someone signs them out everywhere at once. A click-by-click setup guide registers the app with Google Cloud. Users can export everything or delete their account and all its data.</p>
         </div>
       </div>
 
@@ -269,16 +322,64 @@
         <table class="tier-table">
           <thead><tr><th>Integration</th><th>What it does</th></tr></thead>
           <tbody>
-            <tr><td>Google Calendar</td><td>Auto-creates a one-hour block on a dedicated "Prod" calendar, titled <code>[Project] Task</code>. Blocks you drag around sync back, with a warning if one lands after the due date or has already passed. Changes queue offline and sync upon reconnecting. It requests the least-invasive Google permission available.</td></tr>
-            <tr><td>Microsoft Azure (To Do)</td><td>The "Planned" view becomes a tile ranked by the same rules as everything else. You can complete and add tasks, and sign-in happens in your browser.</td></tr>
-            <tr><td>SMTP Email digest</td><td>One button emails a snapshot of every tile. An attached HTML checklist remembers your ticks locally, so it works on a phone without anything syncing back.</td></tr>
+            <tr><td>Google Calendar</td><td>Auto-creates a one-hour block on a dedicated "Prod" calendar, titled <code>[Project] Task</code>. Blocks you drag around sync back, with a warning if one lands after the due date or has already passed. Changes queue offline and sync upon reconnecting. It requests the least-invasive Google permission available. In Pro, a background job syncs every 15 minutes using Google's change tracking, so each sync is usually one small request.</td></tr>
+            <tr><td>Microsoft Azure (To Do) <span class="desk-tag">Desktop</span></td><td>The "Planned" view becomes a tile ranked by the same rules as everything else. You can complete and add tasks, and sign-in happens in your browser.</td></tr>
+            <tr><td>SMTP Email digest</td><td>One button emails a snapshot of every tile. An attached HTML checklist remembers your ticks locally, so it works on a phone without anything syncing back. In Pro, it is sent from the server through the user's own Gmail.</td></tr>
           </tbody>
         </table>
       </div>
       <p class="int-note">Each integration is optional.</p>
 
+      <h2 class="font-display">From desktop to the cloud <span class="pro-tag">Pro</span></h2>
+      <p class="body">Instead of rewriting Prod for the web, I copied its core logic into the new project with almost no changes: the urgency levels, tile and task ordering, the Today page, quick-add, fuzzy search, date labels, calendar warnings, the email builder, and the full test suite. The main adaptation was per-person time zones. Rather than rewrite the logic, Pro converts times into each person's local time before the shared code sees them, so it behaves identically whatever time zone the server or browser is in.</p>
+      <h3 class="sub-head">Problems solved along the way</h3>
+      <ul class="prod-list">
+        <li><strong>Sending email from Cloudflare.</strong> Ordinary email libraries don't run there, so I tested a small Cloudflare-compatible one against Gmail before building on it.</li>
+        <li><strong>Animations freezing in background tabs.</strong> They waited on a browser timing signal that inactive tabs never send, leaving tiles stuck out of place. I switched to a method that doesn't depend on it.</li>
+        <li><strong>A bug that only appeared live.</strong> Calendar creation passed local tests but failed on Cloudflare, which rejects one way of calling its built-in web-request function ("Illegal invocation"). I fixed it and added a test that reproduces Cloudflare's stricter rule.</li>
+        <li><strong>Google Cloud setup friction.</strong> I added the guided setup page and documented reusing the desktop app's existing Google Cloud project.</li>
+      </ul>
+
       <h2 class="font-display prod-accent">Architecture</h2>
-      <figure class="prod-arch">
+      <div class="arch-toggle" role="tablist" aria-label="Architecture version">
+        <button type="button" role="tab" aria-selected="true" aria-controls="archDesktop" data-arch="archDesktop">Prod (desktop)</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="archPro" data-arch="archPro">Prod Pro (cloud)</button>
+      </div>
+      <figure class="prod-arch" id="archPro" hidden>
+        <svg viewBox="0 0 700 330" role="img" aria-label="Prod Pro architecture: an installable web app with a service worker talks to a single Cloudflare Worker, which uses a D1 database, the shared core logic, a scheduled job, Google Calendar, and Gmail">
+          <defs>
+            <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0L10 5L0 10z" fill="#d98b2b" />
+            </marker>
+          </defs>
+          <rect x="8" y="8" width="684" height="314" rx="16" class="arch-boundary" />
+          <text x="26" y="34" class="arch-tag">Prod Pro · Cloudflare free tier</text>
+
+          <g class="arch-box"><rect x="30" y="70" width="125" height="72" rx="10" /><text x="92" y="100" class="arch-t">Web app</text><text x="92" y="120" class="arch-s">React · TypeScript</text><text x="92" y="134" class="arch-s">iPhone · desktop</text></g>
+          <g class="arch-box"><rect x="205" y="70" width="125" height="72" rx="10" /><text x="267" y="100" class="arch-t">Service worker</text><text x="267" y="120" class="arch-s">opens offline</text><text x="267" y="134" class="arch-s">queues changes</text></g>
+          <g class="arch-box"><rect x="380" y="70" width="125" height="72" rx="10" /><text x="442" y="100" class="arch-t">Cloudflare Worker</text><text x="442" y="120" class="arch-s">server + app files</text><text x="442" y="134" class="arch-s">encrypted secrets</text></g>
+          <g class="arch-box"><rect x="555" y="70" width="125" height="72" rx="10" /><text x="617" y="100" class="arch-t">D1 (SQLite)</text><text x="617" y="120" class="arch-s">per-user data</text><text x="617" y="134" class="arch-s">7-day restore</text></g>
+
+          <g class="arch-box"><rect x="30" y="215" width="125" height="72" rx="10" /><text x="92" y="245" class="arch-t">Shared core</text><text x="92" y="265" class="arch-s">copied from desktop</text><text x="92" y="279" class="arch-s">time-zone aware</text></g>
+          <g class="arch-box"><rect x="205" y="215" width="125" height="72" rx="10" /><text x="267" y="245" class="arch-t">Scheduled job</text><text x="267" y="265" class="arch-s">every 15 minutes</text><text x="267" y="279" class="arch-s">sync · cleanup</text></g>
+          <g class="arch-box"><rect x="380" y="215" width="125" height="72" rx="10" /><text x="442" y="245" class="arch-t">Google</text><text x="442" y="265" class="arch-s">sign-in · Calendar</text><text x="442" y="279" class="arch-s">narrowest scope</text></g>
+          <g class="arch-box"><rect x="555" y="215" width="125" height="72" rx="10" /><text x="617" y="245" class="arch-t">Gmail</text><text x="617" y="265" class="arch-s">sent over SMTP</text><text x="617" y="279" class="arch-s">user's own account</text></g>
+          <text x="92" y="306" class="arch-s">Shared logic</text>
+          <text x="442" y="306" class="arch-s">Background work and services</text>
+
+          <g class="arch-line">
+            <line x1="157" y1="106" x2="203" y2="106" marker-start="url(#arr2)" marker-end="url(#arr2)" />
+            <line x1="332" y1="106" x2="378" y2="106" marker-start="url(#arr2)" marker-end="url(#arr2)" />
+            <line x1="507" y1="106" x2="553" y2="106" marker-start="url(#arr2)" marker-end="url(#arr2)" />
+            <line x1="400" y1="144" x2="100" y2="213" marker-end="url(#arr2)" />
+            <line x1="420" y1="144" x2="275" y2="213" marker-end="url(#arr2)" />
+            <line x1="442" y1="144" x2="442" y2="213" marker-end="url(#arr2)" />
+            <line x1="470" y1="144" x2="600" y2="213" marker-end="url(#arr2)" />
+          </g>
+        </svg>
+        <figcaption>Simplified architecture. One Worker serves both the app and the server, so there is a single deployment. The browser never sees calendar tokens or email passwords.</figcaption>
+      </figure>
+      <figure class="prod-arch" id="archDesktop">
         <svg viewBox="0 0 700 330" role="img" aria-label="Prod architecture: a sandboxed UI talks through a typed preload bridge to the Electron main process, which uses SQLite, an urgency engine, and three optional integrations">
           <defs>
             <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -315,15 +416,19 @@
 
       <h2 class="font-display">Engineering</h2>
       <ul class="prod-list">
-        <li><strong>One urgency engine.</strong> A tested module ranks tiles, tasks, and the To Do tile.</li>
+        <li><strong>One urgency engine.</strong> A tested module ranks tiles, tasks, and the To Do tile, and runs unchanged in both versions.</li>
         <li><strong>Offline-first calendar sync.</strong> Changes go through an outbox with retries, so nothing is lost without a connection.</li>
-        <li><strong>Security.</strong> A sandboxed window, a typed bridge to the system, and credentials encrypted with Windows' own protection.</li>
-        <li><strong>Reliability.</strong> All data lives in one backup-friendly file; Windows installer is included.</li>
-        <li><strong>Process.</strong> About 7,200 lines of app code and 1,700 lines of tests, with 151 passing tests. Built in phases with checkpoints and a two-week rule for adopting new dependencies, with AI assistance.</li>
+        <li><strong>Desktop security.</strong> A sandboxed window, a typed bridge to the system, and credentials encrypted with Windows' own protection.</li>
+        <li><strong>Data isolation <span class="pro-tag">Pro</span></strong> Every piece of data is tied to its owner and every database query checks it. Automated tests confirm one person can never read or change another's data, even by guessing IDs.</li>
+        <li><strong>Cloud security <span class="pro-tag">Pro</span></strong> Calendar permissions and email passwords are encrypted with a key that lives only in Cloudflare. Forged-request protection, strict security headers, secure cookies, and rate limits on sign-ins, saves, emails, and admin password guesses. The email feature refuses internal network addresses and unusual ports, so it can't be used to probe other machines.</li>
+        <li><strong>Duplicate-safe sync <span class="pro-tag">Pro</span></strong> Each calendar change is recorded together with its task change, retried with growing waits if Google is down, and locked while it is sent, so two devices and the background job running at once can't create duplicate events.</li>
+        <li><strong>Reliability.</strong> Desktop data lives in one backup-friendly file with a Windows installer. Pro's database can be rewound to any minute in the last 7 days.</li>
+        <li><strong>Testing.</strong> 151 tests for the desktop app. 172 for Pro, covering the shared core, time zones (including midnight and daylight saving), two devices syncing at once, data isolation, the admin page, the background job, and Google Calendar against a fake Google. An end-to-end test also drives the real app in Chrome, from sign-in to the offline queue syncing once.</li>
+        <li><strong>Process.</strong> About 7,200 lines of app code and 1,700 lines of tests in the desktop app. Built in phases with checkpoints and a two-week rule for adopting new dependencies, with AI assistance. For Pro, platform limits and Google's sign-in rules were checked against current official documentation rather than assumed.</li>
       </ul>
 
       <h2 class="font-display">Limits &amp; next steps</h2>
-      <p class="body">Prod is Windows-only for now and the installer is unsigned. Google sign-ins are in testing mode, so they expire weekly. The next step is a web portal that syncs with the desktop app to be accessed off-device.</p>
+      <p class="body">Prod Pro is in user testing, with access limited to an approved list of testers while I gather feedback. The desktop app remains Windows-only with an unsigned installer.</p>
     </div>
   </div>
   <script>
@@ -354,6 +459,16 @@
     document.getElementById("carouselNext").addEventListener("click", () => goToSlide(currentIndex + 1));
 
     goToSlide(0);
+
+    document.querySelectorAll(".arch-toggle button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".arch-toggle button").forEach((b) => {
+          const on = b === btn;
+          b.setAttribute("aria-selected", on ? "true" : "false");
+          document.getElementById(b.dataset.arch).hidden = !on;
+        });
+      });
+    });
   </script>
   <script src="lazy-video.js" defer></script>
 </body>
